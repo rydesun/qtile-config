@@ -2,7 +2,7 @@
 Qtile 配置
 ==========
 
-.. image:: screenshot/screenshot.png
+.. image:: https://raw.githubusercontent.com/rydesun/qtile-config/master/screenshot/screenshot.png
    :align: center
 
 特性
