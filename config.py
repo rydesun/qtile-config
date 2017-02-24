@@ -51,8 +51,8 @@ screens = [
         widget.TextBox(text='\uf3ba'),
         widget.Volume(),
         widget.Sep(**widget_sep_defaults),
-        widget.Systray(icon_size=12),
-        widget.Clock(format='%Y-%m-%d %A %H:%M:%S ', foreground='ebdbb2', update_interval=0.5),
+        widget.Systray(icon_size=15),
+        widget.Clock(format='%Y-%m-%d %A %H:%M:%S ', foreground='ebdbb2', update_interval=0.5, padding=5),
         ], 17, background=["1d2021"])),
 ]
 
