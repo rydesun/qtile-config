@@ -6,6 +6,7 @@ class TaskList(_TaskList):
         ("icon_offset_x", 0),
         ("icon_offset_y", 0),
     ))
+
     def draw_icon(self, surface, offset):
         if not surface:
             return

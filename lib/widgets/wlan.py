@@ -1,6 +1,8 @@
-from libqtile.widget import base
-from libqtile.log_utils import logger
 import iwlib
+
+from libqtile.log_utils import logger
+from libqtile.widget import base
+
 
 def get_status(interface_name):
     interface = iwlib.get_iwconfig(interface_name)
@@ -16,13 +18,13 @@ class Wlan(base.InLoopPollText):
         (
             'disconnected_message',
             'Disconnected',
-            'String to show when the wlan is diconnected.'
+            'String to show when the wlan is diconnected.',
         ),
         (
             'icon',
             '',
-            'Wifi icon'
-        )
+            'Wifi icon',
+        ),
     ]
 
     def __init__(self, **config):

@@ -11,6 +11,7 @@ def humanize_bytes(value):
         suff.pop(0)
     return value, suff[0]
 
+
 class Net(_Net):
     _Net.defaults.extend((
         ("icon_upload", ""),
@@ -51,7 +52,7 @@ class Net(_Net):
             txt_upload = self.fmt_txt.format(up, up_unit)
 
         return self.fmt.format(
-            icon_download = self.icon_download,
-            txt_download = txt_download,
-            icon_upload = self.icon_upload,
-            txt_upload = txt_upload)
+            icon_download=self.icon_download,
+            txt_download=txt_download,
+            icon_upload=self.icon_upload,
+            txt_upload=txt_upload)

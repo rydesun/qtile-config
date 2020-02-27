@@ -1,5 +1,6 @@
 from libqtile.widget import Volume as _Volume
 
+
 class Volume(_Volume):
     def _update_drawer(self):
         if self.volume <= 0:
