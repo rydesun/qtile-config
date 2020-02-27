@@ -1,88 +1,88 @@
-from libqtile import layout, bar, widget
-from libqtile.config import (
-    Screen, Group, ScratchPad, DropDown,
-    EzKey as Key, EzDrag as Drag, EzClick as Click,
-)
-from libqtile.command import lazy
-
 import env
-import theme
-import rules
-import lib.widgets as mywidget
 
+from libqtile import bar, layout, widget
+from libqtile.command import lazy
+from libqtile.config import DropDown
+from libqtile.config import EzDrag as Drag
+from libqtile.config import EzKey as Key
+from libqtile.config import Group, ScratchPad, Screen
+
+import lib.widgets as mywidget
+import rules
+import theme
 
 bring_front_click = True    # bring window topside when clicking
 
-
-floating_layout=layout.Floating(**theme.layout_floating)
+floating_layout = layout.Floating(**theme.layout_floating)
 layouts = [
-    layout.Columns(**theme.layout_column,
+    layout.Columns(
         insert_position=1,
-    ),
+        **theme.layout_column),
     layout.Floating(**theme.layout_floating),
 ]
 
 groups = [
     Group("main", label=" Main", layouts=[layouts[0]], spawn=[env.bin_term]),
-    Group("browser", label="龜 Browser", layouts=[layouts[0]], spawn=[env.bin_browser]),
+    Group("browser", label="龜 Browser", layouts=[
+          layouts[0]], spawn=[env.bin_browser]),
     Group("todo", label=" Todo", layouts=[layouts[0]]),
     Group("float", label=" Float", layouts=[layouts[1]]),
     Group("ghost", label=" Ghost", layouts=[layouts[0]]),
     ScratchPad("scratchpad", [
-        DropDown(**theme.dropdown,
-            name = "term",
-            cmd = env.bin_term,
-        ),
+        DropDown(
+            name="term",
+            cmd=env.bin_term,
+            **theme.dropdown),
     ]),
 ]
 
 widget_defaults = theme.widget_defaults
 screens = [
     Screen(left=bar.Bar([], 500, opacity=0), top=bar.Bar([
-        widget.GroupBox(**theme.groupbox,
-            visible_groups = ["main", "browser", "todo", "float"],
-        ),
-        widget.Prompt(**theme.prompt,
-            ignore_dups_history = True,
-        ),
+        widget.GroupBox(
+            visible_groups=["main", "browser", "todo", "float"],
+            **theme.groupbox),
+        widget.Prompt(
+            ignore_dups_history=True,
+            **theme.prompt),
         widget.Spacer(length=10),
-        mywidget.TaskList(**theme.tasklist,
-            title_width_method = "uniform",
-            highlight_method   = "border",
-        ),
+        mywidget.TaskList(
+            title_width_method="uniform",
+            highlight_method="border",
+            **theme.tasklist),
         widget.Notify(**theme.notify),
         widget.Systray(icon_size=20),
         widget.Spacer(length=30),
-        mywidget.Wlan(**theme.wlan_indicator,
-            interface = env.nic_wlan,
-            disconnected_message = "", # hide itself if disconnected
-        ),
-        mywidget.Net(**theme.net_speed,
-            interface = [env.nic_lan, env.nic_wlan],
-        ),
-        widget.Backlight(**theme.blacklight,
-            backlight_name = env.backlight,
-        ),
+        mywidget.Wlan(
+            interface=env.nic_wlan,
+            disconnected_message="",  # hide itself if disconnected
+            **theme.wlan_indicator),
+        mywidget.Net(
+            interface=[env.nic_lan, env.nic_wlan],
+            **theme.net_speed),
+        widget.Backlight(
+            backlight_name=env.backlight,
+            **theme.blacklight),
         mywidget.Volume(**theme.volume),
         mywidget.ThermalSensor(**theme.thermalSensor),
-        mywidget.Clock(**theme.datetime,
-            update_interval = 0.5,
-        ),
+        mywidget.Clock(
+            update_interval=0.5,
+            **theme.datetime),
         widget.Spacer(length=10),
     ], **theme.bar)),
     Screen(top=bar.Bar([
-        widget.GroupBox(**theme.groupbox,
-            visible_groups = ["main", "browser", "todo", "float", "ghost"],
-        ),
-        mywidget.TaskList(**theme.tasklist,
-            title_width_method = "uniform",
-            highlight_method   = "border",
-        ),
-        mywidget.Clock(**theme.datetime,
-            update_interval = 0.5,
-        ),
+        widget.GroupBox(
+            visible_groups=["main", "browser", "todo", "float", "ghost"],
+            **theme.groupbox),
+        mywidget.TaskList(
+            title_width_method="uniform",
+            highlight_method="border",
+            **theme.tasklist),
+        mywidget.Clock(
+            update_interval=0.5,
+            **theme.datetime),
         widget.Spacer(length=10),
-        ], **theme.bar)),
+    ], **theme.bar)),
 ]
 
 keys = [

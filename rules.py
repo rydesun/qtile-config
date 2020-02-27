@@ -1,8 +1,4 @@
-import subprocess
-
 from libqtile import hook
-
-import env
 
 
 @hook.subscribe.client_new

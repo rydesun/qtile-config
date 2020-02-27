@@ -88,92 +88,92 @@ _datetime_color = color2
 wallpaper_color = "#707070"
 # layout: floating
 layout_floating = dict(
-    border_width = _float_border_width,
+    border_width=_float_border_width,
 )
 # layout: column
 layout_column = dict(
-    border_width = _column_border_width,
-    margin = _column_window_margin,
+    border_width=_column_border_width,
+    margin=_column_window_margin,
 )
 # dropdown
 dropdown = dict(
-    x = _drowndown_x,
-    y = _drowndown_y,
-    width = _drowndown_width,
-    height = _drowndown_height,
+    x=_drowndown_x,
+    y=_drowndown_y,
+    width=_drowndown_width,
+    height=_drowndown_height,
 )
 # widget
 widget_defaults = dict(
-    font = _bar_font,
-    fontsize = _bar_fontsize,
-    foreground = _bar_color_foreground,
+    font=_bar_font,
+    fontsize=_bar_fontsize,
+    foreground=_bar_color_foreground,
 )
 bar = dict(
-    size = _bar_size,
-    background = _bar_color_background,
-    opacity = 0.95,
+    size=_bar_size,
+    background=_bar_color_background,
+    opacity=0.95,
 )
 groupbox = dict(
-    font = _groupbox_font,
-    fontsize = _groupbox_fontsize,
-    background = _groupbox_color_background,
-    active = _groupbox_color_foreground_active,
-    inactive = _groupbox_color_foreground_inative,
+    font=_groupbox_font,
+    fontsize=_groupbox_fontsize,
+    background=_groupbox_color_background,
+    active=_groupbox_color_foreground_active,
+    inactive=_groupbox_color_foreground_inative,
 
-    highlight_method = _groupbox_highlight_method,
-    this_current_screen_border = _groupbox_color_normal,
-    this_screen_border = _groupbox_color_normal,
-    other_current_screen_border = _groupbox_color_normal_other,
-    other_screen_border = _groupbox_color_normal_other,
-    urgent_border = _groupbox_color_urgent,
+    highlight_method=_groupbox_highlight_method,
+    this_current_screen_border=_groupbox_color_normal,
+    this_screen_border=_groupbox_color_normal,
+    other_current_screen_border=_groupbox_color_normal_other,
+    other_screen_border=_groupbox_color_normal_other,
+    urgent_border=_groupbox_color_urgent,
 )
 prompt = dict(
-    font = _prompt_font,
-    prompt = _prompt_icon,
-    foreground = _prompt_color,
+    font=_prompt_font,
+    prompt=_prompt_icon,
+    foreground=_prompt_color,
 )
 tasklist = dict(
-    max_title_width = _tasklist_max_width,
-    spacing = _tasklist_spacing,
-    fontsize = _tasklist_fontsize,
-    icon_size = _tasklist_icon_size,
-    icon_offset_x = _tasklist_icon_offset_x,
-    icon_offset_y = _tasklist_icon_offset_y,
-    txt_floating = _tasklist_hint_floating,
-    txt_maximized= _tasklist_hint_maximized,
-    txt_minimized= _tasklist_hint_minimized,
-    borderwidth = _tasklist_borderwidth,
-    border = _tasklist_color_border_focused,
-    unfocused_border = _tasklist_color_border_unfocused,
-    urgent_border = _tasklist_color_border_urgent,
+    max_title_width=_tasklist_max_width,
+    spacing=_tasklist_spacing,
+    fontsize=_tasklist_fontsize,
+    icon_size=_tasklist_icon_size,
+    icon_offset_x=_tasklist_icon_offset_x,
+    icon_offset_y=_tasklist_icon_offset_y,
+    txt_floating=_tasklist_hint_floating,
+    txt_maximized=_tasklist_hint_maximized,
+    txt_minimized=_tasklist_hint_minimized,
+    borderwidth=_tasklist_borderwidth,
+    border=_tasklist_color_border_focused,
+    unfocused_border=_tasklist_color_border_unfocused,
+    urgent_border=_tasklist_color_border_urgent,
 )
 notify = dict(
-    foreground = _notify_normal,
-    foreground_low = _notify_low,
-    foreground_urgent = _notify_urgent,
+    foreground=_notify_normal,
+    foreground_low=_notify_low,
+    foreground_urgent=_notify_urgent,
 )
 wlan_indicator = dict(
-    icon = _net_wifi_icon,
-    foreground = _net_color,
+    icon=_net_wifi_icon,
+    foreground=_net_color,
 )
 net_speed = dict(
-    icon_upload = _net_upload_icon,
-    icon_download = _net_download_icon,
-    font = _net_speed_font,
-    foreground = _net_color,
+    icon_upload=_net_upload_icon,
+    icon_download=_net_download_icon,
+    font=_net_speed_font,
+    foreground=_net_color,
 )
 volume = dict(
-    foreground = _sensor_color,
+    foreground=_sensor_color,
 )
 thermalSensor = dict(
-    foreground = _sensor_color,
-    foreground_alert = _sensor_color_alert,
+    foreground=_sensor_color,
+    foreground_alert=_sensor_color_alert,
 )
 blacklight = dict(
-    format = _sensor_blacklight_icon + " {percent: 2.0%}",
-    foreground = _sensor_color,
+    format=_sensor_blacklight_icon + " {percent: 2.0%}",
+    foreground=_sensor_color,
 )
 datetime = dict(
-    format = "{} %H:%M:%S   {} %m-%d  ".format(_time_icon, _date_icon),
-    foreground = _datetime_color,
+    format="{} %H:%M:%S   {} %m-%d  ".format(_time_icon, _date_icon),
+    foreground=_datetime_color,
 )
