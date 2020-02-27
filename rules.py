@@ -1,8 +1,12 @@
 from libqtile import hook
 
 
-@hook.subscribe.client_new
-def set_window_float(c):
+class RuleMgr:
+    def work(self):
+        hook.subscribe.client_new(_set_window_float)
+
+
+def _set_window_float(c):
     wm_class = c.window.get_wm_class()
     wm_window_role = c.window.get_wm_window_role()
 

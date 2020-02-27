@@ -8,8 +8,12 @@ from libqtile.config import EzKey as Key
 from libqtile.config import Group, ScratchPad, Screen
 
 import lib.widgets as mywidget
-import rules
+import startup
 import theme
+
+
+startup_mgr = startup.StartupMgr()
+startup_mgr.work()
 
 bring_front_click = True    # bring window topside when clicking
 
