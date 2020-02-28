@@ -22,9 +22,9 @@ class WallpaperManager:
         if len(files) == 0:
             return
         random.shuffle(files)
-        invalid_files = [i for i in self.list for j in files if i == j]
+        valid_files = [i for i in self.list for j in files if i == j]
         new_files = [i for i in files if i not in self.list]
-        self.list = new_files + invalid_files
+        self.list = new_files + valid_files
 
         idx = random.randrange(len(self.list)//2)
         file = self.list.pop(idx)
