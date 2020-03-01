@@ -43,6 +43,12 @@ groups = [
 widget_defaults = theme.widget_defaults
 screens = [
     Screen(left=bar.Bar([], 500, opacity=0), top=bar.Bar([
+        mywidget.ImageButton(
+            filename="~/.config/qtile/assets/arch-logo.svg",
+            margin_x=2,
+            margin_y=2,
+            execute=["jgmenu_run"],
+        ),
         widget.GroupBox(
             visible_groups=["main", "browser", "todo", "float"],
             **theme.groupbox),
