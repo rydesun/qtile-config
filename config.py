@@ -10,6 +10,7 @@ from libqtile.config import Group, ScratchPad, Screen
 import lib.widgets as mywidget
 import startup
 import theme
+import cmd
 
 
 startup_mgr = startup.StartupMgr()
@@ -129,6 +130,19 @@ keys = [
     Key("M-w", lazy.window.toggle_floating()),      # toggle window floating
     Key("M-e", lazy.spawn(env.bin_hint_window)),    # hint focus
     Key("M-x", lazy.window.kill()),                 # close window
+
+    Key("M-S-w", cmd.disable_all_floating),
+    Key("M-S-n", cmd.bring_all_floating_to_front),
+
+    # manipulate floating window
+    Key("M-<Left>", lazy.window.move_floating(-30, 0, 0, 0)),
+    Key("M-<Right>", lazy.window.move_floating(30, 0, 0, 0)),
+    Key("M-<Up>", lazy.window.move_floating(0, -30, 0, 0)),
+    Key("M-<Down>", lazy.window.move_floating(0, 30, 0, 0)),
+    Key("M-S-<Left>", lazy.window.resize_floating(-30, 0, 0, 0)),
+    Key("M-S-<Right>", lazy.window.resize_floating(30, 0, 0, 0)),
+    Key("M-S-<Up>", lazy.window.resize_floating(0, -30, 0, 0)),
+    Key("M-S-<Down>", lazy.window.resize_floating(0, 30, 0, 0)),
 ]
 for keycode, group in zip("asdfg", ["home", "yard", "stash", "float", "ghost"]):
     keys.extend([
