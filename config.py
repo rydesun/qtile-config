@@ -26,10 +26,10 @@ layouts = [
 ]
 
 groups = [
-    Group("main", label=" Main", layouts=[layouts[0]], spawn=[env.bin_term]),
-    Group("browser", label="龜 Browser", layouts=[
+    Group("home", label=" Home", layouts=[layouts[0]], spawn=[env.bin_term]),
+    Group("yard", label=" Yard", layouts=[
           layouts[0]], spawn=[env.bin_browser]),
-    Group("todo", label=" Todo", layouts=[layouts[0]]),
+    Group("stash", label=" Stash", layouts=[layouts[0]]),
     Group("float", label=" Float", layouts=[layouts[1]]),
     Group("ghost", label=" Ghost", layouts=[layouts[0]]),
     ScratchPad("scratchpad", [
@@ -50,7 +50,7 @@ screens = [
             execute=["jgmenu_run"],
         ),
         widget.GroupBox(
-            visible_groups=["main", "browser", "todo", "float"],
+            visible_groups=["home", "yard", "stash", "float"],
             **theme.groupbox),
         widget.Prompt(
             ignore_dups_history=True,
@@ -82,7 +82,7 @@ screens = [
     ], **theme.bar)),
     Screen(top=bar.Bar([
         widget.GroupBox(
-            visible_groups=["main", "browser", "todo", "float", "ghost"],
+            visible_groups=["home", "yard", "stash", "float", "ghost"],
             **theme.groupbox),
         mywidget.TaskList(
             title_width_method="uniform",
@@ -130,7 +130,7 @@ keys = [
     Key("M-e", lazy.spawn(env.bin_hint_window)),    # hint focus
     Key("M-x", lazy.window.kill()),                 # close window
 ]
-for keycode, group in zip("asdfg", ["main", "browser", "todo", "float", "ghost"]):
+for keycode, group in zip("asdfg", ["home", "yard", "stash", "float", "ghost"]):
     keys.extend([
         Key("M-" + keycode, lazy.group[group].toscreen()),
         Key("M-C-" + keycode, lazy.window.togroup(group)),
