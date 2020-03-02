@@ -15,9 +15,8 @@ color_light_yellow = "ebdbb2"
 color_dark_blue = "445582"
 color_pink = "b68992"
 # font
-font_sans = "Noto Sans"
+font_sans = "sans"
 font_mono = "Noto Sans Mono"
-font_icon = "Emoji"
 
 
 # layout
@@ -37,8 +36,10 @@ _bar_fontsize_has_outline = 14
 _bar_color_foreground = color_foreground
 _bar_color_background = color_background
 # widget: groupbox
-_groupbox_font      = font_icon
+_groupbox_font      = font_sans
 _groupbox_fontsize  = _bar_fontsize_has_outline
+_groupbox_margin    = 15
+_groupbox_spacing   = 9
 _groupbox_highlight_method = "block"
 _groupbox_color_background         = color8
 _groupbox_color_foreground_inative = color_foreground
@@ -56,10 +57,10 @@ _tasklist_spacing   = 12
 _tasklist_fontsize  = _bar_fontsize_has_outline
 _tasklist_icon_size     = 18
 _tasklist_icon_offset_x = 0
-_tasklist_icon_offset_y = 3
-_tasklist_hint_floating  = "🗗 "
-_tasklist_hint_maximized = "🗖"
-_tasklist_hint_minimized = "🗕"
+_tasklist_icon_offset_y = 4
+_tasklist_hint_floating  = "  "
+_tasklist_hint_maximized = "  "
+_tasklist_hint_minimized = "  "
 _tasklist_borderwidth = 1
 _tasklist_color_border_focused   = color2
 _tasklist_color_border_unfocused = color6
@@ -79,7 +80,7 @@ _sensor_color           = color6
 _sensor_color_alert     = color5
 _sensor_blacklight_icon = ""
 # widget: calendar and clock
-_date_icon      = ""
+_date_icon      = ""
 _time_icon      = ""
 _datetime_color = color2
 
@@ -117,6 +118,8 @@ groupbox = dict(
     font=_groupbox_font,
     fontsize=_groupbox_fontsize,
     background=_groupbox_color_background,
+    margin_x=_groupbox_margin,
+    spacing=_groupbox_spacing,
     active=_groupbox_color_foreground_active,
     inactive=_groupbox_color_foreground_inative,
 
@@ -170,10 +173,10 @@ thermalSensor = dict(
     foreground_alert=_sensor_color_alert,
 )
 blacklight = dict(
-    format=_sensor_blacklight_icon + " {percent: 2.0%}",
+    format=_sensor_blacklight_icon + "{percent: 2.0%}",
     foreground=_sensor_color,
 )
 datetime = dict(
-    format="{} %H:%M:%S   {} %m-%d  ".format(_time_icon, _date_icon),
+    format="{} %H:%M:%S  {} %m-%d  ".format(_time_icon, _date_icon),
     foreground=_datetime_color,
 )
