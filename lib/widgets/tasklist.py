@@ -19,3 +19,10 @@ class TaskList(_TaskList):
         self.drawer.ctx.set_source(surface)
         self.drawer.ctx.paint()
         self.drawer.ctx.restore()
+
+    def button_press(self, x, y, button):
+        if button == 1:
+            return super().button_press(x, y, button)
+        elif button == 2:
+            window = self.get_clicked(x, y)
+            window.kill()
