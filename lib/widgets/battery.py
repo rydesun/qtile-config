@@ -1,6 +1,5 @@
 from libqtile.widget import Battery as _Battery
 from libqtile.widget.battery import BatteryState
-from gi.repository import Notify
 
 
 class Battery(_Battery):
