@@ -15,10 +15,10 @@ class Clock(_Clock):
         "0": "❼",
     }
 
-    def _get_time(self):
-        time.tzset()
-        now = datetime.now(timezone.utc).astimezone()
-        now += self.DELTA
-        txt = now.strftime(self.format)
+    def poll(self):
+        if self.timezone:
+            now = datetime.now(timezone.utc).astimezone(self.timezone)
+        else:
+            now = datetime.now(timezone.utc).astimezone()
         weekday = self.weekday_sign[now.strftime("%w")]
-        return txt + weekday
+        return (now + self.DELTA).strftime(self.format) + weekday
