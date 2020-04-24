@@ -5,5 +5,6 @@ from .tasklist import TaskList
 from .thermal_sensor import ThermalSensor
 from .volume import Volume
 from .wlan import Wlan
+from .battery import Battery
 
-__all__ = ("ThermalSensor", "Volume", "TaskList", "Net", "Wlan", "Clock", "ImageButton")
+__all__ = ("ThermalSensor", "Volume", "TaskList", "Net", "Wlan", "Clock", "ImageButton", "Battery")

@@ -76,8 +76,17 @@ _net_upload_icon   = ""
 _net_speed_font    = font_mono
 _net_color         = color4
 # widget: sensor
-_sensor_color           = color6
-_sensor_color_alert     = color5
+_sensor_color       = color6
+_sensor_color_warn  = color3
+_sensor_color_alert = color5
+_sensor_battery_plug_icon = ""
+_sensor_battery_charge_icon = ""
+_sensor_battery_discharge_icon = ""
+_sensor_battery_full_energy_icon = ""
+_sensor_battery_high_energy_icon = ""
+_sensor_battery_half_energy_icon = ""
+_sensor_battery_low_energy_icon = ""
+_sensor_battery_empty_energy_icon = ""
 _sensor_blacklight_icon = ""
 # widget: calendar and clock
 _date_icon      = ""
@@ -171,6 +180,20 @@ volume = dict(
 thermalSensor = dict(
     foreground=_sensor_color,
     foreground_alert=_sensor_color_alert,
+)
+battery = dict(
+    format="{extra_icon} {icon} {percent:2.0%}",
+    icon_charge=_sensor_battery_charge_icon,
+    icon_discharge=_sensor_battery_discharge_icon,
+    icon_plug=_sensor_battery_plug_icon,
+    icon_full_energy=_sensor_battery_full_energy_icon,
+    icon_high_energy=_sensor_battery_high_energy_icon,
+    icon_half_energy=_sensor_battery_half_energy_icon,
+    icon_low_energy=_sensor_battery_low_energy_icon,
+    icon_empty_energy=_sensor_battery_empty_energy_icon,
+    foreground=_sensor_color,
+    foreground_discharge=_sensor_color_warn,
+    foreground_low=_sensor_color_alert,
 )
 blacklight = dict(
     format=_sensor_blacklight_icon + "{percent: 2.0%}",
