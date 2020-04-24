@@ -16,7 +16,7 @@ class Net(_Net):
     _Net.defaults.extend((
         ("icon_upload", ""),
         ("icon_download", ""),
-        ("fmt", "{icon_download} {txt_download} {icon_upload} {txt_upload}"),
+        ("format", "{icon_download} {txt_download} {icon_upload} {txt_upload}"),
         ("fmt_txt", "{:·>3.0f}{}"),
         ("mini_val_threshold", 100),
         ("fmt_mini", "···B"),
@@ -28,12 +28,12 @@ class Net(_Net):
         down = 0; up = 0
         for interface in self.interface:
             down += new_int[interface]['down'] - \
-                self.interfaces[interface]['down']
+                self.stats[interface]['down']
             up += new_int[interface]['up'] - \
-                self.interfaces[interface]['up']
+                self.stats[interface]['up']
         down /= self.update_interval
         up /= self.update_interval
-        self.interfaces = new_int
+        self.stats = new_int
 
         txt_download = ""; txt_upload = ""
         if down == 0:
@@ -51,7 +51,7 @@ class Net(_Net):
             up, up_unit = humanize_bytes(up)
             txt_upload = self.fmt_txt.format(up, up_unit)
 
-        return self.fmt.format(
+        return self.format.format(
             icon_download=self.icon_download,
             txt_download=txt_download,
             icon_upload=self.icon_upload,
