@@ -77,7 +77,7 @@ screens = [
             **theme.battery),
         widget.Backlight(
             backlight_name=env.backlight,
-            **theme.blacklight),
+            **theme.backlight),
         mywidget.Volume(**theme.volume),
         mywidget.ThermalSensor(**theme.thermalSensor),
         mywidget.Clock(
