@@ -71,6 +71,10 @@ screens = [
         mywidget.Net(
             interface=[env.nic_lan, env.nic_wlan],
             **theme.net_speed),
+        mywidget.Battery(
+            low_percentage=0.2,
+            update_interval=7,
+            **theme.battery),
         widget.Backlight(
             backlight_name=env.backlight,
             **theme.blacklight),
