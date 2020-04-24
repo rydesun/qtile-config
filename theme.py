@@ -87,7 +87,7 @@ _sensor_battery_high_energy_icon = ""
 _sensor_battery_half_energy_icon = ""
 _sensor_battery_low_energy_icon = ""
 _sensor_battery_empty_energy_icon = ""
-_sensor_blacklight_icon = ""
+_sensor_backlight_icon = ""
 # widget: calendar and clock
 _date_icon      = ""
 _time_icon      = ""
@@ -195,8 +195,8 @@ battery = dict(
     foreground_discharge=_sensor_color_warn,
     foreground_low=_sensor_color_alert,
 )
-blacklight = dict(
-    format=_sensor_blacklight_icon + "{percent: 2.0%}",
+backlight = dict(
+    format=_sensor_backlight_icon + "{percent: 2.0%}",
     foreground=_sensor_color,
 )
 datetime = dict(
