@@ -13,15 +13,17 @@ def humanize_bytes(value):
 
 
 class Net(_Net):
-    _Net.defaults.extend((
-        ("icon_upload", ""),
-        ("icon_download", ""),
-        ("format", "{icon_download} {txt_download} {icon_upload} {txt_upload}"),
-        ("fmt_txt", "{:·>3.0f}{}"),
-        ("mini_val_threshold", 100),
-        ("fmt_mini", "···B"),
-        ("fmt_zero", "····"),
-    ))
+    def __init__(self, *args, **kwargs):
+        self.defaults.extend((
+            ("icon_upload", ""),
+            ("icon_download", ""),
+            ("format", "{icon_download} {txt_download} {icon_upload} {txt_upload}"),
+            ("fmt_txt", "{:·>3.0f}{}"),
+            ("mini_val_threshold", 100),
+            ("fmt_mini", "···B"),
+            ("fmt_zero", "····"),
+        ))
+        super().__init__(*args, **kwargs)
 
     def poll(self):
         new_int = self.get_stats()
