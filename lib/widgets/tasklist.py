@@ -2,10 +2,12 @@ from libqtile.widget import TaskList as _TaskList
 
 
 class TaskList(_TaskList):
-    _TaskList.defaults.extend((
-        ("icon_offset_x", 0),
-        ("icon_offset_y", 0),
-    ))
+    def __init__(self, *args, **kwargs):
+        self.defaults.extend((
+            ("icon_offset_x", 0),
+            ("icon_offset_y", 0),
+        ))
+        super().__init__(*args, **kwargs)
 
     def draw_icon(self, surface, offset):
         if not surface:
