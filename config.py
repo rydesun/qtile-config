@@ -102,8 +102,8 @@ screens = [
 
 keys = [
     # qtile
-    Key("M-S-r", lazy.restart()),
-    Key("M-S-q", lazy.shutdown()),
+    Key("M-S-C-r", lazy.restart()),
+    Key("M-S-C-q", lazy.shutdown()),
 
     # terminal emulator
     Key("M-<Return>", lazy.spawn(env.bin_term)),
