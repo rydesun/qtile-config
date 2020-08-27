@@ -1,7 +1,7 @@
 import time
 from datetime import datetime, timezone
 
-from libqtile.widget import Clock as _Clock
+from libqtile.widget.clock import Clock as _Clock
 
 
 class Clock(_Clock):

@@ -1,5 +1,4 @@
-from libqtile.widget import Battery as _Battery
-from libqtile.widget.battery import BatteryState
+from libqtile.widget.battery import Battery as _Battery, BatteryState
 
 
 class Battery(_Battery):

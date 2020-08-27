@@ -1,4 +1,4 @@
-from libqtile.widget import TaskList as _TaskList
+from libqtile.widget.tasklist import TaskList as _TaskList
 
 
 class TaskList(_TaskList):
