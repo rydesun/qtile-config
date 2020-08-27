@@ -1,4 +1,4 @@
-from libqtile.widget import Volume as _Volume
+from libqtile.widget.volume import Volume as _Volume
 
 
 class Volume(_Volume):

@@ -1,4 +1,4 @@
-from libqtile.widget import ThermalSensor as _ThermalSensor
+from libqtile.widget.sensors import ThermalSensor as _ThermalSensor
 
 
 class ThermalSensor(_ThermalSensor):

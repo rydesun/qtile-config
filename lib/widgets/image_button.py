@@ -1,6 +1,6 @@
 import subprocess
 
-from libqtile.widget import Image as _Image
+from libqtile.widget.image import Image as _Image
 
 
 class ImageButton(_Image):

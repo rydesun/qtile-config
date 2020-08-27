@@ -1,4 +1,4 @@
-from libqtile.widget import Net as _Net
+from libqtile.widget.net import Net as _Net
 
 
 def humanize_bytes(value):
