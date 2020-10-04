@@ -27,12 +27,12 @@ layouts = [
 ]
 
 groups = [
-    Group("home", label=" Home", layouts=[layouts[0]], spawn=[env.bin_term]),
-    Group("yard", label=" Yard", layouts=[
+    Group("home", label=" Earth", layouts=[layouts[0]], spawn=[env.bin_term]),
+    Group("yard", label=" Planet", layouts=[
           layouts[0]], spawn=[env.bin_browser]),
     Group("stash", label=" Stash", layouts=[layouts[0]]),
-    Group("float", label=" Float", layouts=[layouts[1]]),
-    Group("ghost", label=" Ghost", layouts=[layouts[0]]),
+    Group("float", label=" Float", layouts=[layouts[1]]),
+    Group("ghost", label=" Ghost", layouts=[layouts[0]]),
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
