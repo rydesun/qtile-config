@@ -16,7 +16,7 @@ color_dark_blue = "445582"
 color_pink = "b68992"
 # font
 font_sans = "sans"
-font_mono = "Noto Sans Mono"
+font_mono = "monospace"
 
 
 # layout
