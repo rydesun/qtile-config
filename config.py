@@ -7,6 +7,7 @@ from libqtile.config import EzDrag as Drag
 from libqtile.config import EzKey as Key
 from libqtile.config import Group, ScratchPad, Screen
 
+from layout.columns import Columns
 import lib.widgets as mywidget
 import startup
 import theme
@@ -20,7 +21,7 @@ bring_front_click = True    # bring window topside when clicking
 
 floating_layout = layout.Floating(**theme.layout_floating)
 layouts = [
-    layout.Columns(
+    Columns(
         insert_position=1,
         **theme.layout_column),
     layout.Floating(**theme.layout_floating),
