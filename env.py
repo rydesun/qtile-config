@@ -10,4 +10,4 @@ nic_wlan = "wlp2s0"
 
 wallpaper_dir = os.path.expanduser("~/Userdata/Pictures/wallpapers/")
 
-boot_cmds = [['picom'], ['copyq'], ['fcitx'], ['syncthing']]
+boot_cmds = [['picom'], ['copyq'], ['fcitx'], ['nm-applet']]
