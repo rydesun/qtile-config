@@ -63,12 +63,12 @@ screens = [
             highlight_method="border",
             **theme.tasklist),
         widget.Notify(**theme.notify),
-        widget.Systray(icon_size=20),
-        widget.Spacer(length=30),
-        mywidget.Wlan(
-            interface=env.nic_wlan,
-            disconnected_message="",  # hide itself if disconnected
-            **theme.wlan_indicator),
+        widget.Systray(icon_size=22),
+        widget.Spacer(length=20),
+        # mywidget.Wlan(
+        #     interface=env.nic_wlan,
+        #     disconnected_message="",  # hide itself if disconnected
+        #     **theme.wlan_indicator),
         mywidget.Net(
             interface=[env.nic_lan, env.nic_wlan],
             **theme.net_speed),
