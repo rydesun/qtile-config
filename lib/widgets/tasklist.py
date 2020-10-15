@@ -33,7 +33,10 @@ class TaskList(_TaskList):
             self.borderwidth,
             bordercolor,
             padding_x,
-            self.padding_y
+            [
+                (self.bar.height - self.layout.height - self.borderwidth) / 2,
+                (self.bar.height - self.layout.height + self.borderwidth) / 2
+            ]
         )
         if block:
             framed.draw_fill(offset, self.margin_y, rounded)
