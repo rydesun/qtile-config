@@ -28,12 +28,12 @@ layouts = [
 ]
 
 groups = [
-    Group("home", label=" Earth", layouts=[layouts[0]], spawn=[env.bin_term]),
-    Group("yard", label=" Planet", layouts=[
+    Group("a", label="🌏 ⬤", layouts=[layouts[0]], spawn=[env.bin_term]),
+    Group("s", label="🌸 ⬤", layouts=[
           layouts[0]], spawn=[env.bin_browser]),
-    Group("stash", label=" Stash", layouts=[layouts[0]]),
-    Group("float", label=" Float", layouts=[layouts[1]]),
-    Group("ghost", label=" Ghost", layouts=[layouts[0]]),
+    Group("d", label="🐰 ⬤", layouts=[layouts[0]]),
+    Group("f", label="🎀 ⬤", layouts=[layouts[1]]),
+    Group("g", label="👻 ⬤", layouts=[layouts[0]]),
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
@@ -46,13 +46,16 @@ widget_defaults = theme.widget_defaults
 screens = [
     Screen(left=bar.Bar([], 500, opacity=0), top=bar.Bar([
         mywidget.ImageButton(
-            filename="~/.config/qtile/assets/arch-logo.svg",
-            margin_x=2,
-            margin_y=2,
+            filename="/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg",
+            margin_x=3,
+            margin_y=3,
             execute=["jgmenu_run"],
         ),
+        widget.TextBox(
+            text="arch<span foreground='#1793d1'>linux  </span>",
+        ),
         widget.GroupBox(
-            visible_groups=["home", "yard", "stash", "float"],
+            visible_groups=["a", "s", "d", "f"],
             **theme.groupbox),
         widget.Prompt(
             ignore_dups_history=True,
@@ -60,7 +63,6 @@ screens = [
         widget.Spacer(length=10),
         mywidget.TaskList(
             title_width_method="uniform",
-            highlight_method="border",
             **theme.tasklist),
         widget.Notify(**theme.notify),
         widget.Systray(icon_size=22),
@@ -88,7 +90,7 @@ screens = [
     ], **theme.bar)),
     Screen(top=bar.Bar([
         widget.GroupBox(
-            visible_groups=["home", "yard", "stash", "float", "ghost"],
+            visible_groups=["a", "s", "d", "f", "g"],
             **theme.groupbox),
         mywidget.TaskList(
             title_width_method="uniform",
@@ -130,7 +132,7 @@ keys = [
     Key("M-n", lazy.layout.normalize()),            # normalize window size
     Key("M-<Tab>", lazy.layout.toggle_split()),     # toggle between stack and split
 
-    Key("M-r", lazy.spawncmd()),
+    Key("M-r", lazy.spawn(["rofi", "-show", "combi"])),
     Key("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
     Key("M-w", lazy.window.toggle_floating()),      # toggle window floating
     Key("M-e", lazy.spawn(env.bin_hint_window)),    # hint focus
@@ -149,10 +151,10 @@ keys = [
     Key("M-S-<Up>", lazy.window.resize_floating(0, -30, 0, 0)),
     Key("M-S-<Down>", lazy.window.resize_floating(0, 30, 0, 0)),
 ]
-for keycode, group in zip("asdfg", ["home", "yard", "stash", "float", "ghost"]):
+for k in "asdfg":
     keys.extend([
-        Key("M-" + keycode, lazy.group[group].toscreen()),
-        Key("M-C-" + keycode, lazy.window.togroup(group)),
+        Key("M-" + k, lazy.group[k].toscreen()),
+        Key("M-C-" + k, lazy.window.togroup(k)),
     ])
 
 mouse = [

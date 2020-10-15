@@ -10,10 +10,11 @@ color7 = "cfd8dc"; color15 = "eceff1" # white
 # extra colorscheme
 color_foreground = color15
 color_background = color0
-color_green = "427b58"; color_light_green = "cdf3a9"
+color_gray = "aaaaaa"
 color_light_yellow = "ebdbb2"
+color_light_blue = "17a3e1"
 color_dark_blue = "445582"
-color_pink = "b68992"
+color_pink = "e6a9b2"
 # font
 font_sans = "sans"
 font_mono = "monospace"
@@ -37,14 +38,16 @@ _bar_color_foreground = color_foreground
 _bar_color_background = color_background
 # widget: groupbox
 _groupbox_font      = font_sans
-_groupbox_fontsize  = _bar_fontsize_has_outline
-_groupbox_margin    = 15
-_groupbox_spacing   = 9
-_groupbox_highlight_method = "block"
+_groupbox_fontsize  = _bar_fontsize
+_groupbox_margin    = 8
+_groupbox_spacing   = 7
+_groupbox_borderwidth = 2
+_groupbox_highlight_method = "line"
 _groupbox_color_background         = color8
-_groupbox_color_foreground_inative = color_foreground
-_groupbox_color_foreground_active  = color_light_yellow
-_groupbox_color_normal       = color_green
+_groupbox_color_highlight          = _groupbox_color_background
+_groupbox_color_foreground_inative = color_gray
+_groupbox_color_foreground_active  = color_light_blue
+_groupbox_color_normal       = color_light_blue
 _groupbox_color_normal_other = color_dark_blue
 _groupbox_color_urgent       = color_pink
 # widget: prompt
@@ -57,15 +60,16 @@ _tasklist_spacing   = 12
 _tasklist_fontsize  = _bar_fontsize_has_outline
 _tasklist_icon_size = 20
 _tasklist_margin_y  = 0
+_tasklist_padding_x = 5
 _tasklist_padding_y = 4
 _tasklist_icon_offset_x = 0
-_tasklist_icon_offset_y = -1
+_tasklist_icon_offset_y = 0
 _tasklist_hint_floating  = " "
 _tasklist_hint_maximized = " "
 _tasklist_hint_minimized = " "
 _tasklist_borderwidth = 2
-_tasklist_color_border_focused   = color10
-_tasklist_color_border_unfocused = color14
+_tasklist_color_border_focused   = color_light_blue
+_tasklist_color_border_unfocused = color_gray
 _tasklist_color_border_urgent    = color1
 # widget: notify
 _notify_normal = color_light_yellow
@@ -128,9 +132,11 @@ bar = dict(
 groupbox = dict(
     font=_groupbox_font,
     fontsize=_groupbox_fontsize,
+    borderwidth=_groupbox_borderwidth,
     background=_groupbox_color_background,
     margin_x=_groupbox_margin,
     spacing=_groupbox_spacing,
+    highlight_color=_groupbox_color_highlight,
     active=_groupbox_color_foreground_active,
     inactive=_groupbox_color_foreground_inative,
 
@@ -152,6 +158,7 @@ tasklist = dict(
     fontsize=_tasklist_fontsize,
     icon_size=_tasklist_icon_size,
     margin_y=_tasklist_margin_y,
+    padding_x=_tasklist_padding_x,
     padding_y=_tasklist_padding_y,
     icon_offset_x=_tasklist_icon_offset_x,
     icon_offset_y=_tasklist_icon_offset_y,
