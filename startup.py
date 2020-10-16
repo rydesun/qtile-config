@@ -1,21 +1,21 @@
 import rules
 import subprocess
 
-import env
 from lib.theme import WallpaperManager
 from libqtile import hook
 
 
 class StartupMgr:
-    def __init__(self):
+    def __init__(self, env):
+        self.env = env
         self.rule_mgr = rules.RuleMgr()
-        self.wallpaper_mgr = WallpaperManager(env.wallpaper_dir)
+        self.wallpaper_mgr = WallpaperManager(self.env.wallpaper_dir)
 
     def work(self):
         self.rule_mgr.work()
 
         # init start
-        for boot_cmd in env.boot_cmds:
+        for boot_cmd in self.env.boot_cmds:
             self.boot(boot_cmd)
 
         # init start and restart
