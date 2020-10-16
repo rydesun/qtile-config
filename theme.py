@@ -80,9 +80,9 @@ _net_wifi_icon     = ""
 _net_download_icon = ""
 _net_upload_icon   = ""
 _net_speed_font    = font_mono
-_net_color         = color4
+_net_color         = "00d9d9"
 # widget: sensor
-_sensor_color       = color6
+_sensor_color       = color2
 _sensor_color_warn  = color3
 _sensor_color_alert = color5
 _sensor_battery_plug_icon = ""
@@ -95,7 +95,7 @@ _sensor_battery_low_energy_icon = ""
 _sensor_battery_empty_energy_icon = ""
 _sensor_backlight_icon = ""
 # widget: calendar and clock
-_datetime_color = color2
+_datetime_color = "00d9d9"
 
 
 # wallpaper
@@ -209,6 +209,6 @@ backlight = dict(
     foreground=_sensor_color,
 )
 datetime = dict(
-    format="{}  %H:%M:%S  %m-%d  {}",
+    format="{}  %H:%M:%S  %m-%d  <span foreground='#eceff1' size='larger'>{}</span>",
     foreground=_datetime_color,
 )
