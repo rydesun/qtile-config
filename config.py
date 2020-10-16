@@ -1,5 +1,3 @@
-import env
-
 from libqtile import bar, layout, widget
 from libqtile.command import lazy
 from libqtile.config import DropDown
@@ -12,9 +10,10 @@ import lib.widgets as mywidget
 import startup
 import theme
 import cmd
+import env
 
 
-startup_mgr = startup.StartupMgr()
+startup_mgr = startup.StartupMgr(env)
 startup_mgr.work()
 
 bring_front_click = True    # bring window topside when clicking
@@ -135,7 +134,6 @@ keys = [
     Key("M-r", lazy.spawn(["rofi", "-show", "combi"])),
     Key("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
     Key("M-w", lazy.window.toggle_floating()),      # toggle window floating
-    Key("M-e", lazy.spawn(env.bin_hint_window)),    # hint focus
     Key("M-x", lazy.window.kill()),                 # close window
 
     Key("M-S-w", cmd.disable_all_floating),
