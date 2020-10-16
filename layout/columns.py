@@ -25,8 +25,8 @@ class Columns(_Columns):
             0.5 + col.width * screen_rect.width * 0.01 / len(self.columns))
         x = screen_rect.x + int(0.5 + pos * screen_rect.width * 0.01 / len(self.columns))
 
-        margin_left = 0 if n_col == 0 else self.margin
-        margin_right = 0
+        margin_left = 0 if n_col == 0 else self.margin // 2
+        margin_right = 0 if n_col == len(self.columns)-1 else self.margin // 2
         margin_top = self.margin
         margin_bottom = 0
 
@@ -39,6 +39,8 @@ class Columns(_Columns):
             height = int(
                 0.5 + col.heights[client] * screen_rect.height * 0.01 / len(col))
             y = screen_rect.y + int(0.5 + pos * screen_rect.height * 0.01 / len(col))
+            if n_line == 0:
+                margin_top = 1
             place_client(client,
                 x,
                 y,
@@ -53,6 +55,7 @@ class Columns(_Columns):
             )
             client.unhide()
         elif client == col.cw:
+            margin_top = 1
             place_client(client,
                 x,
                 screen_rect.y,

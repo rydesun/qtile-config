@@ -22,7 +22,7 @@ font_mono = "monospace"
 
 # layout
 _column_border_width = 0
-_column_window_margin = 10
+_column_window_margin = 18
 _float_border_width = 0
 # dropdown
 _drowndown_x = 0.2
