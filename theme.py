@@ -95,8 +95,6 @@ _sensor_battery_low_energy_icon = ""
 _sensor_battery_empty_energy_icon = ""
 _sensor_backlight_icon = ""
 # widget: calendar and clock
-_date_icon      = ""
-_time_icon      = ""
 _datetime_color = color2
 
 
@@ -211,6 +209,6 @@ backlight = dict(
     foreground=_sensor_color,
 )
 datetime = dict(
-    format="{} %H:%M:%S  {} %m-%d  ".format(_time_icon, _date_icon),
+    format="{}  %H:%M:%S  %m-%d  {}",
     foreground=_datetime_color,
 )
