@@ -5,20 +5,25 @@ from libqtile.widget.clock import Clock as _Clock
 
 
 class Clock(_Clock):
-    weekday_sign = {
-        "1": "❶",
-        "2": "❷",
-        "3": "❸",
-        "4": "❹",
-        "5": "❺",
-        "6": "❻",
-        "0": "❼",
-    }
+    clock_sign = ("🕛", "🕧", "🕐", "🕜", "🕑", "🕝",
+                  "🕒", "🕞", "🕓", "🕟", "🕔", "🕠",
+                  "🕕", "🕡", "🕖", "🕢", "🕗", "🕣",
+                  "🕘", "🕤", "🕙", "🕥", "🕚", "🕦")
+    weekday_sign = ("❶", "❷", "❸", "❹", "❺", "❻", "❼")
 
     def poll(self):
         if self.timezone:
             now = datetime.now(timezone.utc).astimezone(self.timezone)
         else:
             now = datetime.now(timezone.utc).astimezone()
-        weekday = self.weekday_sign[now.strftime("%w")]
-        return (now + self.DELTA).strftime(self.format) + weekday
+        hour = now.hour
+        if hour >= 12:
+            hour -= 12
+        if now.minute > 15 and now.minute <= 45:
+            clock_index = hour * 2 + 1
+        elif now.minute > 45:
+            clock_index = hour * 2 + 2
+        else:
+            clock_index = hour * 2
+        return (now + self.DELTA).strftime(self.format).format(
+            self.clock_sign[clock_index], self.weekday_sign[now.weekday()])
