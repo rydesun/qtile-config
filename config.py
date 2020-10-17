@@ -134,6 +134,7 @@ keys = [
     Key("M-<Tab>", lazy.layout.toggle_split()),     # toggle between stack and split
 
     Key("M-r", lazy.spawn(["rofi", "-show", "combi"])),
+    Key("M-t", lazy.spawn(["input-box"])),          # chinese input box
     Key("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
     Key("M-w", lazy.window.toggle_floating()),      # toggle window floating
     Key("M-x", lazy.window.kill()),                 # close window
