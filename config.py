@@ -50,8 +50,10 @@ screens = [
             margin_y=3,
             execute=["jgmenu_run"],
         ),
-        widget.TextBox(
-            text="arch<span foreground='#1793d1'>linux  </span>",
+        mywidget.TextBox(
+            text="arch<span foreground='#1793d1'>linux</span>",
+            extra_offsetx = -7,
+            extra_offsety = -1.5,
         ),
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f"],
@@ -77,7 +79,7 @@ screens = [
             low_percentage=0.2,
             update_interval=7,
             **theme.battery),
-        widget.Backlight(
+        mywidget.Backlight(
             backlight_name=env.backlight,
             **theme.backlight),
         mywidget.Volume(**theme.volume),
