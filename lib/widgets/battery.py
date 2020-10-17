@@ -1,7 +1,9 @@
 from libqtile.widget.battery import Battery as _Battery, BatteryState
 
+from .base import TextBox
 
-class Battery(_Battery):
+
+class Battery(TextBox, _Battery):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("sep", (0.85, 0.65, 0.4, 0.25)),

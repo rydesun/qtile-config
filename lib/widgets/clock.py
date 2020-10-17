@@ -3,8 +3,10 @@ from datetime import datetime, timezone
 
 from libqtile.widget.clock import Clock as _Clock
 
+from .base import TextBox
 
-class Clock(_Clock):
+
+class Clock(TextBox, _Clock):
     clock_sign = ("🕛", "🕧", "🕐", "🕜", "🕑", "🕝",
                   "🕒", "🕞", "🕓", "🕟", "🕔", "🕠",
                   "🕕", "🕡", "🕖", "🕢", "🕗", "🕣",

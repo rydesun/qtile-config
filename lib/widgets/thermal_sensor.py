@@ -1,6 +1,8 @@
 from libqtile.widget.sensors import ThermalSensor as _ThermalSensor
 
+from .base import TextBox
 
-class ThermalSensor(_ThermalSensor):
+
+class ThermalSensor(TextBox, _ThermalSensor):
     def poll(self):
         return " " + super().poll().replace(".0", "")

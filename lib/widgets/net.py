@@ -1,5 +1,7 @@
 from libqtile.widget.net import Net as _Net
 
+from .base import TextBox
+
 
 def humanize_bytes(value):
     suff = ["B", "K", "M", "G", "T"]
@@ -12,7 +14,7 @@ def humanize_bytes(value):
     return value, suff[0]
 
 
-class Net(_Net):
+class Net(TextBox, _Net):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("icon_upload", ""),

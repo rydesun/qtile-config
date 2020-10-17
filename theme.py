@@ -81,6 +81,7 @@ _net_download_icon = ""
 _net_upload_icon   = ""
 _net_speed_font    = font_mono
 _net_color         = "00d9d9"
+_net_extra_offsety = 0
 # widget: sensor
 _sensor_color       = color2
 _sensor_color_warn  = color3
@@ -93,9 +94,15 @@ _sensor_battery_high_energy_icon = ""
 _sensor_battery_half_energy_icon = ""
 _sensor_battery_low_energy_icon = ""
 _sensor_battery_empty_energy_icon = ""
+_sensor_battery_extra_offsetx = 5
+_sensor_battery_extra_offsety = -1
 _sensor_backlight_icon = ""
+_sensor_backlight_extra_offsety = -1.5
+_sensor_volume_extra_offsety = -1.6
+_sensor_thermal_extra_offsety = -1.6
 # widget: calendar and clock
 _datetime_color = "00d9d9"
+_datetime_extra_offsety = -3
 
 
 # wallpaper
@@ -182,13 +189,16 @@ net_speed = dict(
     icon_download=_net_download_icon,
     font=_net_speed_font,
     foreground=_net_color,
+    extra_offsety = _net_extra_offsety,
 )
 volume = dict(
     foreground=_sensor_color,
+    extra_offsety = _sensor_volume_extra_offsety,
 )
 thermalSensor = dict(
     foreground=_sensor_color,
     foreground_alert=_sensor_color_alert,
+    extra_offsety = _sensor_thermal_extra_offsety,
 )
 battery = dict(
     format="{extra_icon} {icon} {percent:2.0%}",
@@ -203,12 +213,16 @@ battery = dict(
     foreground=_sensor_color,
     foreground_discharge=_sensor_color_warn,
     foreground_low=_sensor_color_alert,
+    extra_offsetx = _sensor_battery_extra_offsetx,
+    extra_offsety = _sensor_battery_extra_offsety,
 )
 backlight = dict(
     format=_sensor_backlight_icon + "{percent: 2.0%}",
     foreground=_sensor_color,
+    extra_offsety = _sensor_backlight_extra_offsety,
 )
 datetime = dict(
-    format="{}  %H:%M:%S  %m-%d  <span foreground='#eceff1' size='larger'>{}</span>",
+    format="{}  %H:%M:%S  %m-%d  <span foreground='#eceff1'>{}</span>",
     foreground=_datetime_color,
+    extra_offsety = _datetime_extra_offsety,
 )
