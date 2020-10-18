@@ -27,5 +27,7 @@ class Clock(TextBox, _Clock):
             clock_index = hour * 2 + 2
         else:
             clock_index = hour * 2
+        if clock_index >= len(self.clock_sign):
+            clock_index = 0
         return (now + self.DELTA).strftime(self.format).format(
             self.clock_sign[clock_index], self.weekday_sign[now.weekday()])
