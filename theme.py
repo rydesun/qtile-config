@@ -98,11 +98,11 @@ _sensor_battery_extra_offsetx = 5
 _sensor_battery_extra_offsety = -1
 _sensor_backlight_icon = ""
 _sensor_backlight_extra_offsety = -1.5
-_sensor_volume_extra_offsety = -1.6
-_sensor_thermal_extra_offsety = -1.6
+_sensor_volume_extra_offsety = -1.5
+_sensor_thermal_extra_offsety = -1.4
 # widget: calendar and clock
 _datetime_color = "00d9d9"
-_datetime_extra_offsety = -3
+_datetime_extra_offsety = -2
 
 
 # wallpaper
