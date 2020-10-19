@@ -143,14 +143,14 @@ keys = [
     Key("M-S-n", cmd.bring_all_floating_to_front),
 
     # manipulate floating window
-    Key("M-<Left>", lazy.window.move_floating(-30, 0, 0, 0)),
-    Key("M-<Right>", lazy.window.move_floating(30, 0, 0, 0)),
-    Key("M-<Up>", lazy.window.move_floating(0, -30, 0, 0)),
-    Key("M-<Down>", lazy.window.move_floating(0, 30, 0, 0)),
-    Key("M-S-<Left>", lazy.window.resize_floating(-30, 0, 0, 0)),
-    Key("M-S-<Right>", lazy.window.resize_floating(30, 0, 0, 0)),
-    Key("M-S-<Up>", lazy.window.resize_floating(0, -30, 0, 0)),
-    Key("M-S-<Down>", lazy.window.resize_floating(0, 30, 0, 0)),
+    Key("M-<Left>", lazy.window.move_floating(-30, 0)),
+    Key("M-<Right>", lazy.window.move_floating(30, 0)),
+    Key("M-<Up>", lazy.window.move_floating(0, -30)),
+    Key("M-<Down>", lazy.window.move_floating(0, 30)),
+    Key("M-S-<Left>", lazy.window.resize_floating(-30, 0)),
+    Key("M-S-<Right>", lazy.window.resize_floating(30, 0)),
+    Key("M-S-<Up>", lazy.window.resize_floating(0, -30)),
+    Key("M-S-<Down>", lazy.window.resize_floating(0, 30)),
 ]
 for k in "asdfg":
     keys.extend([
