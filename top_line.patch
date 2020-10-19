@@ -1,0 +1,12 @@
+--- drawer.py	2020-10-17 10:13:57.888954995 +0800
++++ /usr/lib/python3.8/site-packages/libqtile/drawer.py	2020-10-17 12:49:33.767890093 +0800
+@@ -167,7 +167,8 @@
+                 self.drawer.set_source_rgb(self.border_color)
+ 
+             # change to only fill in bottom line
+-            opts[1] = self.height - self.border_width  # y
++            # [rydesun]: top line
++            # opts[1] = self.height - self.border_width  # y
+             opts[3] = self.border_width  # height
+ 
+             self.drawer.fillrect(*opts)
