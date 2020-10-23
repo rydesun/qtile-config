@@ -27,12 +27,12 @@ layouts = [
 ]
 
 groups = [
-    Group("a", label="🌏 ⬤", layouts=[layouts[0]], spawn=[env.bin_term]),
-    Group("s", label="🌸 ⬤", layouts=[
+    Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.bin_term]),
+    Group("s", label="⬤", layouts=[
           layouts[0]], spawn=[env.bin_browser]),
-    Group("d", label="🐰 ⬤", layouts=[layouts[0]]),
-    Group("f", label="🎀 ⬤", layouts=[layouts[1]]),
-    Group("g", label="👻 ⬤", layouts=[layouts[0]]),
+    Group("d", label="⬤", layouts=[layouts[0]]),
+    Group("f", label="⬤", layouts=[layouts[1]]),
+    Group("g", label="⬤", layouts=[layouts[0]]),
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
@@ -51,12 +51,13 @@ screens = [
             execute=["jgmenu_run"],
         ),
         mywidget.TextBox(
-            text="arch<span foreground='#1793d1'>linux</span>",
+            text="arch<span foreground='#3ba4d8'>linux</span>",
             extra_offsetx = -7,
             extra_offsety = -1.5,
         ),
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f"],
+            disable_drag=True,
             **theme.groupbox),
         widget.Prompt(
             ignore_dups_history=True,
