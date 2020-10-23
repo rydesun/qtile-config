@@ -12,7 +12,7 @@ color_foreground = color15
 color_background = color0
 color_gray = "aaaaaa"
 color_light_yellow = "ebdbb2"
-color_light_blue = "17a3e1"
+color_light_blue = "4daddc"
 color_dark_blue = "445582"
 color_pink = "e6a9b2"
 # font
@@ -40,7 +40,7 @@ _bar_color_background = color_background
 _groupbox_font      = font_sans
 _groupbox_fontsize  = _bar_fontsize
 _groupbox_margin    = 8
-_groupbox_spacing   = 7
+_groupbox_spacing   = 3
 _groupbox_borderwidth = 2
 _groupbox_highlight_method = "line"
 _groupbox_color_background         = color8
@@ -80,7 +80,7 @@ _net_wifi_icon     = ""
 _net_download_icon = ""
 _net_upload_icon   = ""
 _net_speed_font    = font_mono
-_net_color         = "00d9d9"
+_net_color         = color15
 _net_extra_offsety = 0
 # widget: sensor
 _sensor_color       = color2
@@ -101,7 +101,7 @@ _sensor_backlight_extra_offsety = -1.5
 _sensor_volume_extra_offsety = -1.5
 _sensor_thermal_extra_offsety = -1.4
 # widget: calendar and clock
-_datetime_color = "00d9d9"
+_datetime_color = color15
 _datetime_extra_offsety = -2
 
 
