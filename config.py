@@ -43,7 +43,7 @@ groups = [
 
 widget_defaults = theme.widget_defaults
 screens = [
-    Screen(left=bar.Bar([], 500, opacity=0), top=bar.Bar([
+    Screen(top=bar.Bar([
         mywidget.ImageButton(
             filename="/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg",
             margin_x=3,
@@ -74,7 +74,7 @@ screens = [
         #     disconnected_message="",  # hide itself if disconnected
         #     **theme.wlan_indicator),
         mywidget.Net(
-            interface=[env.nic_lan, env.nic_wlan],
+            interface=[env.nic_wlan],
             **theme.net_speed),
         mywidget.Battery(
             low_percentage=0.2,
@@ -82,6 +82,7 @@ screens = [
             **theme.battery),
         mywidget.Backlight(
             backlight_name=env.backlight,
+            change_command='brightnessctl s {0}',
             **theme.backlight),
         mywidget.Volume(**theme.volume),
         mywidget.ThermalSensor(**theme.thermalSensor),

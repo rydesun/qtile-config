@@ -222,7 +222,7 @@ backlight = dict(
     extra_offsety = _sensor_backlight_extra_offsety,
 )
 datetime = dict(
-    format="{}  %H:%M:%S  %m-%d  <span foreground='#eceff1'>{}</span>",
+    format="%H:%M:%S  %m-%d  <span foreground='#eceff1'>{}</span>",
     foreground=_datetime_color,
     extra_offsety = _datetime_extra_offsety,
 )
