@@ -3,6 +3,7 @@ from libqtile.command import lazy
 from libqtile.config import DropDown
 from libqtile.config import EzDrag as Drag
 from libqtile.config import EzKey as Key
+from libqtile.config import Key as SpecKey
 from libqtile.config import Group, ScratchPad, Screen
 
 from layout.columns import Columns
@@ -153,6 +154,12 @@ keys = [
     Key("M-S-<Right>", lazy.window.resize_floating(30, 0)),
     Key("M-S-<Up>", lazy.window.resize_floating(0, -30)),
     Key("M-S-<Down>", lazy.window.resize_floating(0, 30)),
+
+    SpecKey([], "XF86AudioMute", lazy.spawn(["amixer", "-q", "sset", "Master", "toggle"])),
+    SpecKey([], "XF86AudioLowerVolume", lazy.spawn(["amixer", "-q", "sset", "Master", "1%-"])),
+    SpecKey([], "XF86AudioRaiseVolume", lazy.spawn(["amixer", "-q", "sset", "Master", "1%+"])),
+    SpecKey([], "XF86MonBrightnessUp", lazy.spawn(["brightnessctl", "s", "+1%"])),
+    SpecKey([], "XF86MonBrightnessDown", lazy.spawn(["brightnessctl", "s", "1%-"])),
 ]
 for k in "asdfg":
     keys.extend([
