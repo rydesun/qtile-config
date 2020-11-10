@@ -5,4 +5,4 @@ from .base import TextBox
 
 class ThermalSensor(TextBox, _ThermalSensor):
     def poll(self):
-        return " " + super().poll().replace(".0", "")
+        return " " + super().poll()
