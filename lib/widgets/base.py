@@ -1,3 +1,5 @@
+import subprocess
+
 from libqtile.widget.base import _TextBox
 
 
@@ -6,6 +8,7 @@ class TextBox(_TextBox):
         self.defaults.extend((
             ("extra_offsetx", 0),
             ("extra_offsety", 0),
+            ("execute", ""),
         ))
         super().__init__(*args, **kwargs)
 
@@ -20,3 +23,7 @@ class TextBox(_TextBox):
                 + self.extra_offsety
         )
         self.drawer.draw(offsetx=self.offsetx, width=self.width)
+
+    def button_press(self, x, y, button):
+        if button == 1:
+            subprocess.Popen(self.execute)
