@@ -55,6 +55,7 @@ screens = [
             text="arch<span foreground='#3ba4d8'>linux</span>",
             extra_offsetx = -7,
             extra_offsety = -1.5,
+            execute=["jgmenu_run"],
         ),
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f"],
@@ -70,10 +71,6 @@ screens = [
         widget.Notify(**theme.notify),
         widget.Systray(icon_size=22),
         widget.Spacer(length=20),
-        # mywidget.Wlan(
-        #     interface=env.nic_wlan,
-        #     disconnected_message="",  # hide itself if disconnected
-        #     **theme.wlan_indicator),
         mywidget.Net(
             interface=[env.nic_wlan],
             **theme.net_speed),
