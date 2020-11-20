@@ -37,7 +37,7 @@ _bar_fontsize_has_outline = 14
 _bar_color_foreground = color_foreground
 _bar_color_background = color_background
 # widget: groupbox
-_groupbox_font      = font_sans
+_groupbox_font      = font_mono
 _groupbox_fontsize  = _bar_fontsize
 _groupbox_margin    = 8
 _groupbox_spacing   = 3
