@@ -15,6 +15,7 @@ import env
 
 
 startup_mgr = startup.StartupMgr(env)
+startup_mgr.subreaper()
 startup_mgr.work()
 
 bring_front_click = True    # bring window topside when clicking
