@@ -62,9 +62,6 @@ screens = [
             visible_groups=["a", "s", "d", "f"],
             disable_drag=True,
             **theme.groupbox),
-        widget.Prompt(
-            ignore_dups_history=True,
-            **theme.prompt),
         widget.Spacer(length=10),
         mywidget.TaskList(
             title_width_method="uniform",

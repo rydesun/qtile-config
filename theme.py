@@ -15,6 +15,7 @@ color_light_yellow = "ebdbb2"
 color_light_blue = "4daddc"
 color_dark_blue = "445582"
 color_pink = "e6a9b2"
+color_fontshadow = "#000000"
 # font
 font_sans = "sans"
 font_mono = "monospace"
@@ -83,7 +84,7 @@ _net_speed_font    = font_mono
 _net_color         = color15
 _net_extra_offsety = 0
 # widget: sensor
-_sensor_color       = color2
+_sensor_color       = "#79b9a0"
 _sensor_color_warn  = color3
 _sensor_color_alert = color5
 _sensor_battery_plug_icon = ""
@@ -95,11 +96,11 @@ _sensor_battery_half_energy_icon = ""
 _sensor_battery_low_energy_icon = ""
 _sensor_battery_empty_energy_icon = ""
 _sensor_battery_extra_offsetx = 5
-_sensor_battery_extra_offsety = -1
+_sensor_battery_extra_offsety = -0.6
 _sensor_backlight_icon = ""
-_sensor_backlight_extra_offsety = -1.5
-_sensor_volume_extra_offsety = -1.5
-_sensor_thermal_extra_offsety = -1.4
+_sensor_backlight_extra_offsety = -1.6
+_sensor_volume_extra_offsety = -1.6
+_sensor_thermal_extra_offsety = -1.6
 # widget: calendar and clock
 _datetime_color = color15
 _datetime_extra_offsety = -2
@@ -135,6 +136,7 @@ bar = dict(
     opacity=0.95,
 )
 groupbox = dict(
+    fontshadow=color_background,
     font=_groupbox_font,
     fontsize=_groupbox_fontsize,
     borderwidth=_groupbox_borderwidth,
@@ -152,12 +154,8 @@ groupbox = dict(
     other_screen_border=_groupbox_color_normal_other,
     urgent_border=_groupbox_color_urgent,
 )
-prompt = dict(
-    font=_prompt_font,
-    prompt=_prompt_icon,
-    foreground=_prompt_color,
-)
 tasklist = dict(
+    fontshadow=color_fontshadow,
     max_title_width=_tasklist_max_width,
     spacing=_tasklist_spacing,
     fontsize=_tasklist_fontsize,
@@ -176,15 +174,18 @@ tasklist = dict(
     urgent_border=_tasklist_color_border_urgent,
 )
 notify = dict(
+    fontshadow=color_fontshadow,
     foreground=_notify_normal,
     foreground_low=_notify_low,
     foreground_urgent=_notify_urgent,
 )
 wlan_indicator = dict(
+    fontshadow=color_fontshadow,
     icon=_net_wifi_icon,
     foreground=_net_color,
 )
 net_speed = dict(
+    fontshadow=color_fontshadow,
     icon_upload=_net_upload_icon,
     icon_download=_net_download_icon,
     font=_net_speed_font,
@@ -192,16 +193,19 @@ net_speed = dict(
     extra_offsety = _net_extra_offsety,
 )
 volume = dict(
+    fontshadow=color_fontshadow,
     foreground=_sensor_color,
     extra_offsety = _sensor_volume_extra_offsety,
 )
 thermalSensor = dict(
+    fontshadow=color_fontshadow,
     foreground=_sensor_color,
     foreground_alert=_sensor_color_alert,
     extra_offsety = _sensor_thermal_extra_offsety,
 )
 battery = dict(
     format="{extra_icon} {icon} {percent:2.0%}",
+    fontshadow=color_fontshadow,
     icon_charge=_sensor_battery_charge_icon,
     icon_discharge=_sensor_battery_discharge_icon,
     icon_plug=_sensor_battery_plug_icon,
@@ -218,11 +222,13 @@ battery = dict(
 )
 backlight = dict(
     format=_sensor_backlight_icon + "{percent: 2.0%}",
+    fontshadow=color_fontshadow,
     foreground=_sensor_color,
     extra_offsety = _sensor_backlight_extra_offsety,
 )
 datetime = dict(
-    format="%H:%M:%S  %m-%d  <span foreground='#eceff1'>{}</span>",
+    format="%H:%M:%S  %m-%d  <span size='x-small'>星期{}</span>",
+    fontshadow=color_fontshadow,
     foreground=_datetime_color,
     extra_offsety = _datetime_extra_offsety,
 )
