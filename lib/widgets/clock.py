@@ -7,7 +7,7 @@ from .base import TextBox
 
 
 class Clock(TextBox, _Clock):
-    weekday_sign = ("❶", "❷", "❸", "❹", "❺", "❻", "❼")
+    weekday_sign = ("一", "二", "三", "四", "五", "六", "日")
 
     def poll(self):
         if self.timezone:
