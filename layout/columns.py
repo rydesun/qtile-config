@@ -40,7 +40,7 @@ class Columns(_Columns):
                 0.5 + col.heights[client] * screen_rect.height * 0.01 / len(col))
             y = screen_rect.y + int(0.5 + pos * screen_rect.height * 0.01 / len(col))
             if n_line == 0:
-                margin_top = 1
+                margin_top = 0
             place_client(client,
                 x,
                 y,
