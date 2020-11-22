@@ -134,6 +134,7 @@ bar = dict(
     size=_bar_size,
     background=_bar_color_background,
     opacity=0.95,
+    margin=[0, 0, 1, 0],
 )
 groupbox = dict(
     fontshadow=color_background,
@@ -227,7 +228,7 @@ backlight = dict(
     extra_offsety = _sensor_backlight_extra_offsety,
 )
 datetime = dict(
-    format="%H:%M:%S  %m-%d  <span size='x-small'>星期{}</span>",
+    format="%H:%M:%S  %m-%d  <span rise='550' size='small'>星期{}</span>",
     fontshadow=color_fontshadow,
     foreground=_datetime_color,
     extra_offsety = _datetime_extra_offsety,
