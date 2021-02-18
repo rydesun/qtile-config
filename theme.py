@@ -76,6 +76,17 @@ _tasklist_color_border_urgent    = color1
 _notify_normal = color_light_yellow
 _notify_low    = color_foreground
 _notify_urgent = color1
+# widget: kdeconnect
+_kdeconnect_charge_icon = ""
+_kdeconnect_discharge_icon = ""
+_kdeconnect_icon = ""
+_kdeconnect_full_energy_icon = _kdeconnect_icon
+_kdeconnect_high_energy_icon = _kdeconnect_icon
+_kdeconnect_half_energy_icon = _kdeconnect_icon
+_kdeconnect_low_energy_icon = _kdeconnect_icon
+_kdeconnect_empty_energy_icon = _kdeconnect_icon
+_kdeconnect_extra_offsetx = 0
+_kdeconnect_extra_offsety = -0.6
 # widget: net
 _net_wifi_icon     = ""
 _net_download_icon = ""
@@ -184,6 +195,22 @@ wlan_indicator = dict(
     fontshadow=color_fontshadow,
     icon=_net_wifi_icon,
     foreground=_net_color,
+)
+kdeconnect = dict(
+    format="{icon} {percent:2.0%} {extra_icon}",
+    fontshadow=color_fontshadow,
+    icon_charge=_kdeconnect_charge_icon,
+    icon_discharge=_kdeconnect_discharge_icon,
+    icon_full_energy=_kdeconnect_full_energy_icon,
+    icon_high_energy=_kdeconnect_high_energy_icon,
+    icon_half_energy=_kdeconnect_half_energy_icon,
+    icon_low_energy=_kdeconnect_low_energy_icon,
+    icon_empty_energy=_kdeconnect_empty_energy_icon,
+    foreground=_sensor_color,
+    foreground_discharge=_sensor_color_warn,
+    foreground_low=_sensor_color_alert,
+    extra_offsetx = _kdeconnect_extra_offsetx,
+    extra_offsety = _kdeconnect_extra_offsety,
 )
 net_speed = dict(
     fontshadow=color_fontshadow,

@@ -7,5 +7,6 @@ from .volume import Volume
 from .battery import Battery
 from .backlight import Backlight
 from .base import TextBox
+from .kdeconnect import Kdeconnect
 
-__all__ = ("ThermalSensor", "Volume", "TaskList", "Net", "Clock", "ImageButton", "Battery", "Backlight", "TextBox")
+__all__ = ("ThermalSensor", "Volume", "TaskList", "Net", "Clock", "ImageButton", "Battery", "Backlight", "TextBox", "Kdeconnect")

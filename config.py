@@ -69,6 +69,12 @@ screens = [
         widget.Notify(**theme.notify),
         widget.Systray(icon_size=22),
         widget.Spacer(length=20),
+        mywidget.Kdeconnect(
+            low_percentage=0.2,
+            update_interval=7,
+            dev_id=env.kdeconnect_dev_id,
+            **theme.kdeconnect,
+        ),
         mywidget.Net(
             interface=[env.nic_wlan],
             **theme.net_speed),
