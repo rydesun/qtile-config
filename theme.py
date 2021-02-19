@@ -72,10 +72,6 @@ _tasklist_borderwidth = 2
 _tasklist_color_border_focused   = color_light_blue
 _tasklist_color_border_unfocused = color_gray
 _tasklist_color_border_urgent    = color1
-# widget: notify
-_notify_normal = color_light_yellow
-_notify_low    = color_foreground
-_notify_urgent = color1
 # widget: kdeconnect
 _kdeconnect_charge_icon = ""
 _kdeconnect_discharge_icon = ""
@@ -184,12 +180,6 @@ tasklist = dict(
     border=_tasklist_color_border_focused,
     unfocused_border=_tasklist_color_border_unfocused,
     urgent_border=_tasklist_color_border_urgent,
-)
-notify = dict(
-    fontshadow=color_fontshadow,
-    foreground=_notify_normal,
-    foreground_low=_notify_low,
-    foreground_urgent=_notify_urgent,
 )
 wlan_indicator = dict(
     fontshadow=color_fontshadow,

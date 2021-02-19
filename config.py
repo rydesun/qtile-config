@@ -66,7 +66,6 @@ screens = [
         mywidget.TaskList(
             title_width_method="uniform",
             **theme.tasklist),
-        widget.Notify(**theme.notify),
         widget.Systray(icon_size=22),
         widget.Spacer(length=20),
         mywidget.Kdeconnect(
