@@ -86,14 +86,14 @@ _kdeconnect_half_energy_icon = _kdeconnect_icon
 _kdeconnect_low_energy_icon = _kdeconnect_icon
 _kdeconnect_empty_energy_icon = _kdeconnect_icon
 _kdeconnect_extra_offsetx = 0
-_kdeconnect_extra_offsety = -0.6
+_kdeconnect_extra_offsety = -0.8
 # widget: net
 _net_wifi_icon     = ""
 _net_download_icon = ""
 _net_upload_icon   = ""
 _net_speed_font    = font_mono
 _net_color         = color15
-_net_extra_offsety = 0
+_net_extra_offsety = 0.8
 # widget: sensor
 _sensor_color       = "#79b9a0"
 _sensor_color_warn  = color3
@@ -107,11 +107,11 @@ _sensor_battery_half_energy_icon = ""
 _sensor_battery_low_energy_icon = ""
 _sensor_battery_empty_energy_icon = ""
 _sensor_battery_extra_offsetx = 5
-_sensor_battery_extra_offsety = -0.6
+_sensor_battery_extra_offsety = -1.8
 _sensor_backlight_icon = ""
-_sensor_backlight_extra_offsety = -1.6
-_sensor_volume_extra_offsety = -1.6
-_sensor_thermal_extra_offsety = -1.6
+_sensor_backlight_extra_offsety = -2
+_sensor_volume_extra_offsety = -2
+_sensor_thermal_extra_offsety = -1.4
 # widget: calendar and clock
 _datetime_color = color15
 _datetime_extra_offsety = -2
@@ -197,7 +197,7 @@ wlan_indicator = dict(
     foreground=_net_color,
 )
 kdeconnect = dict(
-    format="{icon} {percent:2.0%} {extra_icon}",
+    format="{extra_icon} {icon} {percent:2.0%}",
     fontshadow=color_fontshadow,
     icon_charge=_kdeconnect_charge_icon,
     icon_discharge=_kdeconnect_discharge_icon,
