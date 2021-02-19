@@ -1,11 +1,11 @@
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
-from libqtile.widget.base import ThreadedPollText
+from libqtile.widget.base import ThreadPoolText
 
 from .base import TextBox
 
 
-class Kdeconnect(TextBox, ThreadedPollText):
+class Kdeconnect(TextBox, ThreadPoolText):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ('low_percentage', 0.20),
@@ -23,7 +23,7 @@ class Kdeconnect(TextBox, ThreadedPollText):
             ("dbus_name", "org.kde.kdeconnect"),
             ("dbus_path", "/modules/kdeconnect/devices/{dev_id}/battery"),
         ))
-        super().__init__(*args, **kwargs)
+        super().__init__("", *args, **kwargs)
         self._dbus_init()
 
     def _dbus_init(self):

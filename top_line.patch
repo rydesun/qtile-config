@@ -1,6 +1,6 @@
---- drawer.py	2020-10-17 10:13:57.888954995 +0800
-+++ /usr/lib/python3.8/site-packages/libqtile/drawer.py	2020-10-17 12:49:33.767890093 +0800
-@@ -167,7 +167,8 @@
+--- /usr/lib/python3.9/site-packages/libqtile/drawer.py	2021-02-18 02:44:21.000000000 +0800
++++ drawer.py	2021-02-19 16:55:08.828800267 +0800
+@@ -168,7 +168,8 @@
                  self.drawer.set_source_rgb(self.border_color)
  
              # change to only fill in bottom line

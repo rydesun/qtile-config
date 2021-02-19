@@ -12,11 +12,10 @@ class Columns(_Columns):
             return
 
         if client.has_focus:
-            color = self.group.qtile.color_pixel(self.border_focus if col.split
-                                                 else self.border_focus_stack)
+            color = self.border_focus if col.split else self.border_focus_stack
         else:
-            color = self.group.qtile.color_pixel(self.border_normal if col.split
-                                                 else self.border_normal_stack)
+            color = self.border_normal if col.split else self.border_normal_stack
+
         if len(self.columns) == 1 and (len(col) == 1 or not col.split):
             border = 0
         else:
@@ -41,72 +40,27 @@ class Columns(_Columns):
             y = screen_rect.y + int(0.5 + pos * screen_rect.height * 0.01 / len(col))
             if n_line == 0:
                 margin_top = 0
-            place_client(client,
+            client.place(
                 x,
                 y,
                 width - 2 * border,
                 height - 2 * border,
                 border,
                 color,
-                margin_left=margin_left,
-                margin_right=margin_right,
-                margin_top=margin_top,
-                margin_bottom=margin_bottom,
+                margin=[margin_top, margin_right, margin_bottom, margin_left],
             )
             client.unhide()
         elif client == col.cw:
             margin_top = 1
-            place_client(client,
+            client.place(
                 x,
                 screen_rect.y,
                 width - 2 * border,
                 screen_rect.height - 2 * border,
                 border,
                 color,
-                margin_left=margin_left,
-                margin_right=margin_right,
-                margin_top=margin_top,
-                margin_bottom=margin_bottom,
+                margin=[margin_top, margin_right, margin_bottom, margin_left],
             )
             client.unhide()
         else:
             client.hide()
-
-def place_client(client, x, y, width, height, borderwidth, bordercolor,
-                 above=False, margin_left=0, margin_right=0, margin_top=0, margin_bottom=0):
-        send_notify = True
-
-        x += margin_left
-        y += margin_top
-        width -= margin_left + margin_right
-        height -= margin_top + margin_bottom
-
-        # save x and y float offset
-        if client.group is not None and client.group.screen is not None:
-            client.float_x = x - client.group.screen.x
-            client.float_y = y - client.group.screen.y
-
-        client.x = x
-        client.y = y
-        client.width = width
-        client.height = height
-        client.borderwidth = borderwidth
-        client.bordercolor = bordercolor
-
-        kwarg = dict(
-            x=x,
-            y=y,
-            width=width,
-            height=height,
-            borderwidth=borderwidth,
-        )
-        if above:
-            kwarg['stackmode'] = StackMode.Above
-
-        client.window.configure(**kwarg)
-
-        if send_notify:
-            client.send_configure_notify(x, y, width, height)
-
-        if bordercolor is not None:
-            client.window.set_attribute(borderpixel=bordercolor)
