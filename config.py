@@ -14,7 +14,10 @@ from startup import startup
 startup()
 theme = themes.ui.Theme(themes.colors.material)
 
-floating_layout = layout.Floating(**theme.layout_floating)
+floating_layout = layout.Floating(float_rules=[
+    *layout.Floating.default_float_rules,
+    *env.float_rules,
+], **theme.layout_floating)
 layouts = [
     Columns(
         insert_position=1,

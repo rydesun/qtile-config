@@ -2,6 +2,8 @@
 
 import os
 
+from libqtile.config import Match
+
 
 wallpaper_dir = os.path.expanduser("~/Userdata/Pictures/wallpapers/")
 
@@ -23,3 +25,10 @@ cmd_volume_increase = ["amixer", "-q", "sset", "Master", "1%+"]
 dev_backlight = "amdgpu_bl0"
 dev_nic = ["wlp1s0", "enp2s0"]
 dev_kdeconnect = "eeeeeeeeeeeeeeee"
+
+float_rules = [
+    Match(wm_class="fcitx-config-gtk3"),
+    Match(wm_class="Lxappearance"),
+    Match(wm_class="firefox", role="Organizer"),
+    Match(wm_class="firefox", role="page-info"),
+]

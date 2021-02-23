@@ -12,8 +12,6 @@ import rules
 def startup() -> None:
     subreaper()  # Should not be wrapped by qtile hooks.
 
-    hook.subscribe.client_new(rules.set_window)
-
     hook.subscribe.client_new(partial(rules.swallow_window, retry=5))
     hook.subscribe.client_killed(rules.unswallow_window)
 
