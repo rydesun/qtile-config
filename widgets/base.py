@@ -8,7 +8,6 @@ class TextBox(_TextBox):
         self.defaults.extend((
             ("extra_offsetx", 0),
             ("extra_offsety", 0),
-            ("execute", ""),
         ))
         super().__init__(*args, **kwargs)
 
@@ -25,6 +24,11 @@ class TextBox(_TextBox):
         self.drawer.draw(offsetx=self.offsetx, width=self.width)
 
 class TextButton(TextBox):
+    def __init__(self, *args, **kwargs):
+        self.defaults.extend((
+            ("execute", ""),
+        ))
+        super().__init__(*args, **kwargs)
     def button_press(self, x, y, button):
         if button == 1:
             subprocess.Popen(self.execute)

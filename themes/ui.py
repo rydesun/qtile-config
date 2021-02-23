@@ -129,12 +129,15 @@ class Theme:
         )
 
         self.volume = dict(
+            icon=" ",
+            icon_mute="婢 ",
             extra_offsety=-2,
 
             foreground=colors.color_healthy,
         )
 
         self.thermalSensor = dict(
+            icon=" ",
             extra_offsety=-1.4,
 
             foreground=colors.color_healthy,
@@ -149,7 +152,16 @@ class Theme:
         )
 
         self.datetime = dict(
-            format="%H:%M:%S  %m-%d  <span rise='550' size='small'>星期{}</span>",
+            format="%H:%M:%S  %m-%d  <span rise='550' size='small'>{}</span>",
+            weekday_sign=(
+                "周一",
+                "周二",
+                "周三",
+                "周四",
+                "周五",
+                "周六",
+                "周日",
+            ),
             extra_offsety=-2,
 
             foreground=colors.color15,

@@ -1,4 +1,3 @@
-import time
 from datetime import datetime, timezone
 
 from libqtile.widget.clock import Clock as _Clock
@@ -7,7 +6,11 @@ from .base import TextBox
 
 
 class Clock(TextBox, _Clock):
-    weekday_sign = ("一", "二", "三", "四", "五", "六", "日")
+    def __init__(self, *args, **kwargs):
+        self.defaults.extend((
+            ("weekday_sign", tuple(range(1,8)), ""),
+        ))
+        super().__init__(*args, **kwargs)
 
     def poll(self):
         if self.timezone:

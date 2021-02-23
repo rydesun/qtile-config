@@ -84,9 +84,14 @@ screens = [
             **theme.battery),
         mywidget.Backlight(
             backlight_name=env.dev_backlight,
-            change_command=env.cmd_backlight,
+            command_increase=env.cmd_backlight_increase,
+            command_decrease=env.cmd_backlight_decrease,
             **theme.backlight),
-        mywidget.Volume(**theme.volume),
+        mywidget.Volume(
+            mute_command=env.cmd_volume_toggle,
+            volume_up_command=env.cmd_volume_increase,
+            volume_down_command=env.cmd_volume_decrease,
+            **theme.volume),
         mywidget.ThermalSensor(**theme.thermalSensor),
         mywidget.Clock(
             update_interval=0.5,
