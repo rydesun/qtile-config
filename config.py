@@ -7,7 +7,7 @@ from libqtile.config import Key as SpecKey
 from libqtile.config import Group, ScratchPad, Screen
 
 from layout.columns import Columns
-import lib.widgets as mywidget
+import widgets as mywidget
 import cmd
 import env
 
@@ -53,7 +53,7 @@ screens = [
             margin_y=3,
             execute=["jgmenu_run"],
         ),
-        mywidget.TextBox(
+        mywidget.TextButton(
             text="arch<span foreground='#3ba4d8'>linux</span>",
             extra_offsetx = -7,
             extra_offsety = -1.5,
@@ -92,10 +92,10 @@ screens = [
         mywidget.Clock(
             update_interval=0.5,
             **theme.datetime),
-        widget.Wallpaper(
+        mywidget.Wallpaper(
             directory=env.wallpaper_dir,
             random_selection=True,
-        ),
+            **theme.wallpaper),
         widget.Spacer(length=10),
     ], **theme.bar)),
     Screen(top=bar.Bar([

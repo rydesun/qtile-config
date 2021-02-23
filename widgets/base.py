@@ -24,6 +24,7 @@ class TextBox(_TextBox):
         )
         self.drawer.draw(offsetx=self.offsetx, width=self.width)
 
+class TextButton(TextBox):
     def button_press(self, x, y, button):
         if button == 1:
             subprocess.Popen(self.execute)

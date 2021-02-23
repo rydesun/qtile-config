@@ -154,3 +154,10 @@ class Theme:
 
             foreground=colors.color15,
         )
+
+        self.wallpaper = dict(
+            label="",
+            extra_offsety=0.5,
+
+            foreground=colors.color15,
+        )
