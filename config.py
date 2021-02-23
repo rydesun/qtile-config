@@ -9,9 +9,9 @@ from libqtile.config import Group, ScratchPad, Screen
 from layout.columns import Columns
 import lib.widgets as mywidget
 import startup
-import theme
 import cmd
 import env
+from . import themes
 
 
 startup_mgr = startup.StartupMgr(env)
@@ -19,6 +19,8 @@ startup_mgr.subreaper()
 startup_mgr.work()
 
 bring_front_click = True    # bring window topside when clicking
+
+theme = themes.ui.Theme(themes.colors.material)
 
 floating_layout = layout.Floating(**theme.layout_floating)
 layouts = [
@@ -39,7 +41,7 @@ groups = [
         DropDown(
             name="term",
             cmd=env.bin_term,
-            **theme.dropdown),
+            **theme.dropdown_window),
     ]),
 ]
 
@@ -56,6 +58,7 @@ screens = [
             text="arch<span foreground='#3ba4d8'>linux</span>",
             extra_offsetx = -7,
             extra_offsety = -1.5,
+            fontshadow=None,
             execute=["jgmenu_run"],
         ),
         widget.GroupBox(
@@ -76,7 +79,7 @@ screens = [
         ),
         mywidget.Net(
             interface=[env.nic_wlan],
-            **theme.net_speed),
+            **theme.netspeed),
         mywidget.Battery(
             low_percentage=0.2,
             update_interval=7,
