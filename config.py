@@ -8,15 +8,14 @@ from libqtile.config import Group, ScratchPad, Screen
 
 from layout.columns import Columns
 import lib.widgets as mywidget
-import startup
 import cmd
 import env
-from . import themes
+
+import themes
+from startup import startup
 
 
-startup_mgr = startup.StartupMgr(env)
-startup_mgr.subreaper()
-startup_mgr.work()
+startup()
 
 bring_front_click = True    # bring window topside when clicking
 

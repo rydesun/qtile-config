@@ -1,53 +1,47 @@
-from cffi import FFI
-from threading import Thread
 import os
-import rules
-import subprocess
 import time
+from functools import partial
+from threading import Thread
 
-from lib.theme import WallpaperManager
+from cffi import FFI
 from libqtile import hook
 
+import env
+import rules
+from lib.theme import WallpaperManager
 
-class StartupMgr:
-    def __init__(self, env):
-        self.env = env
-        self.rule_mgr = rules.RuleMgr()
-        self.wallpaper_mgr = WallpaperManager(self.env.wallpaper_dir)
 
-    def subreaper(self):
-        ffi = FFI()
-        ffi.cdef("""
-            int prctl(int option, unsigned long arg2);
-            #define PR_SET_CHILD_SUBREAPER ...
-        """)
-        C = ffi.verify("""
-            #include<sys/prctl.h>
-        """)
-        C.prctl(C.PR_SET_CHILD_SUBREAPER, 1)
-        def waitpid_thread():
-            while True:
-                try:
-                    os.waitpid(-1, 0)
-                except OSError:
-                    time.sleep(1)
+def startup() -> None:
+    subreaper()  # Should not be wrapped by qtile hooks.
 
-        thread = Thread(target=waitpid_thread)
-        thread.daemon = True
-        thread.start()
+    hook.subscribe.client_new(rules.set_window)
 
-    def work(self):
-        self.rule_mgr.work()
+    hook.subscribe.client_new(partial(rules.swallow_window, retry=5))
+    hook.subscribe.client_killed(rules.unswallow_window)
 
-        # init start
-        for boot_cmd in self.env.boot_cmds:
-            self.boot(boot_cmd)
+    wallpaper_mgr = WallpaperManager(env.wallpaper_dir)
+    hook.subscribe.startup(wallpaper_mgr.random_set_wallpaper)
 
-        # init start and restart
-        hook.subscribe.startup(self.wallpaper_mgr.random_set_wallpaper)
 
-    def _boot(self, boot_cmd: list):
-        subprocess.Popen(boot_cmd)
+# https://blog.lilydjwg.me/2014/2/23/let-s-adopt-orphaned-processes.43035.html
+def subreaper() -> None:
+    ffi = FFI()
+    ffi.cdef("""
+        int prctl(int option, unsigned long arg2);
+        #define PR_SET_CHILD_SUBREAPER ...
+    """)
+    C = ffi.verify("""
+        #include<sys/prctl.h>
+    """)
+    C.prctl(C.PR_SET_CHILD_SUBREAPER, 1)
 
-    def boot(self, boot_cmd: list):
-        hook.subscribe.startup_once(lambda: self._boot(boot_cmd))
+    def waitpid_thread():
+        while True:
+            try:
+                os.waitpid(-1, 0)
+            except OSError:
+                time.sleep(1)
+
+    thread = Thread(target=waitpid_thread)
+    thread.daemon = True
+    thread.start()

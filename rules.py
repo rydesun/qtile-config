@@ -1,14 +1,12 @@
-from libqtile import hook
 import psutil
-
-class RuleMgr:
-    def work(self):
-        hook.subscribe.client_new(_set_window_float)
-        hook.subscribe.client_new(_swallow)
-        hook.subscribe.client_killed(_unswallow)
+from libqtile.window import Window as _Window
 
 
-def _set_window_float(c):
+class Window(_Window):
+    parent: _Window
+
+
+def set_window(c: Window):
     wm_class = c.window.get_wm_class()
     wm_window_role = c.window.get_wm_window_role()
 
@@ -30,21 +28,27 @@ def _set_window_float(c):
     if "Wine" in wm_class:
         c.floating = True
 
+
 # https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
-def _swallow(window):
-    pid = window.window.get_net_wm_pid()
+def swallow_window(c: Window, retry: int):
+    pid = c.window.get_net_wm_pid()
     ppid = psutil.Process(pid).ppid()
-    cpids = {c.window.get_net_wm_pid(): wid for wid, c in window.qtile.windows_map.items()}
-    for _ in range(5):
-        if not ppid:
-            return
+    if not ppid:
+        return
+
+    cpids = {
+        c.window.get_net_wm_pid(): wid
+        for wid, c in c.qtile.windows_map.items()
+    }
+    for _ in range(retry):
         if ppid in cpids:
-            parent = window.qtile.windows_map.get(cpids[ppid])
+            parent = c.qtile.windows_map.get(cpids[ppid])
             parent.minimized = True
-            window.parent = parent
+            c.parent = parent
             return
         ppid = psutil.Process(ppid).ppid()
 
-def _unswallow(window):
-    if hasattr(window, 'parent'):
-        window.parent.minimized = False
+
+def unswallow_window(c: Window):
+    if hasattr(c, 'parent'):
+        c.parent.minimized = False
