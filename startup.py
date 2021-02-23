@@ -6,9 +6,7 @@ from threading import Thread
 from cffi import FFI
 from libqtile import hook
 
-import env
 import rules
-from lib.theme import WallpaperManager
 
 
 def startup() -> None:
@@ -18,9 +16,6 @@ def startup() -> None:
 
     hook.subscribe.client_new(partial(rules.swallow_window, retry=5))
     hook.subscribe.client_killed(rules.unswallow_window)
-
-    wallpaper_mgr = WallpaperManager(env.wallpaper_dir)
-    hook.subscribe.startup(wallpaper_mgr.random_set_wallpaper)
 
 
 # https://blog.lilydjwg.me/2014/2/23/let-s-adopt-orphaned-processes.43035.html

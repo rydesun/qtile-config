@@ -92,6 +92,10 @@ screens = [
         mywidget.Clock(
             update_interval=0.5,
             **theme.datetime),
+        widget.Wallpaper(
+            directory=env.wallpaper_dir,
+            random_selection=True,
+        ),
         widget.Spacer(length=10),
     ], **theme.bar)),
     Screen(top=bar.Bar([
