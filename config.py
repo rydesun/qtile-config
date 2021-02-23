@@ -31,8 +31,7 @@ layouts = [
 
 groups = [
     Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.bin_term]),
-    Group("s", label="⬤", layouts=[
-          layouts[0]], spawn=[env.bin_browser]),
+    Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.bin_browser]),
     Group("d", label="⬤", layouts=[layouts[0]]),
     Group("f", label="⬤", layouts=[layouts[1]]),
     Group("g", label="⬤", layouts=[layouts[0]]),
@@ -48,13 +47,13 @@ widget_defaults = theme.widget_defaults
 screens = [
     Screen(top=bar.Bar([
         mywidget.ImageButton(
-            filename="/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg",
+            filename=env.logo_file,
             margin_x=3,
             margin_y=3,
-            execute=["jgmenu_run"],
+            execute=env.cmd_menu,
         ),
         mywidget.TextButton(
-            text="arch<span foreground='#3ba4d8'>linux</span>",
+            text=env.logo_text,
             extra_offsetx = -7,
             extra_offsety = -1.5,
             fontshadow=None,
@@ -73,19 +72,19 @@ screens = [
         mywidget.Kdeconnect(
             low_percentage=0.2,
             update_interval=7,
-            dev_id=env.kdeconnect_dev_id,
+            dev_id=env.dev_kdeconnect,
             **theme.kdeconnect,
         ),
         mywidget.Net(
-            interface=[env.nic_wlan],
+            interface=env.dev_nic,
             **theme.netspeed),
         mywidget.Battery(
             low_percentage=0.2,
             update_interval=7,
             **theme.battery),
         mywidget.Backlight(
-            backlight_name=env.backlight,
-            change_command='brightnessctl s {0}',
+            backlight_name=env.dev_backlight,
+            change_command=env.cmd_backlight,
             **theme.backlight),
         mywidget.Volume(**theme.volume),
         mywidget.ThermalSensor(**theme.thermalSensor),
@@ -93,8 +92,9 @@ screens = [
             update_interval=0.5,
             **theme.datetime),
         mywidget.Wallpaper(
-            directory=env.wallpaper_dir,
             random_selection=True,
+            directory=env.wallpaper_dir,
+            wallpaper_command=env.cmd_wallpaper,
             **theme.wallpaper),
         widget.Spacer(length=10),
     ], **theme.bar)),
@@ -142,8 +142,8 @@ keys = [
     Key("M-n", lazy.layout.normalize()),            # normalize window size
     Key("M-<Tab>", lazy.layout.toggle_split()),     # toggle between stack and split
 
-    Key("M-r", lazy.spawn(["rofi", "-show", "combi"])),
-    Key("M-t", lazy.spawn(["input-box"])),          # chinese input box
+    Key("M-r", lazy.spawn(env.cmd_launcher)),
+    Key("M-t", lazy.spawn(["input-box"])),          # Chinese input box
     Key("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
     Key("M-w", lazy.window.toggle_floating()),      # toggle window floating
     Key("M-x", lazy.window.kill()),                 # close window
@@ -161,11 +161,11 @@ keys = [
     Key("M-S-<Up>", lazy.window.resize_floating(0, -30)),
     Key("M-S-<Down>", lazy.window.resize_floating(0, 30)),
 
-    SpecKey([], "XF86AudioMute", lazy.spawn(["amixer", "-q", "sset", "Master", "toggle"])),
-    SpecKey([], "XF86AudioLowerVolume", lazy.spawn(["amixer", "-q", "sset", "Master", "1%-"])),
-    SpecKey([], "XF86AudioRaiseVolume", lazy.spawn(["amixer", "-q", "sset", "Master", "1%+"])),
-    SpecKey([], "XF86MonBrightnessUp", lazy.spawn(["brightnessctl", "s", "+1%"])),
-    SpecKey([], "XF86MonBrightnessDown", lazy.spawn(["brightnessctl", "s", "1%-"])),
+    SpecKey([], "XF86AudioMute", lazy.spawn(env.cmd_volume_toggle)),
+    SpecKey([], "XF86AudioLowerVolume", lazy.spawn(env.cmd_volume_decrease)),
+    SpecKey([], "XF86AudioRaiseVolume", lazy.spawn(env.cmd_volume_increase)),
+    SpecKey([], "XF86MonBrightnessUp", lazy.spawn(env.cmd_backlight_increase)),
+    SpecKey([], "XF86MonBrightnessDown", lazy.spawn(env.cmd_backlight_decrease)),
 ]
 for k in "asdfg":
     keys.extend([
