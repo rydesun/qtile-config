@@ -45,6 +45,17 @@ class Theme:
             fontshadow=colors.color_shadow,
         )
 
+        self.menu_button = dict(
+            margin_x=3,
+            margin_y=3,
+        )
+
+        self.menu_text = dict(
+            fontshadow=None,
+            extra_offsetx=-7,
+            extra_offsety=-1.5,
+        )
+
         self.groupbox = dict(
             font=font_mono,
             fontsize=fontsize,
@@ -65,6 +76,7 @@ class Theme:
         )
 
         self.tasklist = dict(
+            title_width_method="uniform",
             max_title_width=200,
             spacing=12,
             fontsize=fontsize_with_decoration,
@@ -82,6 +94,10 @@ class Theme:
             border=colors.color_major,
             unfocused_border=colors.color_common,
             urgent_border=colors.color1,
+        )
+
+        self.systray = dict(
+            icon_size=22,
         )
 
         self.kdeconnect = dict(
@@ -151,7 +167,7 @@ class Theme:
             foreground=colors.color_healthy,
         )
 
-        self.datetime = dict(
+        self.clock = dict(
             format="%H:%M:%S  %m-%d  <span rise='550' size='small'>{}</span>",
             weekday_sign=(
                 "周一",

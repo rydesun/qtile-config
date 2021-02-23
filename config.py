@@ -1,24 +1,17 @@
 from libqtile import bar, layout, widget
 from libqtile.command import lazy
-from libqtile.config import DropDown
-from libqtile.config import EzDrag as Drag
-from libqtile.config import EzKey as Key
-from libqtile.config import Key as SpecKey
-from libqtile.config import Group, ScratchPad, Screen
+from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
+                             Screen)
 
-from layout.columns import Columns
-import widgets as mywidget
-import cmd
+import command
 import env
-
 import themes
+import widgets as mywidget
+from layout.columns import Columns
 from startup import startup
 
 
 startup()
-
-bring_front_click = True    # bring window topside when clicking
-
 theme = themes.ui.Theme(themes.colors.material)
 
 floating_layout = layout.Floating(**theme.layout_floating)
@@ -29,12 +22,14 @@ layouts = [
     layout.Floating(**theme.layout_floating),
 ]
 
-groups = [
+_groups = [
     Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.bin_term]),
     Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.bin_browser]),
     Group("d", label="⬤", layouts=[layouts[0]]),
     Group("f", label="⬤", layouts=[layouts[1]]),
     Group("g", label="⬤", layouts=[layouts[0]]),
+]
+groups = _groups + [
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
@@ -48,26 +43,19 @@ screens = [
     Screen(top=bar.Bar([
         mywidget.ImageButton(
             filename=env.logo_file,
-            margin_x=3,
-            margin_y=3,
             execute=env.cmd_menu,
-        ),
+        **theme.menu_button),
         mywidget.TextButton(
             text=env.logo_text,
-            extra_offsetx = -7,
-            extra_offsety = -1.5,
-            fontshadow=None,
-            execute=["jgmenu_run"],
-        ),
+            execute=env.cmd_menu,
+        **theme.menu_text),
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f"],
             disable_drag=True,
             **theme.groupbox),
         widget.Spacer(length=10),
-        mywidget.TaskList(
-            title_width_method="uniform",
-            **theme.tasklist),
-        widget.Systray(icon_size=22),
+        mywidget.TaskList(**theme.tasklist),
+        widget.Systray(**theme.systray),
         widget.Spacer(length=20),
         mywidget.Kdeconnect(
             low_percentage=0.2,
@@ -95,7 +83,7 @@ screens = [
         mywidget.ThermalSensor(**theme.thermalSensor),
         mywidget.Clock(
             update_interval=0.5,
-            **theme.datetime),
+            **theme.clock),
         mywidget.Wallpaper(
             random_selection=True,
             directory=env.wallpaper_dir,
@@ -107,78 +95,80 @@ screens = [
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f", "g"],
             **theme.groupbox),
-        mywidget.TaskList(
-            title_width_method="uniform",
-            highlight_method="border",
-            **theme.tasklist),
+        mywidget.TaskList(**theme.tasklist),
         mywidget.Clock(
             update_interval=0.5,
-            **theme.datetime),
+            **theme.clock),
         widget.Spacer(length=10),
     ], **theme.bar)),
 ]
 
 keys = [
     # qtile
-    Key("M-S-C-r", lazy.restart()),
-    Key("M-S-C-q", lazy.shutdown()),
+    EzKey("M-S-C-r", lazy.restart()),
+    EzKey("M-S-C-q", lazy.shutdown()),
 
     # terminal emulator
-    Key("M-<Return>", lazy.spawn(env.bin_term)),
-    Key('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
+    EzKey("M-<Return>", lazy.spawn(env.bin_term)),
+    EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
 
     # toggle sidebar
-    Key("M-<space>", lazy.hide_show_bar("left")),
+    EzKey("M-<space>", lazy.hide_show_bar("left")),
     # window focus
-    Key("M-j", lazy.layout.down()),
-    Key("M-k", lazy.layout.up()),
-    Key("M-h", lazy.layout.left()),
-    Key("M-l", lazy.layout.right()),
+    EzKey("M-j", lazy.layout.down()),
+    EzKey("M-k", lazy.layout.up()),
+    EzKey("M-h", lazy.layout.left()),
+    EzKey("M-l", lazy.layout.right()),
     # window shift
-    Key("M-C-j", lazy.layout.shuffle_down()),
-    Key("M-C-k", lazy.layout.shuffle_up()),
-    Key("M-C-h", lazy.layout.shuffle_left()),
-    Key("M-C-l", lazy.layout.shuffle_right()),
+    EzKey("M-C-j", lazy.layout.shuffle_down()),
+    EzKey("M-C-k", lazy.layout.shuffle_up()),
+    EzKey("M-C-h", lazy.layout.shuffle_left()),
+    EzKey("M-C-l", lazy.layout.shuffle_right()),
     # window resize
-    Key("M-S-j", lazy.layout.grow_down()),
-    Key("M-S-k", lazy.layout.grow_up()),
-    Key("M-S-h", lazy.layout.grow_left()),
-    Key("M-S-l", lazy.layout.grow_right()),
-    Key("M-n", lazy.layout.normalize()),            # normalize window size
-    Key("M-<Tab>", lazy.layout.toggle_split()),     # toggle between stack and split
+    EzKey("M-S-j", lazy.layout.grow_down()),
+    EzKey("M-S-k", lazy.layout.grow_up()),
+    EzKey("M-S-h", lazy.layout.grow_left()),
+    EzKey("M-S-l", lazy.layout.grow_right()),
+    EzKey("M-n", lazy.layout.normalize()),            # normalize window size
+    # toggle between stack and split
+    EzKey("M-<Tab>", lazy.layout.toggle_split()),
 
-    Key("M-r", lazy.spawn(env.cmd_launcher)),
-    Key("M-t", lazy.spawn(["input-box"])),          # Chinese input box
-    Key("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
-    Key("M-w", lazy.window.toggle_floating()),      # toggle window floating
-    Key("M-x", lazy.window.kill()),                 # close window
+    EzKey("M-r", lazy.spawn(env.cmd_launcher)),
+    EzKey("M-t", lazy.spawn(["input-box"])),          # Chinese input box
+    EzKey("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
+    EzKey("M-w", lazy.window.toggle_floating()),      # toggle window floating
+    EzKey("M-x", lazy.window.kill()),                 # close window
 
-    Key("M-S-w", cmd.disable_all_floating),
-    Key("M-S-n", cmd.bring_all_floating_to_front),
+    EzKey("M-S-w", command.disable_all_floating),
+    EzKey("M-S-n", command.bring_all_floating_to_front),
 
     # manipulate floating window
-    Key("M-<Left>", lazy.window.move_floating(-30, 0)),
-    Key("M-<Right>", lazy.window.move_floating(30, 0)),
-    Key("M-<Up>", lazy.window.move_floating(0, -30)),
-    Key("M-<Down>", lazy.window.move_floating(0, 30)),
-    Key("M-S-<Left>", lazy.window.resize_floating(-30, 0)),
-    Key("M-S-<Right>", lazy.window.resize_floating(30, 0)),
-    Key("M-S-<Up>", lazy.window.resize_floating(0, -30)),
-    Key("M-S-<Down>", lazy.window.resize_floating(0, 30)),
+    EzKey("M-<Left>", lazy.window.move_floating(-30, 0)),
+    EzKey("M-<Right>", lazy.window.move_floating(30, 0)),
+    EzKey("M-<Up>", lazy.window.move_floating(0, -30)),
+    EzKey("M-<Down>", lazy.window.move_floating(0, 30)),
+    EzKey("M-S-<Left>", lazy.window.resize_floating(-30, 0)),
+    EzKey("M-S-<Right>", lazy.window.resize_floating(30, 0)),
+    EzKey("M-S-<Up>", lazy.window.resize_floating(0, -30)),
+    EzKey("M-S-<Down>", lazy.window.resize_floating(0, 30)),
 
-    SpecKey([], "XF86AudioMute", lazy.spawn(env.cmd_volume_toggle)),
-    SpecKey([], "XF86AudioLowerVolume", lazy.spawn(env.cmd_volume_decrease)),
-    SpecKey([], "XF86AudioRaiseVolume", lazy.spawn(env.cmd_volume_increase)),
-    SpecKey([], "XF86MonBrightnessUp", lazy.spawn(env.cmd_backlight_increase)),
-    SpecKey([], "XF86MonBrightnessDown", lazy.spawn(env.cmd_backlight_decrease)),
+    Key([], "XF86AudioMute", lazy.spawn(env.cmd_volume_toggle)),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(env.cmd_volume_decrease)),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(env.cmd_volume_increase)),
+    Key([], "XF86MonBrightnessUp", lazy.spawn(env.cmd_backlight_increase)),
+    Key([], "XF86MonBrightnessDown",
+            lazy.spawn(env.cmd_backlight_decrease)),
 ]
-for k in "asdfg":
+for i in _groups:
     keys.extend([
-        Key("M-" + k, lazy.group[k].toscreen()),
-        Key("M-C-" + k, lazy.window.togroup(k)),
+        EzKey("M-" + i.name, lazy.group[i.name].toscreen()),
+        EzKey("M-C-" + i.name, lazy.window.togroup(i.name)),
     ])
 
 mouse = [
-    Drag("M-1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag("M-3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    EzDrag("M-1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    EzDrag("M-3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
 ]
+
+bring_front_click = True    # bring window topside when clicking
