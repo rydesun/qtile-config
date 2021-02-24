@@ -10,14 +10,14 @@ class Window(_Window):
 def swallow_window(c: Window, retry: int):
     pid = c.window.get_net_wm_pid()
     ppid = psutil.Process(pid).ppid()
-    if not ppid:
-        return
 
     cpids = {
         c.window.get_net_wm_pid(): wid
         for wid, c in c.qtile.windows_map.items()
     }
     for _ in range(retry):
+        if not ppid:
+            return
         if ppid in cpids:
             parent = c.qtile.windows_map.get(cpids[ppid])
             parent.minimized = True
