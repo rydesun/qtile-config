@@ -1,4 +1,4 @@
-from libqtile import bar, layout, widget
+from libqtile import bar, widget
 from libqtile.command import lazy
 from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
                              Screen)
@@ -8,21 +8,25 @@ import env
 import themes
 import widgets as mywidget
 from layout.columns import Columns
+from layout.floating import Floating
 from startup import startup
 
 
 startup()
 theme = themes.ui.Theme(themes.colors.material)
 
-floating_layout = layout.Floating(float_rules=[
-    *layout.Floating.default_float_rules,
-    *env.float_rules,
-], **theme.layout_floating)
+floating_layout = Floating(
+    float_rules=[
+        *Floating.default_float_rules,
+        *env.float_rules,
+    ],
+    border_rules=env.float_borders,
+    **theme.layout_floating)
 layouts = [
     Columns(
         insert_position=1,
         **theme.layout_column),
-    layout.Floating(**theme.layout_floating),
+    Floating(**theme.layout_floating),
 ]
 
 _groups = [

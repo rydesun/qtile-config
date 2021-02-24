@@ -32,3 +32,6 @@ float_rules = [
     Match(wm_class="firefox", role="Organizer"),
     Match(wm_class="firefox", role="page-info"),
 ]
+float_borders = [
+    {"match": Match(wm_class="Alacritty"), "border_width": 2},
+]
