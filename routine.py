@@ -11,7 +11,9 @@ import rules
 
 def startup() -> None:
     subreaper()  # Should not be wrapped by qtile hooks.
+    Thread(target=waitpid, args=(5,), daemon=True).start()
 
+def subscribe_hooks() -> None:
     hook.subscribe.client_new(partial(rules.swallow_window, retry=5))
     hook.subscribe.client_killed(rules.unswallow_window)
 
@@ -28,13 +30,9 @@ def subreaper() -> None:
     """)
     C.prctl(C.PR_SET_CHILD_SUBREAPER, 1)
 
-    def waitpid_thread():
-        while True:
-            try:
-                os.waitpid(-1, 0)
-            except OSError:
-                time.sleep(1)
-
-    thread = Thread(target=waitpid_thread)
-    thread.daemon = True
-    thread.start()
+def waitpid(interval: int) -> None:
+    while True:
+        try:
+            os.waitpid(-1, 0)
+        except OSError:
+            time.sleep(interval)

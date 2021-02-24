@@ -6,9 +6,9 @@ from libqtile.log_utils import logger
 
 import command
 import layouts as mylayouts
+import routine
 import themes
 import widgets as mywidgets
-from startup import startup
 
 try:
     import env
@@ -17,7 +17,8 @@ except ImportError:
     import env_example as env
 
 
-startup()
+routine.startup()
+routine.subscribe_hooks()
 theme = themes.ui.Theme(themes.colors.material)
 
 floating_layout = mylayouts.Floating(
