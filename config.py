@@ -2,31 +2,36 @@ from libqtile import bar, widget
 from libqtile.command import lazy
 from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
                              Screen)
+from libqtile.log_utils import logger
 
 import command
-import env
+import layouts as mylayouts
 import themes
-import widgets as mywidget
-from layout.columns import Columns
-from layout.floating import Floating
+import widgets as mywidgets
 from startup import startup
+
+try:
+    import env
+except ImportError:
+    logger.warning("env.py is missing")
+    import env_example as env
 
 
 startup()
 theme = themes.ui.Theme(themes.colors.material)
 
-floating_layout = Floating(
+floating_layout = mylayouts.Floating(
     float_rules=[
-        *Floating.default_float_rules,
+        *mylayouts.Floating.default_float_rules,
         *env.float_rules,
     ],
     border_rules=env.float_borders,
     **theme.layout_floating)
 layouts = [
-    Columns(
+    mylayouts.Columns(
         insert_position=1,
         **theme.layout_column),
-    Floating(**theme.layout_floating),
+    mylayouts.Floating(**theme.layout_floating),
 ]
 
 _groups = [
@@ -48,50 +53,50 @@ groups = _groups + [
 widget_defaults = theme.widget_defaults
 screens = [
     Screen(top=bar.Bar([
-        mywidget.ImageButton(
+        mywidgets.ImageButton(
             filename=env.logo_file,
             execute=env.cmd_menu,
-        **theme.menu_button),
-        mywidget.TextButton(
+            **theme.menu_button),
+        mywidgets.TextButton(
             text=env.logo_text,
             execute=env.cmd_menu,
-        **theme.menu_text),
+            **theme.menu_text),
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f"],
             disable_drag=True,
             **theme.groupbox),
         widget.Spacer(length=10),
-        mywidget.TaskList(**theme.tasklist),
+        mywidgets.TaskList(**theme.tasklist),
         widget.Systray(**theme.systray),
         widget.Spacer(length=20),
-        mywidget.Kdeconnect(
+        mywidgets.Kdeconnect(
             low_percentage=0.2,
             update_interval=7,
             dev_id=env.dev_kdeconnect,
             **theme.kdeconnect,
         ),
-        mywidget.Net(
+        mywidgets.Net(
             interface=env.dev_nic,
             **theme.netspeed),
-        mywidget.Battery(
+        mywidgets.Battery(
             low_percentage=0.2,
             update_interval=7,
             **theme.battery),
-        mywidget.Backlight(
+        mywidgets.Backlight(
             backlight_name=env.dev_backlight,
             command_increase=env.cmd_backlight_increase,
             command_decrease=env.cmd_backlight_decrease,
             **theme.backlight),
-        mywidget.Volume(
+        mywidgets.Volume(
             mute_command=env.cmd_volume_toggle,
             volume_up_command=env.cmd_volume_increase,
             volume_down_command=env.cmd_volume_decrease,
             **theme.volume),
-        mywidget.ThermalSensor(**theme.thermalSensor),
-        mywidget.Clock(
+        mywidgets.ThermalSensor(**theme.thermalSensor),
+        mywidgets.Clock(
             update_interval=0.5,
             **theme.clock),
-        mywidget.Wallpaper(
+        mywidgets.Wallpaper(
             random_selection=True,
             directory=env.wallpaper_dir,
             wallpaper_command=env.cmd_wallpaper,
@@ -102,8 +107,8 @@ screens = [
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f", "g"],
             **theme.groupbox),
-        mywidget.TaskList(**theme.tasklist),
-        mywidget.Clock(
+        mywidgets.TaskList(**theme.tasklist),
+        mywidgets.Clock(
             update_interval=0.5,
             **theme.clock),
         widget.Spacer(length=10),
@@ -174,8 +179,9 @@ for i in _groups:
 
 mouse = [
     EzDrag("M-1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    EzDrag("M-3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+           start=lazy.window.get_position()),
+    EzDrag("M-3", lazy.window.set_size_floating(),
+           start=lazy.window.get_size()),
 ]
 
 bring_front_click = True    # bring window topside when clicking
