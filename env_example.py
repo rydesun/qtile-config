@@ -4,7 +4,6 @@ import os
 
 from libqtile.config import Match
 
-
 wallpaper_dir = os.path.expanduser("~/Userdata/Pictures/wallpapers/")
 
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
@@ -16,7 +15,6 @@ cmd_menu = ["jgmenu_run"]
 cmd_launcher = ["rofi", "-show", "combi"]
 cmd_note = ["alacritty", "-e", "joplin"]
 cmd_wallpaper = ["hsetroot", "-cover"]
-cmd_backlight = "brightnessctl s {}"
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
 cmd_volume_toggle = ["amixer", "-q", "sset", "Master", "toggle"]
@@ -32,6 +30,8 @@ float_rules = [
     Match(wm_class="Lxappearance"),
     Match(wm_class="firefox", role="Organizer"),
     Match(wm_class="firefox", role="page-info"),
+    Match(wm_class="firefox", role="About"),
+    Match(wm_class="Steam"),
 ]
 float_borders = [
     {"match": Match(wm_class="Alacritty"), "border_width": 2},
