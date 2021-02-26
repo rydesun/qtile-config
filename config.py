@@ -48,6 +48,10 @@ groups = _groups + [
             name="term",
             cmd=env.bin_term,
             **theme.dropdown_window),
+        DropDown(
+            name="note",
+            cmd=env.cmd_note,
+            **theme.dropdown_window),
     ]),
 ]
 
@@ -124,6 +128,7 @@ keys = [
     # terminal emulator
     EzKey("M-<Return>", lazy.spawn(env.bin_term)),
     EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
+    EzKey('M-o', lazy.group['scratchpad'].dropdown_toggle('note')),
 
     # toggle sidebar
     EzKey("M-<space>", lazy.hide_show_bar("left")),

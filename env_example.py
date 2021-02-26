@@ -14,6 +14,7 @@ bin_browser = "firefox"
 bin_term = "alacritty"
 cmd_menu = ["jgmenu_run"]
 cmd_launcher = ["rofi", "-show", "combi"]
+cmd_note = ["alacritty", "-e", "joplin"]
 cmd_wallpaper = ["hsetroot", "-cover"]
 cmd_backlight = "brightnessctl s {}"
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
