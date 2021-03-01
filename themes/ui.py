@@ -85,10 +85,13 @@ class Theme:
             padding_x=5,
             padding_y=4,
             icon_offset_x=0,
-            icon_offset_y=0,
-            txt_floating=" ",
-            txt_maximized=" ",
-            txt_minimized=" ",
+            icon_offset_y=1.3,
+            markup_floating="  <span foreground='%s'></span>   {}"
+            % colors.color14,
+            markup_maximized="  <span foreground='%s'></span>   {}"
+            % colors.color14,
+            markup_minimized="  <span foreground='%s'></span>   {}"
+            % colors.color14,
             borderwidth=2,
 
             border=colors.color_major,
