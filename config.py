@@ -186,6 +186,8 @@ for i in _groups:
 mouse = [
     EzDrag("M-1", lazy.window.set_position_floating(),
            start=lazy.window.get_position()),
+    EzDrag("M-2", lazy.window.set_size_floating(),
+           start=lazy.window.toggle_floating()),
     EzDrag("M-3", lazy.window.set_size_floating(),
            start=lazy.window.get_size()),
 ]
