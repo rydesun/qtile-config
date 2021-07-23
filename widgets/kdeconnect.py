@@ -32,9 +32,14 @@ class Kdeconnect(TextBox, ThreadPoolText):
             return
         self.dbus = dbus.SessionBus(mainloop=dbus_loop)
         dbus_path = self.dbus_path.format(dev_id=self.dev_id)
-        self.dev = self.dbus.get_object(self.dbus_name, dbus_path)
+        try:
+            self.dev = self.dbus.get_object(self.dbus_name, dbus_path)
+        except Exception:
+            self.dev = None
 
     def poll(self) -> str:
+        if not self.dev:
+            return ""
         try:
             data = self.dev.GetAll("charge")
         except dbus.exceptions.DBusException:
