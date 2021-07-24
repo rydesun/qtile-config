@@ -36,7 +36,7 @@ layouts = [
 ]
 
 _groups = [
-    Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.bin_term]),
+    Group("a", label="⬤", layouts=[layouts[0]], spawn=env.cmd_term),
     Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.bin_browser]),
     Group("d", label="⬤", layouts=[layouts[0]]),
     Group("f", label="⬤", layouts=[layouts[1]]),
@@ -46,7 +46,7 @@ groups = _groups + [
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
-            cmd=env.bin_term,
+            cmd=env.cmd_term,
             **theme.dropdown_window),
         DropDown(
             name="note",
@@ -126,7 +126,7 @@ keys = [
     EzKey("M-S-C-q", lazy.shutdown()),
 
     # terminal emulator
-    EzKey("M-<Return>", lazy.spawn(env.bin_term)),
+    EzKey("M-<Return>", lazy.spawn(env.cmd_term)),
     EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
     EzKey('M-o', lazy.group['scratchpad'].dropdown_toggle('note')),
 
