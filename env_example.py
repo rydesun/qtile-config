@@ -10,10 +10,11 @@ logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
 logo_text = "arch<span foreground='#3ba4d8'>linux</span>"
 
 bin_browser = "firefox"
-cmd_term = ["kitty", "--single-instance"]
+cmd_term = ["kitty"]
+cmd_term_1 = ["kitty", "--single-instance"]
 cmd_menu = ["jgmenu_run"]
 cmd_launcher = ["rofi", "-show", "combi"]
-cmd_note = ["kitty", "--single-instance", "-e", "joplin"]
+cmd_note = ["kitty", "-e", "joplin"]
 cmd_wallpaper = ["hsetroot", "-cover"]
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
