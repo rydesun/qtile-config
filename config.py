@@ -36,7 +36,7 @@ layouts = [
 ]
 
 _groups = [
-    Group("a", label="⬤", layouts=[layouts[0]], spawn=env.cmd_term_1),
+    Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.cmd_term_1]),
     Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.bin_browser]),
     Group("d", label="⬤", layouts=[layouts[0]]),
     Group("f", label="⬤", layouts=[layouts[1]]),
