@@ -13,9 +13,16 @@ def startup() -> None:
     subreaper()  # Should not be wrapped by qtile hooks.
     Thread(target=waitpid, args=(5,), daemon=True).start()
 
+
 def subscribe_hooks() -> None:
     hook.subscribe.client_new(partial(rules.swallow_window, retry=5))
     hook.subscribe.client_killed(rules.unswallow_window)
+
+    @hook.subscribe.client_focus
+    def _(c):
+        for i in c.qtile.current_group.windows:
+            if i.floating:
+                i.cmd_bring_to_front()
 
 
 # https://blog.lilydjwg.me/2014/2/23/let-s-adopt-orphaned-processes.43035.html

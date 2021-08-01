@@ -4,7 +4,6 @@ from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
                              Screen)
 from libqtile.log_utils import logger
 
-import command
 import layouts as mylayouts
 import routine
 import themes
@@ -137,6 +136,8 @@ keys = [
     EzKey("M-k", lazy.layout.up()),
     EzKey("M-h", lazy.layout.left()),
     EzKey("M-l", lazy.layout.right()),
+    EzKey("M-n", lazy.group.next_window()),
+    EzKey("M-p", lazy.group.prev_window()),
     # window shift
     EzKey("M-C-j", lazy.layout.shuffle_down()),
     EzKey("M-C-k", lazy.layout.shuffle_up()),
@@ -147,18 +148,16 @@ keys = [
     EzKey("M-S-k", lazy.layout.grow_up()),
     EzKey("M-S-h", lazy.layout.grow_left()),
     EzKey("M-S-l", lazy.layout.grow_right()),
-    EzKey("M-n", lazy.layout.normalize()),            # normalize window size
+    EzKey("M-S-n", lazy.layout.normalize()),          # normalize window size
     # toggle between stack and split
     EzKey("M-<Tab>", lazy.layout.toggle_split()),
 
     EzKey("M-r", lazy.spawn(env.cmd_launcher)),
     EzKey("M-t", lazy.spawn(["input-box"])),          # Chinese input box
-    EzKey("M-q", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
+    EzKey("M-q", lazy.window.toggle_minimize()),      # toggle window minimize
     EzKey("M-w", lazy.window.toggle_floating()),      # toggle window floating
+    EzKey("M-e", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
     EzKey("M-x", lazy.window.kill()),                 # close window
-
-    EzKey("M-S-w", command.disable_all_floating),
-    EzKey("M-S-n", command.bring_all_floating_to_front),
 
     # manipulate floating window
     EzKey("M-<Left>", lazy.window.move_floating(-30, 0)),
@@ -191,5 +190,3 @@ mouse = [
     EzDrag("M-3", lazy.window.set_size_floating(),
            start=lazy.window.get_size()),
 ]
-
-bring_front_click = True    # bring window topside when clicking
