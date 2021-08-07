@@ -19,11 +19,11 @@ class Net(TextBox, _Net):
         self.defaults.extend((
             ("icon_upload", ""),
             ("icon_download", ""),
-            ("format", "{icon_download} {txt_download} {icon_upload} {txt_upload}"),
-            ("fmt_txt", "{:·>3.0f}{}"),
+            ("format", "{icon_download} {txt_download}  {icon_upload} {txt_upload}"),
+            ("fmt_txt", "{:·>3.0f} {}"),
             ("mini_val_threshold", 100),
-            ("fmt_mini", "···B"),
-            ("fmt_zero", "····"),
+            ("fmt_mini", "··· B"),
+            ("fmt_zero", "··· O"),
         ))
         super().__init__(*args, **kwargs)
 
