@@ -1,5 +1,7 @@
-from . import material
+from . import ayu, onehalf, tokyo_night
 
 __all__ = [
-    'material'
+    'ayu',
+    'tokyo_night',
+    "onehalf"
 ]

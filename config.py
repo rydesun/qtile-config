@@ -18,7 +18,7 @@ except ImportError:
 
 routine.startup()
 routine.subscribe_hooks()
-theme = themes.ui.Theme(themes.colors.material)
+theme = themes.ui.Theme(themes.colors.onehalf)
 
 floating_layout = mylayouts.Floating(
     float_rules=[

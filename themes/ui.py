@@ -96,7 +96,7 @@ class Theme:
 
             border=colors.color_major,
             unfocused_border=colors.color_common,
-            urgent_border=colors.color1,
+            urgent_border=colors.color_urgent,
         )
 
         self.systray = dict(
@@ -187,7 +187,7 @@ class Theme:
         )
 
         self.wallpaper = dict(
-            label="",
+            label="",
             extra_offsety=0.5,
 
             foreground=colors.color15,
