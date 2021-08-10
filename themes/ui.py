@@ -9,8 +9,8 @@ class Theme:
     def init_layouts(self, colors: Colors) -> None:
         self.layout_floating = dict(
             border_width=0,
-            border_focus=colors.color_common,
-            border_normal=colors.color_common,
+            border_focus=colors.color0,
+            border_normal=colors.color0,
         )
         self.layout_column = dict(
             border_width=0,
@@ -66,7 +66,7 @@ class Theme:
 
             background=colors.color8,
             highlight_color=colors.color8,
-            inactive=colors.color_common,
+            inactive=colors.color0,
             active=colors.color_major,
             this_current_screen_border=colors.color_major,
             this_screen_border=colors.color_major,
@@ -104,18 +104,18 @@ class Theme:
         )
 
         self.kdeconnect = dict(
-            format="{extra_icon} {icon} {percent:2.0%}",
-            icon_charge="",
+            format="{extra_icon}{icon} {percent:2.0%}",
+            icon_charge=" ",
             icon_discharge="",
-            icon_full_energy="",
-            icon_high_energy="",
-            icon_half_energy="",
-            icon_low_energy="",
-            icon_empty_energy="",
-            extra_offsetx=0,
-            extra_offsety=-0.8,
+            icon_full_energy="",
+            icon_high_energy="",
+            icon_half_energy="",
+            icon_low_energy="",
+            icon_empty_energy="",
+            extra_offsetx=5,
+            extra_offsety=-1,
 
-            foreground=colors.color_healthy,
+            foreground=colors.color4,
             foreground_discharge=colors.color3,
             foreground_low=colors.color5,
         )
@@ -142,7 +142,7 @@ class Theme:
             foreground_discharge=colors.color3,
             foreground_low=colors.color5,
             extra_offsetx=5,
-            extra_offsety=-1.8,
+            extra_offsety=-0.7,
 
             foreground=colors.color_healthy,
         )
@@ -152,7 +152,7 @@ class Theme:
             icon_mute="婢 ",
             extra_offsety=-2,
 
-            foreground=colors.color_healthy,
+            foreground=colors.color6,
         )
 
         self.thermalSensor = dict(
@@ -167,7 +167,7 @@ class Theme:
             format="{percent: 2.0%}",
             extra_offsety=-2,
 
-            foreground=colors.color_healthy,
+            foreground=colors.color6,
         )
 
         self.clock = dict(

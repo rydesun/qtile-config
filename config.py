@@ -74,12 +74,6 @@ screens = [
         mywidgets.TaskList(**theme.tasklist),
         widget.Systray(**theme.systray),
         widget.Spacer(length=20),
-        mywidgets.Kdeconnect(
-            low_percentage=0.2,
-            update_interval=7,
-            dev_id=env.dev_kdeconnect,
-            **theme.kdeconnect,
-        ),
         mywidgets.Net(
             interface=env.dev_nic,
             **theme.netspeed),
@@ -87,6 +81,12 @@ screens = [
             low_percentage=0.2,
             update_interval=7,
             **theme.battery),
+        mywidgets.Kdeconnect(
+            low_percentage=0.2,
+            update_interval=7,
+            dev_id=env.dev_kdeconnect,
+            **theme.kdeconnect,
+        ),
         mywidgets.Backlight(
             backlight_name=env.dev_backlight,
             command_increase=env.cmd_backlight_increase,

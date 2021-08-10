@@ -37,5 +37,5 @@ color_healthy = color2
 color_urgent = color1
 color_major = color2
 color_minor = color0
-color_common = color0
+color_common = color4
 color_shadow = "#000000"

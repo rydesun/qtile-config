@@ -2,6 +2,7 @@ from typing import Protocol
 
 
 class Colors(Protocol):
+    color0: str
     color1: str
     color2: str
     color3: str
