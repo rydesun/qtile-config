@@ -9,7 +9,7 @@ class Kdeconnect(TextBox, ThreadPoolText):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ('low_percentage', 0.20),
-            ('format', '{char} {percent:2.0%}', 'Display format'),
+            ('format', '{char} {percent: .0f}', 'Display format'),
             ("sep", (0.85, 0.65, 0.4, 0.25)),
             ("icon_charge", ""),
             ("icon_full_energy", ""),
@@ -75,6 +75,6 @@ class Kdeconnect(TextBox, ThreadPoolText):
 
         return self.format.format(
             icon=icon,
-            percent = percent if percent < 1 else 1,
+            percent=percent*100 if percent < 1 else 100,
             extra_icon=extra_icon,
         )

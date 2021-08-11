@@ -53,7 +53,7 @@ class Battery(TextBox, _Battery):
 
         return self.format.format(
             icon=icon,
-            percent = status.percent if status.percent < 1 else 1,
+            percent = status.percent*100 if status.percent < 1 else 100,
             watt=status.power,
             hour=hour,
             min=minute,

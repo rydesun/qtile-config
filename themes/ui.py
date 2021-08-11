@@ -104,7 +104,7 @@ class Theme:
         )
 
         self.kdeconnect = dict(
-            format="{extra_icon}{icon} {percent:2.0%}",
+            format="{extra_icon}{icon}{percent: .0f}",
             icon_charge=" ",
             icon_discharge="",
             icon_full_energy="",
@@ -113,7 +113,7 @@ class Theme:
             icon_low_energy="",
             icon_empty_energy="",
             extra_offsetx=5,
-            extra_offsety=-1,
+            extra_offsety=-2,
 
             foreground=colors.color4,
             foreground_discharge=colors.color3,
@@ -130,7 +130,7 @@ class Theme:
         )
 
         self.battery = dict(
-            format="{extra_icon} {icon} {percent:2.0%}",
+            format="{extra_icon} {icon}{percent: .0f}",
             icon_charge="",
             icon_discharge="",
             icon_plug="",
@@ -164,7 +164,7 @@ class Theme:
         )
 
         self.backlight = dict(
-            format="{percent: 2.0%}",
+            format="{percent: .0f}",
             extra_offsety=-2,
 
             foreground=colors.color6,
@@ -187,8 +187,8 @@ class Theme:
         )
 
         self.wallpaper = dict(
-            label="",
-            extra_offsety=0.5,
+            label="Tile",
+            extra_offsety=-1,
 
             foreground=colors.color15,
         )
