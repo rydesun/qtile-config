@@ -1,17 +1,10 @@
 import psutil
-
-try:
-    from libqtile.backend.x11.window import Window as _Window
-except ImportError:
-    from libqtile.window import Window as _Window
-
-
-class Window(_Window):
-    parent: _Window
+from libqtile import hook
 
 
 # https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
-def swallow_window(c: Window, retry: int):
+@hook.subscribe.client_new
+def swallow_window(c, retry=5):
     pid = c.get_pid()
     ppid = psutil.Process(pid).ppid()
 
@@ -30,6 +23,7 @@ def swallow_window(c: Window, retry: int):
         ppid = psutil.Process(ppid).ppid()
 
 
-def unswallow_window(c: Window):
+@hook.subscribe.client_killed
+def unswallow_window(c):
     if hasattr(c, 'parent'):
         c.parent.minimized = False

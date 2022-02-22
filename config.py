@@ -4,7 +4,7 @@ from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
                              Screen)
 from libqtile.log_utils import logger
 
-import routine
+import rules
 import themes
 import widgets as mywidgets
 
@@ -14,9 +14,6 @@ except ImportError:
     logger.warning("env.py is missing")
     import env_example as env
 
-
-routine.startup()
-routine.subscribe_hooks()
 
 theme = themes.ui.Theme(themes.colors.random_select())
 
