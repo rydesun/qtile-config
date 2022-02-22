@@ -14,7 +14,6 @@ class Theme:
         )
         self.layout_column = dict(
             border_width=0,
-            margin=18,
         )
         self.dropdown_window = dict(
             x=0.2,
@@ -32,7 +31,6 @@ class Theme:
         self.bar = dict(
             size=34,
             opacity=0.95,
-            margin=[0, 0, 1, 0],
 
             background=colors.color_background,
         )
@@ -181,7 +179,7 @@ class Theme:
                 "周六",
                 "周日",
             ),
-            extra_offsety=-2,
+            extra_offsety=-1,
 
             foreground=colors.color15,
         )
