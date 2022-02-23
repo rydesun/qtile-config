@@ -6,6 +6,7 @@ from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
                              Screen)
 from libqtile.log_utils import logger
 
+import layouts as mylayouts
 import rules
 import themes
 import widgets as mywidgets
@@ -24,9 +25,9 @@ def autostart():
 
 theme = themes.ui.Theme(themes.colors.random_select())
 
-floating_layout = layout.Floating(
+floating_layout = mylayouts.Floating(
     float_rules=[
-        *layout.Floating.default_float_rules,
+        *mylayouts.Floating.default_float_rules,
         *env.float_rules,
     ],
     border_rules=env.float_borders,
@@ -35,7 +36,7 @@ layouts = [
     layout.Columns(
         insert_position=1,
         **theme.layout_column),
-    layout.Floating(**theme.layout_floating),
+    mylayouts.Floating(**theme.layout_floating),
 ]
 
 _groups = [
