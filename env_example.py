@@ -9,11 +9,12 @@ wallpaper_dir = os.path.expanduser("~/Userdata/Pictures/wallpapers/")
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
 logo_text = "arch<span foreground='#3ba4d8'>linux</span>"
 
+sh_browser = "firefox"
+sh_term = "kitty --single-instance"
+
 cmd_locker = ["xss-lock", "--", "betterlockscreen", "-l"]
 cmd_lock_screen = ["loginctl", "lock-session"]
-bin_browser = "firefox"
 cmd_term = ["kitty"]
-cmd_term_1 = ["kitty", "--single-instance"]
 cmd_menu = ["jgmenu_run"]
 cmd_launcher = ["rofi", "-show", "combi"]
 cmd_password_manager = ["rofi-rbw"]
