@@ -1,4 +1,6 @@
-from libqtile import bar, layout, widget
+import subprocess
+
+from libqtile import bar, hook, layout, widget
 from libqtile.command import lazy
 from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
                              Screen)
@@ -13,6 +15,11 @@ try:
 except ImportError:
     logger.warning("env.py is missing")
     import env_example as env
+
+
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.Popen(env.cmd_locker)
 
 
 theme = themes.ui.Theme(themes.colors.random_select())
@@ -150,6 +157,11 @@ keys = [
     EzKey("M-<Tab>", lazy.layout.toggle_split()),
 
     EzKey("M-r", lazy.spawn(env.cmd_launcher)),
+    EzKey("M-S-p", lazy.spawn(env.cmd_lock_screen)),
+    EzKey("M-S-r", lazy.spawn(env.cmd_password_manager)),
+    EzKey("M-S-f", lazy.spawn(env.cmd_screenshot)),
+    EzKey("M-S-s", lazy.spawn(env.cmd_screenshot_select)),
+    EzKey("M-S-w", lazy.spawn(env.cmd_screenshot_window)),
     EzKey("M-t", lazy.spawn(["input-box"])),          # Chinese input box
     EzKey("M-q", lazy.window.toggle_minimize()),      # toggle window minimize
     EzKey("M-w", lazy.window.toggle_floating()),      # toggle window floating
