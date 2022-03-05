@@ -110,8 +110,8 @@ class Theme:
             icon_half_energy="",
             icon_low_energy="",
             icon_empty_energy="",
-            extra_offsetx=5,
-            extra_offsety=-2,
+            extra_offsetx=3,
+            extra_offsety=-1.5,
 
             foreground=colors.color4,
             foreground_discharge=colors.color3,
@@ -122,7 +122,7 @@ class Theme:
             icon_upload="",
             icon_download="",
             font=font_mono,
-            extra_offsety=0.8,
+            extra_offsety=0.3,
 
             foreground=colors.color15,
         )
@@ -148,9 +148,9 @@ class Theme:
         self.volume = dict(
             icon=" ",
             icon_mute="婢 ",
-            extra_offsety=-2,
+            extra_offsety=-1.5,
 
-            foreground=colors.color6,
+            foreground=colors.color15,
         )
 
         self.thermalSensor = dict(
@@ -163,9 +163,9 @@ class Theme:
 
         self.backlight = dict(
             format="{percent: .0f}",
-            extra_offsety=-2,
+            extra_offsety=-1.5,
 
-            foreground=colors.color6,
+            foreground=colors.color15,
         )
 
         self.clock = dict(
@@ -185,7 +185,7 @@ class Theme:
         )
 
         self.wallpaper = dict(
-            label="Tile",
+            label=" ",
             extra_offsety=-1,
 
             foreground=colors.color15,

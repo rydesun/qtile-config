@@ -1,13 +1,13 @@
 # black
 color0 = "#282c34"
-color8 = "#5d677a"
+color8 = "#1d677a"
 
 # red
 color1 = "#e06c75"
 color9 = "#e06c75"
 
 # green
-color2 = "#98c379"
+color2 = "#58d379"
 color10 = "#98c379"
 
 # yellow
@@ -28,7 +28,7 @@ color14 = "#56b6c2"
 
 # white
 color7 = "#dcdfe4"
-color15 = "#dcdfe4"
+color15 = "#0ed2d5"
 
 color_foreground = "#dcdfe4"
 color_background = "#282c34"

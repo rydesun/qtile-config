@@ -23,7 +23,7 @@ def autostart():
     subprocess.Popen(env.cmd_locker)
 
 
-theme = themes.ui.Theme(themes.colors.random_select())
+theme = themes.ui.Theme(themes.colors)
 
 floating_layout = mylayouts.Floating(
     float_rules=[
@@ -110,7 +110,6 @@ screens = [
             directory=env.wallpaper_dir,
             wallpaper_command=env.cmd_wallpaper,
             **theme.wallpaper),
-        widget.Spacer(length=10),
     ], **theme.bar)),
     Screen(top=bar.Bar([
         widget.GroupBox(
