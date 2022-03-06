@@ -1,54 +1,48 @@
-import dbus
-from dbus.mainloop.glib import DBusGMainLoop
-from libqtile.widget.base import ThreadPoolText
+from libqtile.log_utils import logger
+from libqtile.utils import add_signal_receiver
 
 from .base import TextBox
 
 
-class Kdeconnect(TextBox, ThreadPoolText):
+class Kdeconnect(TextBox):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
-            ('low_percentage', 0.20),
+            ('low_percentage', 0.20, ""),
             ('format', '{char} {percent: .0f}', 'Display format'),
-            ("sep", (0.85, 0.65, 0.4, 0.25)),
-            ("icon_charge", ""),
-            ("icon_full_energy", ""),
-            ("icon_high_energy", ""),
-            ("icon_half_energy", ""),
-            ("icon_low_energy", ""),
-            ("icon_empty_energy", ""),
-            ("foreground", ""),
-            ("foreground_low", ""),
-            ("dev_id", ""),
-            ("dbus_name", "org.kde.kdeconnect"),
-            ("dbus_path", "/modules/kdeconnect/devices/{dev_id}/battery"),
+            ("sep", (0.85, 0.65, 0.4, 0.25), ""),
+            ("icon_charge", "", ""),
+            ("icon_full_energy", "", ""),
+            ("icon_high_energy", "", ""),
+            ("icon_half_energy", "", ""),
+            ("icon_low_energy", "", ""),
+            ("icon_empty_energy", "", ""),
+            ("foreground", "", ""),
+            ("foreground_low", "", ""),
+            ("dev_id", "", ""),
+            ("dbus_name", "org.kde.kdeconnect", ""),
+            ("dbus_path", "/modules/kdeconnect/devices/{dev_id}/battery", ""),
         ))
         super().__init__("", *args, **kwargs)
-        self._dbus_init()
 
-    def _dbus_init(self):
-        dbus_loop = DBusGMainLoop()
-        if hasattr(self, 'dbus'):
-            return
-        self.dbus = dbus.SessionBus(mainloop=dbus_loop)
-        dbus_path = self.dbus_path.format(dev_id=self.dev_id)
-        try:
-            self.dev = self.dbus.get_object(self.dbus_name, dbus_path)
-        except Exception:
-            self.dev = None
+    async def _config_async(self):
+        self.dbus_path = self.dbus_path.format(dev_id=self.dev_id)
+        subscribe = await add_signal_receiver(
+            callback=self._signal_received,
+            session_bus=True,
+            signal_name="refreshed",
+            dbus_interface="org.kde.kdeconnect.device.battery",
+            bus_name=self.dbus_name,
+            path=self.dbus_path,
+        )
+        if not subscribe:
+            logger.warning(
+                "Unable to add signal receiver for {}.".format(self.dbus_name)
+            )
 
-    def poll(self) -> str:
-        if not self.dev:
-            return ""
-        try:
-            data = self.dev.GetAll("charge")
-        except dbus.exceptions.DBusException:
-            return ""
-        percent = data["charge"] / 100
-        isCharging = data["isCharging"]
-        return self.build_string(percent, isCharging)
+    def _signal_received(self, message):
+        isCharging, charge = message.body
+        percent = charge / 100
 
-    def build_string(self, percent, isCharging):
         if self.layout is not None:
             if percent < self.low_percentage:
                 self.layout.colour = self.foreground_low
@@ -73,8 +67,9 @@ class Kdeconnect(TextBox, ThreadPoolText):
         else:
             extra_icon = self.icon_discharge
 
-        return self.format.format(
+        text = self.format.format(
             icon=icon,
             percent=percent*100 if percent < 1 else 100,
             extra_icon=extra_icon,
         )
+        self.update(text)
