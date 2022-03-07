@@ -11,6 +11,7 @@ from .base import TextBox
 class BatteryState:
     Charging = 1
     Discharing = 2
+    Plugging = 4
 
 
 class Battery(TextBox):
@@ -87,6 +88,8 @@ class Battery(TextBox):
             extra_icon = self.icon_charge
         elif state == BatteryState.Discharing:
             extra_icon = self.icon_discharge
+        elif state == BatteryState.Plugging:
+            extra_icon = self.icon_plug
         else:
             extra_icon = ""
 
