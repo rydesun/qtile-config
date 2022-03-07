@@ -101,7 +101,9 @@ screens = [
             volume_up_command=env.cmd_volume_increase,
             volume_down_command=env.cmd_volume_decrease,
             **theme.volume),
-        mywidgets.ThermalSensor(**theme.thermalSensor),
+        mywidgets.ThermalSensor(
+            dev_name=env.dev_thermal,
+            **theme.thermalSensor),
         mywidgets.Clock(
             update_interval=0.5,
             **theme.clock),

@@ -30,6 +30,7 @@ cmd_volume_decrease = ["amixer", "-q", "sset", "Master", "1%-"]
 cmd_volume_increase = ["amixer", "-q", "sset", "Master", "1%+"]
 
 dev_backlight = "amdgpu_bl0"
+dev_thermal = "acpitz"
 dev_nic = ["wlp1s0", "enp2s0"]
 dev_kdeconnect = "eeeeeeeeeeeeeeee"
 
