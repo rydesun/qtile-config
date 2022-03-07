@@ -16,7 +16,7 @@ class BatteryState:
 class Battery(TextBox):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
-            ("sep", (0.85, 0.65, 0.4, 0.25, 0), ""),
+            ("sep", (85, 65, 40, 25, 0), ""),
             ("icon_charge", "", ""),
             ("icon_plug", "", ""),
             ("icon_full_energy", "", ""),
