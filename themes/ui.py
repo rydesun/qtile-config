@@ -169,7 +169,7 @@ class Theme:
         )
 
         self.clock = dict(
-            format="%H:%M:%S  %m-%d  <span rise='550' size='small'>{}</span>",
+            format="%H:%M:%S  %m-%d  <span rise='1000' size='small'>{}</span>",
             weekday_sign=(
                 "周一",
                 "周二",
