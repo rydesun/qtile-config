@@ -2,10 +2,10 @@ import subprocess
 
 from libqtile.widget.backlight import Backlight as _Backlight
 
-from .base import TextBox
+from .base import Box
 
 
-class Backlight(TextBox, _Backlight):
+class Backlight(Box, _Backlight):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("command_increase", "", ""),

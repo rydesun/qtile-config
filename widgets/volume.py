@@ -2,10 +2,10 @@ import subprocess
 
 from libqtile.widget.volume import Volume as _Volume
 
-from .base import TextBox
+from .base import Box
 
 
-class Volume(TextBox, _Volume):
+class Volume(Box, _Volume):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("icon", "", ""),

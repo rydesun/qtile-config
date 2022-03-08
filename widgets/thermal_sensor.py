@@ -3,10 +3,10 @@ from glob import glob
 
 from libqtile.widget.base import InLoopPollText
 
-from .base import TextBox
+from .base import Box
 
 
-class ThermalSensor(TextBox, InLoopPollText):
+class ThermalSensor(Box, InLoopPollText):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("dev_name", "acpitz", ""),

@@ -62,14 +62,13 @@ groups = _groups + [
 widget_defaults = theme.widget_defaults
 screens = [
     Screen(top=bar.Bar([
-        mywidgets.ImageButton(
-            filename=env.logo_file,
-            execute=env.cmd_menu,
-            **theme.menu_button),
-        mywidgets.TextButton(
+        mywidgets.Box(
+            image_path=env.logo_file,
             text=env.logo_text,
-            execute=env.cmd_menu,
-            **theme.menu_text),
+            mouse_callbacks={
+                "Button1": lazy.spawn(env.cmd_menu),
+            },
+            **theme.menu_button),
         widget.GroupBox(
             visible_groups=["a", "s", "d", "f"],
             disable_drag=True,
@@ -107,7 +106,7 @@ screens = [
         mywidgets.Clock(
             update_interval=0.5,
             **theme.clock),
-        mywidgets.Wallpaper(
+        widget.Wallpaper(
             random_selection=True,
             directory=env.wallpaper_dir,
             wallpaper_command=env.cmd_wallpaper,

@@ -1,10 +1,10 @@
 from libqtile.log_utils import logger
 from libqtile.utils import add_signal_receiver
 
-from .base import TextBox
+from .base import Box
 
 
-class Kdeconnect(TextBox):
+class Kdeconnect(Box):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ('low_percentage', 0.20, ""),

@@ -2,10 +2,10 @@ from datetime import datetime, timedelta, timezone
 
 from libqtile.widget.base import InLoopPollText
 
-from .base import TextBox
+from .base import Box
 
 
-class Clock(TextBox, InLoopPollText):
+class Clock(Box, InLoopPollText):
     DELTA = timedelta(seconds=0.5)
 
     def __init__(self, *args, **kwargs):

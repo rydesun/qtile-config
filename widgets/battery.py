@@ -5,7 +5,7 @@ from dbus_next.constants import BusType
 from libqtile.log_utils import logger
 from libqtile.utils import add_signal_receiver
 
-from .base import TextBox
+from .base import Box
 
 
 class BatteryState:
@@ -14,7 +14,7 @@ class BatteryState:
     Plugging = 4
 
 
-class Battery(TextBox):
+class Battery(Box):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("sep", (85, 65, 40, 25, 0), ""),
