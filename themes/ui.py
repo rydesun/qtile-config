@@ -46,12 +46,7 @@ class Theme:
         self.menu_button = dict(
             margin_x=3,
             margin_y=3,
-        )
-
-        self.menu_text = dict(
             fontshadow=None,
-            extra_offsetx=-7,
-            extra_offsety=-1.5,
         )
 
         self.groupbox = dict(
