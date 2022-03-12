@@ -17,19 +17,21 @@ def humanize_bytes(value):
 class Net(Box, _Net):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
-            ("icon_upload", ""),
-            ("icon_download", ""),
-            ("format", "{icon_download} {txt_download}  {icon_upload} {txt_upload}"),
-            ("fmt_txt", "{:·>3.0f} {}"),
-            ("mini_val_threshold", 100),
-            ("fmt_mini", "··· B"),
-            ("fmt_zero", "··· O"),
+            ("icon_upload", "", ""),
+            ("icon_download", "", ""),
+            ("format",
+             "{icon_download} {txt_download} {icon_upload} {txt_upload}", ""),
+            ("fmt_txt", "{:·>3.0f} {}", ""),
+            ("mini_val_threshold", 100, ""),
+            ("fmt_mini", "··· B", ""),
+            ("fmt_zero", "··· O", ""),
         ))
         super().__init__(*args, **kwargs)
 
     def poll(self):
         new_int = self.get_stats()
-        down = 0; up = 0
+        down = 0
+        up = 0
         for interface in self.interface:
             down += new_int[interface]['down'] - \
                 self.stats[interface]['down']
@@ -39,7 +41,8 @@ class Net(Box, _Net):
         up /= self.update_interval
         self.stats = new_int
 
-        txt_download = ""; txt_upload = ""
+        txt_download = ""
+        txt_upload = ""
         if down == 0:
             txt_download = self.fmt_zero
         elif down < self.mini_val_threshold:

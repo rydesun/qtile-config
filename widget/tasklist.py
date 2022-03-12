@@ -4,8 +4,8 @@ from libqtile.widget.tasklist import TaskList as _TaskList
 class TaskList(_TaskList):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
-            ("icon_offset_x", 0),
-            ("icon_offset_y", 0),
+            ("icon_offset_x", 0, ""),
+            ("icon_offset_y", 0, ""),
         ))
         super().__init__(*args, **kwargs)
 

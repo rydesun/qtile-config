@@ -50,14 +50,18 @@ class Bar:
 
             local_widget.Backlight(
                 backlight_name=self.env.dev_backlight,
-                command_increase=self.env.cmd_backlight_increase,
-                command_decrease=self.env.cmd_backlight_decrease,
+                mouse_callbacks={
+                    "Button4": lazy.spawn(self.env.cmd_backlight_increase),
+                    "Button5": lazy.spawn(self.env.cmd_backlight_decrease),
+                },
                 **theme.backlight),
 
             local_widget.Volume(
-                mute_command=self.env.cmd_volume_toggle,
-                volume_up_command=self.env.cmd_volume_increase,
-                volume_down_command=self.env.cmd_volume_decrease,
+                mouse_callbacks={
+                    "Button1": lazy.spawn(self.env.cmd_volume_toggle),
+                    "Button4": lazy.spawn(self.env.cmd_volume_increase),
+                    "Button5": lazy.spawn(self.env.cmd_volume_decrease),
+                },
                 **theme.volume),
 
             local_widget.ThermalSensor(
