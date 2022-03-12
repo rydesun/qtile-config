@@ -26,12 +26,10 @@ def autostart():
 theme = themes.ui.Theme(themes.colors)
 
 floating_layout = mylayouts.Floating(
-    float_rules=[
-        *mylayouts.Floating.default_float_rules,
-        *env.float_rules,
-    ],
-    border_rules=env.float_borders,
+    float_rules=env.float_rules,
+    float_config=env.float_config,
     **theme.layout_floating)
+
 layouts = [
     layout.Columns(
         insert_position=1,

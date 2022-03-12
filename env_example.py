@@ -35,14 +35,13 @@ dev_nic = ["wlp1s0", "enp2s0"]
 dev_kdeconnect = "eeeeeeeeeeeeeeee"
 
 float_rules = [
-    Match(wm_class="fcitx-config-gtk3"),
-    Match(wm_class="Lxappearance"),
     Match(wm_class="firefox", role="Organizer"),
     Match(wm_class="firefox", role="page-info"),
     Match(wm_class="firefox", role="About"),
     Match(wm_class="Steam"),
     Match(wm_class="pinentry-qt"),
 ]
-float_borders = [
+
+float_config = [
     {"match": Match(wm_class="kitty"), "border_width": 2},
 ]
