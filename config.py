@@ -1,15 +1,14 @@
-import subprocess
-
-from libqtile import bar, hook, layout, widget
-from libqtile.command import lazy
-from libqtile.config import (DropDown, EzDrag, EzKey, Group, Key, ScratchPad,
-                             Screen)
+import psutil
+from libqtile import hook
+from libqtile.config import DropDown, Group, ScratchPad, Screen
+from libqtile.layout.columns import Columns
 from libqtile.log_utils import logger
 
-import layouts as mylayouts
-import rules
-import themes
-import widgets as mywidgets
+import color
+from bar import Bar
+from control import Control
+from layout import Floating
+from theme import Theme
 
 try:
     import env
@@ -17,184 +16,76 @@ except ImportError:
     logger.warning("env.py is missing")
     import env_example as env
 
+theme_agent = Theme(color)
+bar_agent = Bar(env)
+control_agent = Control(env)
 
-@hook.subscribe.startup_once
-def autostart():
-    subprocess.Popen(env.cmd_locker)
+# ==== Qtile config begin ====
 
+keys = control_agent.keys(group_chars="asdf")
+mouse = control_agent.mouse()
 
-theme = themes.ui.Theme(themes.colors)
-
-floating_layout = mylayouts.Floating(
-    float_rules=env.float_rules,
-    float_config=env.float_config,
-    **theme.layout_floating)
-
-layouts = [
-    layout.Columns(
-        insert_position=1,
-        **theme.layout_column),
-    mylayouts.Floating(**theme.layout_floating),
+screens = [
+    Screen(top=bar_agent.main_bar(theme=theme_agent)),
+    Screen(top=bar_agent.other_bar(theme=theme_agent)),
 ]
 
-_groups = [
+layouts = [
+    Columns(
+        insert_position=1,
+        **theme_agent.layout_column),
+    Floating(**theme_agent.layout_floating),
+]
+
+groups = [
     Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.sh_term]),
     Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.sh_browser]),
     Group("d", label="⬤", layouts=[layouts[0]]),
     Group("f", label="⬤", layouts=[layouts[1]]),
-    Group("g", label="⬤", layouts=[layouts[0]]),
-]
-groups = _groups + [
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
             cmd=env.cmd_term,
-            **theme.dropdown_window),
+            **theme_agent.dropdown_window),
         DropDown(
             name="note",
             cmd=env.cmd_note,
-            **theme.dropdown_window),
+            **theme_agent.dropdown_window),
     ]),
 ]
 
-widget_defaults = theme.widget_defaults
-screens = [
-    Screen(top=bar.Bar([
-        mywidgets.Box(
-            image_path=env.logo_file,
-            text=env.logo_text,
-            mouse_callbacks={
-                "Button1": lazy.spawn(env.cmd_menu),
-            },
-            **theme.menu_button),
-        widget.GroupBox(
-            visible_groups=["a", "s", "d", "f"],
-            disable_drag=True,
-            **theme.groupbox),
-        widget.Spacer(length=10),
-        mywidgets.TaskList(**theme.tasklist),
-        widget.Systray(**theme.systray),
-        widget.Spacer(length=20),
-        mywidgets.Net(
-            interface=env.dev_nic,
-            **theme.netspeed),
-        mywidgets.Battery(
-            low_percentage=0.2,
-            update_interval=7,
-            **theme.battery),
-        mywidgets.Kdeconnect(
-            low_percentage=0.2,
-            update_interval=7,
-            dev_id=env.dev_kdeconnect,
-            **theme.kdeconnect,
-        ),
-        mywidgets.Backlight(
-            backlight_name=env.dev_backlight,
-            command_increase=env.cmd_backlight_increase,
-            command_decrease=env.cmd_backlight_decrease,
-            **theme.backlight),
-        mywidgets.Volume(
-            mute_command=env.cmd_volume_toggle,
-            volume_up_command=env.cmd_volume_increase,
-            volume_down_command=env.cmd_volume_decrease,
-            **theme.volume),
-        mywidgets.ThermalSensor(
-            dev_name=env.dev_thermal,
-            **theme.thermalSensor),
-        mywidgets.Clock(
-            update_interval=0.5,
-            **theme.clock),
-        widget.Wallpaper(
-            random_selection=True,
-            directory=env.wallpaper_dir,
-            wallpaper_command=env.cmd_wallpaper,
-            **theme.wallpaper),
-    ], **theme.bar)),
-    Screen(top=bar.Bar([
-        widget.GroupBox(
-            visible_groups=["a", "s", "d", "f", "g"],
-            **theme.groupbox),
-        mywidgets.TaskList(**theme.tasklist),
-        mywidgets.Clock(
-            update_interval=0.5,
-            **theme.clock),
-        widget.Spacer(length=10),
-    ], **theme.bar)),
-]
+widget_defaults = theme_agent.widget_defaults
 
-keys = [
-    # qtile
-    EzKey("M-S-C-r", lazy.restart()),
-    EzKey("M-S-C-q", lazy.shutdown()),
+floating_layout = Floating(
+    float_rules=env.float_rules,
+    float_config=env.float_config,
+    **theme_agent.layout_floating)
 
-    # terminal emulator
-    EzKey("M-<Return>", lazy.spawn(env.sh_term)),
-    EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
-    EzKey('M-o', lazy.group['scratchpad'].dropdown_toggle('note')),
 
-    # toggle sidebar
-    EzKey("M-<space>", lazy.hide_show_bar("left")),
-    # window focus
-    EzKey("M-j", lazy.layout.down()),
-    EzKey("M-k", lazy.layout.up()),
-    EzKey("M-h", lazy.layout.left()),
-    EzKey("M-l", lazy.layout.right()),
-    EzKey("M-n", lazy.group.next_window()),
-    EzKey("M-p", lazy.group.prev_window()),
-    # window shift
-    EzKey("M-C-j", lazy.layout.shuffle_down()),
-    EzKey("M-C-k", lazy.layout.shuffle_up()),
-    EzKey("M-C-h", lazy.layout.shuffle_left()),
-    EzKey("M-C-l", lazy.layout.shuffle_right()),
-    # window resize
-    EzKey("M-S-j", lazy.layout.grow_down()),
-    EzKey("M-S-k", lazy.layout.grow_up()),
-    EzKey("M-S-h", lazy.layout.grow_left()),
-    EzKey("M-S-l", lazy.layout.grow_right()),
-    EzKey("M-S-n", lazy.layout.normalize()),          # normalize window size
-    # toggle between stack and split
-    EzKey("M-<Tab>", lazy.layout.toggle_split()),
+# ==== hooks ====
 
-    EzKey("M-r", lazy.spawn(env.cmd_launcher)),
-    EzKey("M-S-p", lazy.spawn(env.cmd_lock_screen)),
-    EzKey("M-S-r", lazy.spawn(env.cmd_password_manager)),
-    EzKey("M-S-f", lazy.spawn(env.cmd_screenshot)),
-    EzKey("M-S-s", lazy.spawn(env.cmd_screenshot_select)),
-    EzKey("M-S-w", lazy.spawn(env.cmd_screenshot_window)),
-    EzKey("M-t", lazy.spawn(["input-box"])),          # Chinese input box
-    EzKey("M-q", lazy.window.toggle_minimize()),      # toggle window minimize
-    EzKey("M-w", lazy.window.toggle_floating()),      # toggle window floating
-    EzKey("M-e", lazy.window.toggle_fullscreen()),    # toggle window fullscreen
-    EzKey("M-x", lazy.window.kill()),                 # close window
+# https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
+@hook.subscribe.client_new
+def swallow_window(c, retry=5):
+    pid = c.get_pid()
+    ppid = psutil.Process(pid).ppid()
 
-    # manipulate floating window
-    EzKey("M-<Left>", lazy.window.move_floating(-30, 0)),
-    EzKey("M-<Right>", lazy.window.move_floating(30, 0)),
-    EzKey("M-<Up>", lazy.window.move_floating(0, -30)),
-    EzKey("M-<Down>", lazy.window.move_floating(0, 30)),
-    EzKey("M-S-<Left>", lazy.window.resize_floating(-30, 0)),
-    EzKey("M-S-<Right>", lazy.window.resize_floating(30, 0)),
-    EzKey("M-S-<Up>", lazy.window.resize_floating(0, -30)),
-    EzKey("M-S-<Down>", lazy.window.resize_floating(0, 30)),
+    cpids = {
+        c.get_pid(): wid
+        for wid, c in c.qtile.windows_map.items()
+    }
+    for _ in range(retry):
+        if not ppid:
+            return
+        if ppid in cpids:
+            parent = c.qtile.windows_map.get(cpids[ppid])
+            parent.minimized = True
+            c.parent = parent
+            return
+        ppid = psutil.Process(ppid).ppid()
 
-    Key([], "XF86AudioMute", lazy.spawn(env.cmd_volume_toggle)),
-    Key([], "XF86AudioLowerVolume", lazy.spawn(env.cmd_volume_decrease)),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn(env.cmd_volume_increase)),
-    Key([], "XF86MonBrightnessUp", lazy.spawn(env.cmd_backlight_increase)),
-    Key([], "XF86MonBrightnessDown",
-            lazy.spawn(env.cmd_backlight_decrease)),
-]
-for i in _groups:
-    keys.extend([
-        EzKey("M-" + i.name, lazy.group[i.name].toscreen()),
-        EzKey("M-C-" + i.name, lazy.window.togroup(i.name)),
-    ])
 
-mouse = [
-    EzDrag("M-1", lazy.window.set_position_floating(),
-           start=lazy.window.get_position()),
-    EzDrag("M-2", lazy.window.set_size_floating(),
-           start=lazy.window.toggle_floating()),
-    EzDrag("M-3", lazy.window.set_size_floating(),
-           start=lazy.window.get_size()),
-]
+@hook.subscribe.client_killed
+def unswallow_window(c):
+    if hasattr(c, 'parent'):
+        c.parent.minimized = False

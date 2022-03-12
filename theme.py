@@ -1,16 +1,13 @@
-from .types import Colors
-
-
 class Theme:
-    def __init__(self, colors: Colors):
-        self.init_layouts(colors)
-        self.init_widgets(colors)
+    def __init__(self, color):
+        self.init_layouts(color)
+        self.init_widgets(color)
 
-    def init_layouts(self, colors: Colors) -> None:
+    def init_layouts(self, color) -> None:
         self.layout_floating = dict(
             border_width=0,
-            border_focus=colors.color0,
-            border_normal=colors.color0,
+            border_focus=color.color0,
+            border_normal=color.color0,
         )
         self.layout_column = dict(
             border_width=0,
@@ -22,7 +19,7 @@ class Theme:
             height=0.7,
         )
 
-    def init_widgets(self, colors: Colors) -> None:
+    def init_widgets(self, color) -> None:
         font_sans = "sans"
         font_mono = "monospace"
         fontsize = 16
@@ -32,15 +29,15 @@ class Theme:
             size=34,
             opacity=0.95,
 
-            background=colors.color_background,
+            background=color.color_background,
         )
 
         self.widget_defaults = dict(
             font=font_sans,
             fontsize=fontsize,
 
-            foreground=colors.color_foreground,
-            fontshadow=colors.color_shadow,
+            foreground=color.color_foreground,
+            fontshadow=color.color_shadow,
         )
 
         self.menu_button = dict(
@@ -57,15 +54,15 @@ class Theme:
             spacing=3,
             highlight_method="line",
 
-            background=colors.color8,
-            highlight_color=colors.color8,
-            inactive=colors.color0,
-            active=colors.color_major,
-            this_current_screen_border=colors.color_major,
-            this_screen_border=colors.color_major,
-            other_current_screen_border=colors.color_minor,
-            other_screen_border=colors.color_minor,
-            urgent_border=colors.color_urgent,
+            background=color.color8,
+            highlight_color=color.color8,
+            inactive=color.color0,
+            active=color.color_major,
+            this_current_screen_border=color.color_major,
+            this_screen_border=color.color_major,
+            other_current_screen_border=color.color_minor,
+            other_screen_border=color.color_minor,
+            urgent_border=color.color_urgent,
         )
 
         self.tasklist = dict(
@@ -80,16 +77,16 @@ class Theme:
             icon_offset_x=0,
             icon_offset_y=1.3,
             markup_floating="  <span foreground='%s'></span>   {}"
-            % colors.color14,
+            % color.color14,
             markup_maximized="  <span foreground='%s'></span>   {}"
-            % colors.color14,
+            % color.color14,
             markup_minimized="  <span foreground='%s'></span>   {}"
-            % colors.color14,
+            % color.color14,
             borderwidth=2,
 
-            border=colors.color_major,
-            unfocused_border=colors.color_common,
-            urgent_border=colors.color_urgent,
+            border=color.color_major,
+            unfocused_border=color.color_common,
+            urgent_border=color.color_urgent,
         )
 
         self.systray = dict(
@@ -108,9 +105,9 @@ class Theme:
             extra_offsetx=3,
             extra_offsety=-1.5,
 
-            foreground=colors.color4,
-            foreground_discharge=colors.color3,
-            foreground_low=colors.color5,
+            foreground=color.color4,
+            foreground_discharge=color.color3,
+            foreground_low=color.color5,
         )
 
         self.netspeed = dict(
@@ -119,7 +116,7 @@ class Theme:
             font=font_mono,
             extra_offsety=0.3,
 
-            foreground=colors.color15,
+            foreground=color.color15,
         )
 
         self.battery = dict(
@@ -132,12 +129,12 @@ class Theme:
             icon_half_energy="",
             icon_low_energy="",
             icon_empty_energy="",
-            foreground_discharge=colors.color3,
-            foreground_low=colors.color5,
+            foreground_discharge=color.color3,
+            foreground_low=color.color5,
             extra_offsetx=5,
             extra_offsety=-0.7,
 
-            foreground=colors.color_healthy,
+            foreground=color.color_healthy,
         )
 
         self.volume = dict(
@@ -145,22 +142,22 @@ class Theme:
             icon_mute="婢 ",
             extra_offsety=-1.5,
 
-            foreground=colors.color15,
+            foreground=color.color15,
         )
 
         self.thermalSensor = dict(
             icon=" ",
             extra_offsety=-1.4,
 
-            foreground=colors.color_healthy,
-            foreground_alert=colors.color5,
+            foreground=color.color_healthy,
+            foreground_alert=color.color5,
         )
 
         self.backlight = dict(
             format="{percent: .0f}",
             extra_offsety=-1.5,
 
-            foreground=colors.color15,
+            foreground=color.color15,
         )
 
         self.clock = dict(
@@ -176,12 +173,12 @@ class Theme:
             ),
             extra_offsety=-1,
 
-            foreground=colors.color15,
+            foreground=color.color15,
         )
 
         self.wallpaper = dict(
             label=" ",
             extra_offsety=-1,
 
-            foreground=colors.color15,
+            foreground=color.color15,
         )

@@ -12,7 +12,6 @@ logo_text = "arch<span foreground='#3ba4d8'>linux</span>"
 sh_browser = "firefox"
 sh_term = "kitty --single-instance"
 
-cmd_locker = ["xss-lock", "--", "betterlockscreen", "-l"]
 cmd_lock_screen = ["loginctl", "lock-session"]
 cmd_term = ["kitty"]
 cmd_menu = ["jgmenu_run"]
