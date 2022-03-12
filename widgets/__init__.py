@@ -1,21 +1,18 @@
-from .backlight import Backlight
-from .base import Box
-from .battery import Battery
-from .clock import Clock
-from .kdeconnect import Kdeconnect
-from .net import Net
-from .tasklist import TaskList
-from .thermal_sensor import ThermalSensor
-from .volume import Volume
+from libqtile.utils import lazify_imports
+from libqtile.widget.import_error import make_error
 
-__all__ = (
-    "Backlight",
-    "Box",
-    "Battery",
-    "Clock",
-    "Kdeconnect",
-    "Net",
-    "TaskList",
-    "ThermalSensor",
-    "Volume",
+widgets = {
+    "Backlight": "backlight",
+    "Box": "base",
+    "Battery": "battery",
+    "Clock": "clock",
+    "Kdeconnect": "kdeconnect",
+    "Net": "net",
+    "TaskList": "tasklist",
+    "ThermalSensor": "thermal_sensor",
+    "Volume": "volume",
+}
+
+__all__, __dir__, __getattr__ = lazify_imports(
+    widgets, __package__, fallback=make_error
 )
