@@ -7,16 +7,18 @@ from .base import Box
 
 
 class ThermalSensor(Box, InLoopPollText):
+    defaults = [
+        ("dev_name", "acpitz", ""),
+        ("sysfs_glob", "/sys/class/hwmon/hwmon*", ""),
+        ("update_interval", 2, "Update interval in seconds"),
+        ("threshold", 70, ""),
+        ("foreground_alert", "ff0000", "Foreground colour alert"),
+        ("icon", "", ""),
+    ]
+
     def __init__(self, *args, **kwargs):
-        self.defaults.extend((
-            ("dev_name", "acpitz", ""),
-            ("sysfs_glob", "/sys/class/hwmon/hwmon*", ""),
-            ("update_interval", 2, "Update interval in seconds"),
-            ("threshold", 70, ""),
-            ("foreground_alert", "ff0000", "Foreground colour alert"),
-            ("icon", "", ""),
-        ))
         super().__init__(*args, **kwargs)
+        self.add_defaults(self.defaults)
 
         dir = self._get_sysfs_path()
         if dir is None:

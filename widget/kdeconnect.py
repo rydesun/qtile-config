@@ -5,24 +5,26 @@ from .base import Box
 
 
 class Kdeconnect(Box):
+    defaults = [
+        ('low_percentage', 0.20, ""),
+        ('format', '{char} {percent: .0f}', 'Display format'),
+        ("sep", (0.85, 0.65, 0.4, 0.25), ""),
+        ("icon_charge", "", ""),
+        ("icon_full_energy", "", ""),
+        ("icon_high_energy", "", ""),
+        ("icon_half_energy", "", ""),
+        ("icon_low_energy", "", ""),
+        ("icon_empty_energy", "", ""),
+        ("foreground", "", ""),
+        ("foreground_low", "", ""),
+        ("dev_id", "", ""),
+        ("dbus_name", "org.kde.kdeconnect", ""),
+        ("dbus_path", "/modules/kdeconnect/devices/{dev_id}/battery", ""),
+    ]
+
     def __init__(self, *args, **kwargs):
-        self.defaults.extend((
-            ('low_percentage', 0.20, ""),
-            ('format', '{char} {percent: .0f}', 'Display format'),
-            ("sep", (0.85, 0.65, 0.4, 0.25), ""),
-            ("icon_charge", "", ""),
-            ("icon_full_energy", "", ""),
-            ("icon_high_energy", "", ""),
-            ("icon_half_energy", "", ""),
-            ("icon_low_energy", "", ""),
-            ("icon_empty_energy", "", ""),
-            ("foreground", "", ""),
-            ("foreground_low", "", ""),
-            ("dev_id", "", ""),
-            ("dbus_name", "org.kde.kdeconnect", ""),
-            ("dbus_path", "/modules/kdeconnect/devices/{dev_id}/battery", ""),
-        ))
         super().__init__("", *args, **kwargs)
+        self.add_defaults(self.defaults)
 
     async def _config_async(self):
         self.dbus_path = self.dbus_path.format(dev_id=self.dev_id)

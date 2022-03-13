@@ -6,15 +6,17 @@ from libqtile.widget.base import _TextBox
 
 
 class Box(_TextBox):
+    defaults = [
+        ("image_path", "", ""),
+        ("image_padding", 0, ""),
+        ("image_rotate", 0.0, ""),
+        ("extra_offsetx", 0, ""),
+        ("extra_offsety", 0, ""),
+    ]
+
     def __init__(self, *args, **kwargs):
-        self.defaults.extend((
-            ("image_path", "", ""),
-            ("image_padding", 0, ""),
-            ("image_rotate", 0.0, ""),
-            ("extra_offsetx", 0, ""),
-            ("extra_offsety", 0, ""),
-        ))
         super().__init__(*args, **kwargs)
+        self.add_defaults(Box.defaults)
 
         self.image = None
         self.image_length = 0

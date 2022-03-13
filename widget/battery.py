@@ -15,24 +15,26 @@ class BatteryState:
 
 
 class Battery(Box):
+    defaults = [
+        ("sep", (85, 65, 40, 25, 0), ""),
+        ("icon_charge", "", ""),
+        ("icon_plug", "", ""),
+        ("icon_full_energy", "", ""),
+        ("icon_high_energy", "", ""),
+        ("icon_half_energy", "", ""),
+        ("icon_low_energy", "", ""),
+        ("icon_empty_energy", "", ""),
+        ("foreground", "", ""),
+        ("foreground_discharge", "", ""),
+        ("foreground_low", "", ""),
+        ("dbus_name", "org.freedesktop.UPower", ""),
+        ("dbus_path", "/org/freedesktop/UPower/devices/DisplayDevice", ""),
+        ("dbus_props", "org.freedesktop.UPower.Device", "")
+    ]
+
     def __init__(self, *args, **kwargs):
-        self.defaults.extend((
-            ("sep", (85, 65, 40, 25, 0), ""),
-            ("icon_charge", "", ""),
-            ("icon_plug", "", ""),
-            ("icon_full_energy", "", ""),
-            ("icon_high_energy", "", ""),
-            ("icon_half_energy", "", ""),
-            ("icon_low_energy", "", ""),
-            ("icon_empty_energy", "", ""),
-            ("foreground", "", ""),
-            ("foreground_discharge", "", ""),
-            ("foreground_low", "", ""),
-            ("dbus_name", "org.freedesktop.UPower", ""),
-            ("dbus_path", "/org/freedesktop/UPower/devices/DisplayDevice", ""),
-            ("dbus_props", "org.freedesktop.UPower.Device", "")
-        ))
         super().__init__(*args, **kwargs)
+        self.add_defaults(self.defaults)
 
     async def _config_async(self):
         subscribe = await add_signal_receiver(

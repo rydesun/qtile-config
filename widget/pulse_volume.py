@@ -4,12 +4,14 @@ from .base import Box
 
 
 class PulseVolume(Box, _PulseVolume):
+    defaults = [
+        ("icon", "", ""),
+        ("icon_mute", "", ""),
+    ]
+
     def __init__(self, *args, **kwargs):
-        self.defaults.extend((
-            ("icon", "", ""),
-            ("icon_mute", "", ""),
-        ))
         super().__init__(*args, **kwargs)
+        self.add_defaults(self.defaults)
 
     def _update_drawer(self):
         if self.volume < 0:

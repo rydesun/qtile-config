@@ -8,13 +8,14 @@ from .base import Box
 class Clock(Box, InLoopPollText):
     DELTA = timedelta(seconds=0.5)
 
-    def __init__(self, *args, **kwargs):
-        self.defaults.extend((
-            ("weekday_sign", tuple(range(1, 8)), ""),
-            ("update_interval", 1.0, "Update interval for the clock"),
+    defaults = [
+        ("weekday_sign", tuple(range(1, 8)), ""),
+        ("update_interval", 1.0, "Update interval for the clock"),
+    ]
 
-        ))
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.add_defaults(self.defaults)
 
     def poll(self):
         now = datetime.now(timezone.utc).astimezone()
