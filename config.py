@@ -41,14 +41,14 @@ layouts = [
 ]
 
 groups = [
-    Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.sh_term]),
-    Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.sh_browser]),
+    Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.cmd_term]),
+    Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.cmd_browser]),
     Group("d", label="⬤", layouts=[layouts[0]]),
     Group("f", label="⬤", layouts=[layouts[1]]),
     ScratchPad("scratchpad", [
         DropDown(
             name="term",
-            cmd=env.cmd_term,
+            cmd=env.cmd_term_alter,
             **theme_agent.dropdown_window),
         DropDown(
             name="note",

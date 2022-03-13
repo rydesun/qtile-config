@@ -35,7 +35,7 @@ class Control:
             EzKey("M-S-l", lazy.layout.grow_right()),
             EzKey("M-S-n", lazy.layout.normalize()),
 
-            EzKey("M-<Return>", lazy.spawn(self.env.sh_term)),
+            EzKey("M-<Return>", lazy.spawn(self.env.cmd_term)),
             EzKey("M-r", lazy.spawn(self.env.cmd_launcher)),
             EzKey("M-t", lazy.spawn(["input-box"])),
             EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
