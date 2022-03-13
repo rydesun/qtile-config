@@ -20,7 +20,7 @@ class Net(Box, _Net):
             ("icon_upload", "", ""),
             ("icon_download", "", ""),
             ("format",
-             "{icon_download} {txt_download} {icon_upload} {txt_upload}", ""),
+             "{icon_download} {txt_download}  {icon_upload} {txt_upload}", ""),
             ("fmt_txt", "{:·>3.0f} {}", ""),
             ("mini_val_threshold", 100, ""),
             ("fmt_mini", "··· B", ""),
