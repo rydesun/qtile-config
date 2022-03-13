@@ -47,8 +47,9 @@ class TaskList(_TaskList):
             self.draw_icon(icon, offset)
 
     def button_press(self, x, y, button):
-        if button == 1:
-            return super().button_press(x, y, button)
-        elif button == 2:
+        if button == 2:
             window = self.get_clicked(x, y)
-            window.kill()
+            if window:
+                window.kill()
+        else:
+            return super().button_press(x, y, button)
