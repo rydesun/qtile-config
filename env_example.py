@@ -2,6 +2,8 @@
 
 from libqtile.config import Match
 
+total_screens = 2
+
 wallpaper_main_dir = "~/Userdata/Pictures/wallpapers/"
 wallpaper_other_dir = wallpaper_main_dir
 

@@ -27,7 +27,10 @@ control_agent = Control(env)
 
 screens = [
     Screen(top=bar_agent.main_bar(theme=theme_agent)),
-    Screen(top=bar_agent.other_bar(theme=theme_agent)),
+    *(
+        Screen(top=bar_agent.other_bar(theme=theme_agent))
+        for _ in range(1, getattr(env, "total_screens", 1))
+    ),
 ]
 
 layouts = [
