@@ -3,6 +3,7 @@ from libqtile import hook
 from libqtile.config import DropDown, Group, ScratchPad, Screen
 from libqtile.layout.columns import Columns
 from libqtile.log_utils import logger
+from libqtile.utils import send_notification
 
 import color
 from bar import Bar
@@ -14,6 +15,8 @@ try:
     import env
 except ImportError:
     logger.warning("env.py is missing")
+    send_notification("Configuration warning",
+                      "env.py is missing. Use env_example.py instead.")
     import env_example as env
 
 theme_agent = Theme(color)
