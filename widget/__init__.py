@@ -8,9 +8,9 @@ widgets = {
     "Clock": "clock",
     "Kdeconnect": "kdeconnect",
     "Net": "net",
+    "PulseVolume": "pulse_volume",
     "TaskList": "tasklist",
     "ThermalSensor": "thermal_sensor",
-    "Volume": "volume",
 }
 
 __all__, __dir__, __getattr__ = lazify_imports(

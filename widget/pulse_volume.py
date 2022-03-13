@@ -1,9 +1,9 @@
-from libqtile.widget.volume import Volume as _Volume
+from libqtile.widget.pulse_volume import PulseVolume as _PulseVolume
 
 from .base import Box
 
 
-class Volume(Box, _Volume):
+class PulseVolume(Box, _PulseVolume):
     def __init__(self, *args, **kwargs):
         self.defaults.extend((
             ("icon", "", ""),

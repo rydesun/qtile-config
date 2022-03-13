@@ -24,9 +24,9 @@ cmd_note = ["kitty", "-e", "joplin"]
 cmd_wallpaper = ["feh", "--bg-fill", "--no-fehbg"]
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
-cmd_volume_toggle = ["amixer", "-q", "sset", "Master", "toggle"]
-cmd_volume_decrease = ["amixer", "-q", "sset", "Master", "1%-"]
-cmd_volume_increase = ["amixer", "-q", "sset", "Master", "1%+"]
+cmd_volume_toggle = ["pactl", "set-sink-mute", "0", "toggle"]
+cmd_volume_decrease = ["pactl", "set-sink-volume", "0", "-2%"]
+cmd_volume_increase = ["pactl", "set-sink-volume", "0", "+2%"]
 
 dev_backlight = "amdgpu_bl0"
 dev_thermal = "acpitz"

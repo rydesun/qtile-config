@@ -56,12 +56,7 @@ class Bar:
                 },
                 **theme.backlight),
 
-            local_widget.Volume(
-                mouse_callbacks={
-                    "Button1": lazy.spawn(self.env.cmd_volume_toggle),
-                    "Button4": lazy.spawn(self.env.cmd_volume_increase),
-                    "Button5": lazy.spawn(self.env.cmd_volume_decrease),
-                },
+            local_widget.PulseVolume(
                 **theme.volume),
 
             local_widget.ThermalSensor(
