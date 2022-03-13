@@ -25,9 +25,6 @@ control_agent = Control(env)
 
 # ==== Qtile config begin ====
 
-keys = control_agent.keys(group_chars="asdf")
-mouse = control_agent.mouse()
-
 screens = [
     Screen(top=bar_agent.main_bar(theme=theme_agent)),
     Screen(top=bar_agent.other_bar(theme=theme_agent)),
@@ -39,6 +36,12 @@ layouts = [
         **theme_agent.layout_column),
     Floating(**theme_agent.layout_floating),
 ]
+
+keys = control_agent.keys(
+    group_chars="asdf",
+    scratchpad_names=["term", "note"]
+)
+mouse = control_agent.mouse()
 
 groups = [
     Group("a", label="⬤", layouts=[layouts[0]], spawn=[env.cmd_term]),

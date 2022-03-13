@@ -1,12 +1,13 @@
 from libqtile.command import lazy
 from libqtile.config import EzDrag, EzKey, Key
+from libqtile.utils import lget
 
 
 class Control:
     def __init__(self, env) -> None:
         self.env = env
 
-    def keys(self, group_chars: str):
+    def keys(self, group_chars: str, scratchpad_names=None):
         return [
             EzKey("M-S-C-r", lazy.restart()),
             EzKey("M-S-C-q", lazy.shutdown()),
@@ -38,8 +39,10 @@ class Control:
             EzKey("M-<Return>", lazy.spawn(self.env.cmd_term)),
             EzKey("M-r", lazy.spawn(self.env.cmd_launcher)),
             EzKey("M-t", lazy.spawn(["input-box"])),
-            EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle('term')),
-            EzKey('M-o', lazy.group['scratchpad'].dropdown_toggle('note')),
+            EzKey('M-i', lazy.group['scratchpad'].dropdown_toggle(
+                lget(scratchpad_names, 0))),
+            EzKey('M-o', lazy.group['scratchpad'].dropdown_toggle(
+                lget(scratchpad_names, 1))),
 
             EzKey("M-S-p", lazy.spawn(self.env.cmd_lock_screen)),
             EzKey("M-S-r", lazy.spawn(self.env.cmd_password_manager)),
