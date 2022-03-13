@@ -68,9 +68,8 @@ class Bar:
                 **theme.clock),
 
             qtile_widget.Wallpaper(
-                random_selection=True,
-                directory=self.env.wallpaper_dir,
-                wallpaper_command=self.env.cmd_wallpaper,
+                wallpaper_command=None,
+                directory=self.env.wallpaper_main_dir,
                 **theme.wallpaper),
 
         ], **theme.bar)
@@ -87,6 +86,9 @@ class Bar:
                 update_interval=0.5,
                 **theme.clock),
 
-            qtile_widget.Spacer(length=10),
+            qtile_widget.Wallpaper(
+                wallpaper_command=None,
+                directory=self.env.wallpaper_other_dir,
+                **theme.wallpaper),
 
         ], **theme.bar)

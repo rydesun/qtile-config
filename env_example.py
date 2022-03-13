@@ -1,10 +1,9 @@
 # Rename this file to env.py
 
-import os
-
 from libqtile.config import Match
 
-wallpaper_dir = os.path.expanduser("~/Userdata/Pictures/wallpapers/")
+wallpaper_main_dir = "~/Userdata/Pictures/wallpapers/"
+wallpaper_other_dir = wallpaper_main_dir
 
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
 logo_text = "arch<span foreground='#3ba4d8'>linux</span>"
@@ -20,7 +19,6 @@ cmd_screenshot = ["flameshot", "screen"]
 cmd_screenshot_select = ["flameshot", "gui"]
 cmd_screenshot_window = ["scrot", "-u"]
 cmd_note = ["kitty", "-e", "joplin"]
-cmd_wallpaper = ["feh", "--bg-fill", "--no-fehbg"]
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
 cmd_volume_toggle = ["pactl", "set-sink-mute", "0", "toggle"]
