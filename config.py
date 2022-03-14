@@ -5,8 +5,8 @@ from libqtile.layout.columns import Columns
 from libqtile.log_utils import logger
 from libqtile.utils import send_notification
 
-import color
 from bar import Bar
+from color import Color
 from control import Control
 from layout import Floating
 from theme import Theme
@@ -19,9 +19,9 @@ except ImportError:
                       "env.py is missing. Use env_example.py instead.")
     import env_example as env
 
-theme_agent = Theme(color)
-bar_agent = Bar(env)
 control_agent = Control(env)
+bar_agent = Bar(env)
+theme_agent = Theme(Color())
 
 # ==== Qtile config begin ====
 

@@ -9,7 +9,8 @@ wallpaper_other_dir = wallpaper_main_dir
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
-logo_text = "arch<span foreground='#3ba4d8'>linux</span>"
+logo_text = "<span foreground='#dcdfe4'>arch</span>\
+<span foreground='#3ba4d8'>linux</span>"
 
 cmd_term = ["kitty", "--single-instance"]
 cmd_term_alter = ["kitty"]
