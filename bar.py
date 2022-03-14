@@ -19,7 +19,7 @@ class Bar:
                 },
                 **theme.menu_button)
             if getattr(self.env, "logo_file", None)
-            or getattr(self.env, "logo_text", None)
+            and getattr(self.env, "logo_text", None)
             else None,
 
             qtile_widget.GroupBox(
