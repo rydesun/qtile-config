@@ -70,7 +70,7 @@ class Color:
         )
         self.kdeconnect = dict(
             foreground=self.hint,
-            foreground_discharge=self.notice,
+            foreground_discharge=self.hint,
             foreground_low=self.danger,
         )
         self.backlight = dict(

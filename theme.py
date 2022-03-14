@@ -95,6 +95,7 @@ class Theme:
             format="{extra_icon}{icon}{percent: .0f}",
             icon_charge=" ",
             icon_discharge="",
+            icon_plug="",
             icon_full_energy="",
             icon_high_energy="",
             icon_half_energy="",
