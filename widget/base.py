@@ -19,7 +19,8 @@ class Box(_TextBox):
         self.add_defaults(Box.defaults)
 
         self.image = None
-        self.image_length = 0
+        self.text_offset = 0
+
         if not self.image_path:
             return
         self.image_path = os.path.expanduser(self.image_path)
@@ -29,10 +30,18 @@ class Box(_TextBox):
         self.image = Img.from_path(self.image_path)
         self.image.theta = self.image_rotate
 
+    def _configure(self, qtile, bar):
+        super()._configure(qtile, bar)
+        if self.image:
+            new_height = self.bar.height - \
+                (self.margin_y * 2) - (self.image_padding * 2)
+            self.image.resize(height=new_height)
+
     def calculate_length(self):
-        if self.text:
+        if self.text or self.image:
             return min(
-                self.image_length + self.layout.width, self.bar.width
+                self.text_offset + self.layout.width,
+                self.bar.width,
             ) + self.actual_padding * 2
         else:
             return 0
@@ -40,13 +49,10 @@ class Box(_TextBox):
     def draw(self):
         if not self.can_draw():
             return
+        self.drawer.clear(self.background or self.bar.background)
 
-        self.image_length = 0
+        self.text_offset = 0
         if self.image:
-            new_height = self.bar.height - \
-                (self.margin_y * 2) - (self.image_padding * 2)
-            self.image.resize(height=new_height)
-            self.drawer.clear(self.background or self.bar.background)
             self.drawer.ctx.save()
             self.drawer.ctx.translate(
                 self.margin_x,
@@ -54,12 +60,12 @@ class Box(_TextBox):
             self.drawer.ctx.set_source(self.image.pattern)
             self.drawer.ctx.paint()
             self.drawer.ctx.restore()
-            self.image_length += self.image.width
+
+            self.text_offset += self.image.width
 
         if self.text:
-            self.drawer.clear(self.background or self.bar.background)
             self.layout.draw(
-                (self.actual_padding or 0) + self.image_length
+                self.actual_padding + self.text_offset
                 + self.extra_offsetx,
                 int(self.bar.height / 2 - self.layout.height / 2) + 1
                 + self.extra_offsety
