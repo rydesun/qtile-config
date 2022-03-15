@@ -3,6 +3,8 @@
 from libqtile.config import Match
 
 total_screens = 2
+main_screen_scale = 1
+other_screen_scale = 1
 
 wallpaper_main_dir = "~/Userdata/Pictures/wallpapers/"
 wallpaper_other_dir = wallpaper_main_dir

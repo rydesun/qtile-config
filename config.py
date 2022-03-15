@@ -21,14 +21,19 @@ except ImportError:
 
 control_agent = Control(env)
 bar_agent = Bar(env)
-theme_agent = Theme(Color())
+main_theme = Theme(
+    Color(),
+    scale_factor=env.main_screen_scale,
+)
 
 # ==== Qtile config begin ====
 
 screens = [
-    Screen(top=bar_agent.main_bar(theme=theme_agent)),
+    Screen(top=bar_agent.main_bar(theme=main_theme)),
     *(
-        Screen(top=bar_agent.other_bar(theme=theme_agent))
+        Screen(top=bar_agent.other_bar(theme=Theme(
+            Color(), scale_factor=env.other_screen_scale,
+        )))
         for _ in range(1, getattr(env, "total_screens", 1))
     ),
 ]
@@ -36,8 +41,8 @@ screens = [
 layouts = [
     Columns(
         insert_position=1,
-        **theme_agent.layout_column),
-    Floating(**theme_agent.layout_floating),
+        **main_theme.layout_column),
+    Floating(**main_theme.layout_floating),
 ]
 
 keys = control_agent.keys(
@@ -55,20 +60,20 @@ groups = [
         DropDown(
             name="term",
             cmd=env.cmd_term_alter,
-            **theme_agent.dropdown_window),
+            **main_theme.dropdown_window),
         DropDown(
             name="note",
             cmd=env.cmd_note,
-            **theme_agent.dropdown_window),
+            **main_theme.dropdown_window),
     ]),
 ]
 
-widget_defaults = theme_agent.widget_defaults
+widget_defaults = main_theme.widget_defaults
 
 floating_layout = Floating(
     float_rules=env.float_rules,
     float_config=env.float_config,
-    **theme_agent.layout_floating)
+    **main_theme.layout_floating)
 
 
 # ==== hooks ====

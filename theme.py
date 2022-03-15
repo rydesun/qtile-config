@@ -1,17 +1,22 @@
 class Theme:
-    def __init__(self, color):
+    def __init__(self, color, scale_factor=1):
         self.color = color
+        self.scale_factor = scale_factor
         self.init_layout()
         self.init_window()
         self.init_bar()
         self.init_widget()
 
+    def scale(self, val, rounded=False):
+        scaled = self.scale_factor * val
+        return round(scaled) if rounded else scaled
+
     def init_layout(self):
         self.layout_column = dict(
-            border_width=0,
+            border_width=self.scale(0),
         )
         self.layout_floating = dict(
-            border_width=0,
+            border_width=self.scale(0),
             **self.color.layout_floating,
         )
 
@@ -25,40 +30,40 @@ class Theme:
 
     def init_bar(self):
         self.bar = dict(
-            size=32,
+            size=self.scale(32, rounded=True),
             **self.color.bar,
         )
 
     def init_widget(self):
         self.widget_defaults = dict(
             font="sans",
-            fontsize=16,
+            fontsize=self.scale(16, rounded=True),
             **self.color.widget_defaults,
         )
         self.menu_button = dict(
-            margin_x=3,
-            margin_y=3,
+            margin_x=self.scale(3),
+            margin_y=self.scale(3),
             **self.color.menu_button,
         )
         self.groupbox = dict(
             font="monospace",
-            margin_x=8,
-            spacing=3,
-            borderwidth=2,
+            margin_x=self.scale(8),
+            spacing=self.scale(3),
+            borderwidth=self.scale(2),
             highlight_method="line",
             **self.color.groupbox,
         )
         self.tasklist = dict(
-            fontsize=14,
-            icon_size=20,
+            fontsize=self.scale(14, rounded=True),
+            icon_size=self.scale(20),
             title_width_method="uniform",
-            max_title_width=200,
-            spacing=12,
-            margin_y=0,
-            padding_x=8,
-            icon_offset_x=0,
-            icon_offset_y=-1,
-            borderwidth=2,
+            max_title_width=self.scale(200),
+            spacing=self.scale(12),
+            margin_y=self.scale(0),
+            padding_x=self.scale(8),
+            icon_offset_x=self.scale(0),
+            icon_offset_y=self.scale(-1),
+            borderwidth=self.scale(2),
             markup_floating="  <span foreground='%s'></span>   {}"
             % self.color.tasklist["_icon_floating"],
             markup_maximized="  <span foreground='%s'></span>   {}"
@@ -68,13 +73,13 @@ class Theme:
             **self.color.tasklist,
         )
         self.systray = dict(
-            icon_size=22,
+            icon_size=self.scale(22, rounded=True),
         )
         self.netspeed = dict(
             font="monospace",
             icon_upload="",
             icon_download="",
-            extra_offsety=0.3,
+            extra_offsety=self.scale(0.3),
             **self.color.netspeed
         )
         self.battery = dict(
@@ -87,8 +92,8 @@ class Theme:
             icon_half_energy="",
             icon_low_energy="",
             icon_empty_energy="",
-            extra_offsetx=5,
-            extra_offsety=-0.7,
+            extra_offsetx=self.scale(5),
+            extra_offsety=self.scale(-0.7),
             **self.color.battery,
         )
         self.kdeconnect = dict(
@@ -101,24 +106,24 @@ class Theme:
             icon_half_energy="",
             icon_low_energy="",
             icon_empty_energy="",
-            extra_offsetx=3,
-            extra_offsety=-1.5,
+            extra_offsetx=self.scale(3),
+            extra_offsety=self.scale(-1.5),
             **self.color.kdeconnect
         )
         self.backlight = dict(
             format="{percent: .0f}",
-            extra_offsety=-1.5,
+            extra_offsety=self.scale(-1.5),
             **self.color.backlight,
         )
         self.volume = dict(
             icon=" ",
             icon_mute="婢 ",
-            extra_offsety=-1.5,
+            extra_offsety=self.scale(-1.5),
             **self.color.volume,
         )
         self.thermalSensor = dict(
             icon=" ",
-            extra_offsety=-1.4,
+            extra_offsety=self.scale(-1.4),
             **self.color.thermalSensor,
         )
         self.clock = dict(
@@ -132,11 +137,11 @@ class Theme:
                 "周六",
                 "周日",
             ),
-            extra_offsety=-1,
+            extra_offsety=self.scale(-1),
             **self.color.clock,
         )
         self.wallpaper = dict(
             label=" ",
-            extra_offsety=-1,
+            extra_offsety=self.scale(-1),
             **self.color.wallpaper,
         )
