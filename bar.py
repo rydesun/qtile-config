@@ -78,13 +78,6 @@ class Bar:
                 update_interval=0.5,
                 **theme.clock),
 
-            qtile_widget.Wallpaper(
-                wallpaper_command=None,
-                directory=self.env.wallpaper_main_dir,
-                **theme.wallpaper)
-            if getattr(self.env, "wallpaper_main_dir", None)
-            else None,
-
         ))), **theme.bar)
 
     def other_bar(self, theme):

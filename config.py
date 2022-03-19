@@ -29,12 +29,19 @@ main_theme = Theme(
 # ==== Qtile config begin ====
 
 screens = [
-    Screen(top=bar_agent.main_bar(theme=main_theme)),
+    Screen(
+        top=bar_agent.main_bar(theme=main_theme),
+        wallpaper=env.wallpaper_main,
+        wallpaper_mode="fill",
+    ),
     *(
-        Screen(top=bar_agent.other_bar(theme=Theme(
-            Color(), scale_factor=env.other_screen_scale,
-        )))
-        for _ in range(1, getattr(env, "total_screens", 1))
+        Screen(
+            top=bar_agent.other_bar(theme=Theme(
+                Color(), scale_factor=env.other_screen_scale,
+            )),
+            wallpaper=env.wallpaper_other,
+            wallpaper_mode="fill",
+        ) for _ in range(1, getattr(env, "total_screens", 1))
     ),
 ]
 

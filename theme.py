@@ -140,8 +140,3 @@ class Theme:
             extra_offsety=self.scale(-1),
             **self.color.clock,
         )
-        self.wallpaper = dict(
-            label="🍀",
-            extra_offsety=self.scale(-1),
-            **self.color.wallpaper,
-        )
