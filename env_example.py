@@ -2,8 +2,8 @@
 
 from libqtile.config import Match
 
-# Be free to edit, comment or delete these lines,
-# which will disable the relevant plugins.
+# Feel free to edit, comment or delete these lines,
+# which will disable the relevant widgets.
 
 #################
 # External assets
