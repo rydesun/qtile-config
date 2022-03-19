@@ -31,12 +31,15 @@ cmd_password_manager = ["rofi-rbw"]
 cmd_screenshot = ["flameshot", "screen"]
 cmd_screenshot_select = ["flameshot", "gui"]
 cmd_screenshot_window = ["scrot", "-u"]
-cmd_note = ["kitty", "-e", "joplin"]
+cmd_note = ["kitty", "joplin"]
+cmd_net_sniffer = ["wireshark"]
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
 cmd_volume_toggle = ["pactl", "set-sink-mute", "0", "toggle"]
 cmd_volume_decrease = ["pactl", "set-sink-volume", "0", "-2%"]
 cmd_volume_increase = ["pactl", "set-sink-volume", "0", "+2%"]
+cmd_volume_control = ["pavucontrol-qt"]
+cmd_calendar = ["evolution", "-c", "calendar"]
 
 #################
 # Hardware device

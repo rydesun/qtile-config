@@ -36,6 +36,9 @@ class Bar:
 
             local_widget.Net(
                 interface=self.env.dev_nic,
+                mouse_callbacks={
+                    "Button2": lazy.spawn(self.env.cmd_net_sniffer),
+                },
                 **theme.netspeed)
             if getattr(self.env, "dev_nic", None)
             else None,
@@ -64,6 +67,9 @@ class Bar:
             else None,
 
             local_widget.PulseVolume(
+                mouse_callbacks={
+                    "Button2": lazy.spawn(self.env.cmd_volume_control),
+                },
                 **theme.volume),
 
             local_widget.ThermalSensor(
@@ -74,6 +80,9 @@ class Bar:
 
             local_widget.Clock(
                 update_interval=0.5,
+                mouse_callbacks={
+                    "Button2": lazy.spawn(self.env.cmd_calendar),
+                },
                 **theme.clock),
 
             qtile_widget.Spacer(length=20),
@@ -90,6 +99,9 @@ class Bar:
 
             local_widget.Clock(
                 update_interval=0.5,
+                mouse_callbacks={
+                    "Button2": lazy.spawn(self.env.cmd_calendar),
+                },
                 **theme.clock),
 
             qtile_widget.Spacer(length=20),
