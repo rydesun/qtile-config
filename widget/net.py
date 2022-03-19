@@ -35,6 +35,8 @@ class Net(Box, _Net):
         down = 0
         up = 0
         for interface in self.interface:
+            if interface not in new_int:
+                continue
             down += new_int[interface]['down'] - \
                 self.stats[interface]['down']
             up += new_int[interface]['up'] - \
