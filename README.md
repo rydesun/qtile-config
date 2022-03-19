@@ -4,6 +4,8 @@ Essential dependency packages to install
 
 ```bash
 sudo pacman -S --needed python-dbus-next python-psutil
+# if have battery
+sudo pacman -S --needed upower
 ```
 
 As for icons, you need nerd font or at least one font

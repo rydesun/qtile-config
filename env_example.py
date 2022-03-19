@@ -9,8 +9,9 @@ from libqtile.config import Match
 # External assets
 #################
 
+# Arch Linux: Run `sudo pacman -S archlinux-wallpaper`
 wallpaper_main = "/usr/share/backgrounds/archlinux/small.png"
-wallpaper_other = wallpaper_main
+wallpaper_other = "/usr/share/backgrounds/archlinux/simple.png"
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
