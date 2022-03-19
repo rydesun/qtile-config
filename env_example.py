@@ -9,7 +9,7 @@ from libqtile.config import Match
 # External assets
 #################
 
-wallpaper_main_dir = "~/Userdata/Pictures/wallpapers/"
+wallpaper_main_dir = "/usr/share/backgrounds/archlinux/"
 wallpaper_other_dir = wallpaper_main_dir
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`

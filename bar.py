@@ -99,11 +99,6 @@ class Bar:
                 update_interval=0.5,
                 **theme.clock),
 
-            qtile_widget.Wallpaper(
-                wallpaper_command=None,
-                directory=self.env.wallpaper_other_dir,
-                **theme.wallpaper)
-            if getattr(self.env, "wallpaper_other_dir", None)
-            else None,
+            qtile_widget.Spacer(length=10),
 
         ))), **theme.bar)
