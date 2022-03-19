@@ -27,8 +27,6 @@ class Bar:
                 disable_drag=True,
                 **theme.groupbox),
 
-            qtile_widget.Spacer(length=10),
-
             local_widget.TaskList(**theme.tasklist),
 
             qtile_widget.Systray(**theme.systray)

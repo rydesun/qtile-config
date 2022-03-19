@@ -62,7 +62,7 @@ class Theme:
             margin_y=self.scale(0),
             padding_x=self.scale(8),
             icon_offset_x=self.scale(0),
-            icon_offset_y=self.scale(-1),
+            icon_offset_y=self.scale(0),
             borderwidth=self.scale(2),
             markup_floating="  <span foreground='%s'></span>   {}"
             % self.color.tasklist["_icon_floating"],
