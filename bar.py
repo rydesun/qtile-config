@@ -78,6 +78,8 @@ class Bar:
                 update_interval=0.5,
                 **theme.clock),
 
+            qtile_widget.Spacer(length=20),
+
         ))), **theme.bar)
 
     def other_bar(self, theme):
@@ -92,6 +94,6 @@ class Bar:
                 update_interval=0.5,
                 **theme.clock),
 
-            qtile_widget.Spacer(length=10),
+            qtile_widget.Spacer(length=20),
 
         ))), **theme.bar)
