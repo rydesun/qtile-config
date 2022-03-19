@@ -96,7 +96,12 @@ def __getattr__(attr):
     """
     Make missing attrs dummy.
     """
-    if attr.startswith("cmd_"):
+    if attr == "cmd_term":
+        from libqtile.utils import guess_terminal
+        cmd_term = [guess_terminal()]
+        vars()["cmd_term"] = cmd_term
+        return cmd_term
+    elif attr.startswith("cmd_"):
         return ["false"]
     elif attr == "float_rules":
         return []
