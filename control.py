@@ -33,7 +33,6 @@ class Control:
             EzKey("M-S-s", lazy.spawn(self.env.cmd_screenshot_select)),
             EzKey("M-S-w", lazy.spawn(self.env.cmd_screenshot_window)),
             EzKey("M-S-t", lazy.spawn(["bash", "-c", """text=$(zenity --entry)
-                                       xdotool key Return
                                        xdotool type --delay 150 $text"""])),
 
             EzKey("M-x", lazy.window.kill()),
