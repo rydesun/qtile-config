@@ -2,6 +2,9 @@
 
 from libqtile.config import Match
 
+# Be free to edit, comment or delete these lines,
+# which will disable the relevant plugins.
+
 #################
 # External assets
 #################
@@ -11,8 +14,7 @@ wallpaper_other_dir = wallpaper_main_dir
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
-logo_text = "<span foreground='#dcdfe4'>arch</span>\
-<span foreground='#3ba4d8'>linux</span>"
+logo_text = "<span foreground='#dcdfe4'>arch</span><span foreground='#3ba4d8'>linux</span>"
 
 ###################
 # External programs
@@ -65,7 +67,7 @@ dev_kdeconnect = None
 # dev_kdeconnect = "eeeeeeeeeeeeeeee"
 
 #########################
-# layout and window rules
+# Layout and window rules
 #########################
 
 # The window matching these rules will float.
@@ -83,3 +85,27 @@ float_rules = [
 float_config = [
     {"match": Match(wm_class="kitty"), "border_width": 2},
 ]
+
+##############
+# Helper funcs
+##############
+
+
+def __getattr__(attr):
+    """
+    Make missing attrs dummy.
+    """
+    if attr.startswith("cmd_"):
+        return ["false"]
+    elif attr == "float_rules":
+        return []
+    elif attr == "float_config":
+        return []
+    elif attr == "total_screens":
+        return 2
+    elif attr == "main_screen_scale":
+        return 1
+    elif attr == "other_screen_scale":
+        return 1
+    else:
+        raise AttributeError
