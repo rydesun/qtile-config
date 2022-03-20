@@ -140,3 +140,8 @@ class Theme:
             extra_offsety=self.scale(-1),
             **self.color.clock,
         )
+        self.wallpaper = dict(
+            fmt="tile",
+            font="mono",
+            extra_offsety=self.scale(-2),
+        )

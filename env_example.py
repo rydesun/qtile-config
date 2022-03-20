@@ -10,8 +10,13 @@ from libqtile.config import Match
 #################
 
 # Arch Linux: Run `sudo pacman -S archlinux-wallpaper`
-wallpaper_main = "/usr/share/backgrounds/archlinux/small.png"
-wallpaper_other = "/usr/share/backgrounds/archlinux/simple.png"
+wallpaper_main_default = "/usr/share/backgrounds/archlinux/small.png"
+# random select one from dir if default is omitted
+wallpaper_main_dir = "/usr/share/backgrounds/archlinux/"
+
+# Other screens
+wallpaper_other_default = "/usr/share/backgrounds/archlinux/simple.png"
+wallpaper_other_dir = "/usr/share/backgrounds/archlinux/"
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
@@ -106,6 +111,8 @@ def __getattr__(attr):
         return cmd_term
     elif attr.startswith("cmd_"):
         return ["false"]
+    elif attr.startswith("wallpaper_"):
+        return ""
     elif attr == "float_rules":
         return []
     elif attr == "float_config":

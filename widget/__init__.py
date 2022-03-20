@@ -11,6 +11,7 @@ widgets = {
     "PulseVolume": "pulse_volume",
     "TaskList": "tasklist",
     "ThermalSensor": "thermal_sensor",
+    "Wallpaper": "wallpaper",
 }
 
 __all__, __dir__, __getattr__ = lazify_imports(

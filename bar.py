@@ -85,7 +85,10 @@ class Bar:
                 },
                 **theme.clock),
 
-            qtile_widget.Spacer(length=20),
+            local_widget.Wallpaper(
+                default=self.env.wallpaper_main_default,
+                dir=self.env.wallpaper_main_dir,
+                **theme.wallpaper),
 
         ))), **theme.bar)
 
@@ -104,6 +107,9 @@ class Bar:
                 },
                 **theme.clock),
 
-            qtile_widget.Spacer(length=20),
+            local_widget.Wallpaper(
+                default=self.env.wallpaper_other_default,
+                dir=self.env.wallpaper_other_dir,
+                **theme.wallpaper),
 
         ))), **theme.bar)
