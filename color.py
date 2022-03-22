@@ -1,19 +1,17 @@
 class Color:
-    foreground = "#0ed2d5"
+    foreground = "#0ec2c5"
     foreground_soft = "#56b6c2"
     foreground_hard = "#dcdfe4"
-    background = "#282c34"
+    background = "#14272d"
     shadow = "#000000"
 
     sudden = "#e06c75"
-    danger = "#c678dd"
-    notice = "#e5c07b"
-    hint = "#61afef"
-    safe = "#58d379"
-    major = "#58d379"
-    minor = background
-
-    idx1 = "#1d677a"
+    danger = "#b678ad"
+    notice = "#a5a07b"
+    hint = "#33a3a8"
+    safe = "#58b379"
+    major = safe
+    minor = "#1d677a"
 
     def __init__(self):
         self.init_layout()
@@ -34,21 +32,21 @@ class Color:
 
     def init_widget(self):
         self.widget_defaults = dict(
-            foreground=self.foreground_soft,
+            foreground=self.foreground,
             fontshadow=self.shadow,
         )
         self.menu_button = dict(
             fontshadow=None,
         )
         self.groupbox = dict(
-            background=self.idx1,
-            highlight_color=self.idx1,
+            background=self.minor,
+            highlight_color=self.minor,
             inactive=self.background,
             active=self.major,
             this_current_screen_border=self.major,
             this_screen_border=self.major,
-            other_current_screen_border=self.minor,
-            other_screen_border=self.minor,
+            other_current_screen_border=self.background,
+            other_screen_border=self.background,
             urgent_border=self.sudden,
         )
         self.tasklist = dict(
@@ -57,12 +55,10 @@ class Color:
             _icon_minimized=self.foreground_soft,
             foreground=self.foreground_hard,
             border=self.major,
-            unfocused_border=self.hint,
+            unfocused_border=self.minor,
             urgent_border=self.sudden,
         )
-        self.netspeed = dict(
-            foreground=self.foreground,
-        )
+        self.netspeed = dict()
         self.battery = dict(
             foreground=self.safe,
             foreground_discharge=self.notice,
@@ -73,19 +69,11 @@ class Color:
             foreground_discharge=self.hint,
             foreground_low=self.danger,
         )
-        self.backlight = dict(
-            foreground=self.foreground,
-        )
-        self.volume = dict(
-            foreground=self.foreground,
-        )
+        self.backlight = dict()
+        self.volume = dict()
         self.thermalSensor = dict(
             foreground=self.safe,
             foreground_alert=self.danger,
         )
-        self.clock = dict(
-            foreground=self.foreground,
-        )
-        self.wallpaper = dict(
-            foreground=self.foreground,
-        )
+        self.clock = dict()
+        self.wallpaper = dict()
