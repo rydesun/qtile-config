@@ -27,7 +27,6 @@ logo_text = "<span foreground='#dcdfe4'>arch</span><span foreground='#3ba4d8'>li
 ###################
 
 cmd_term = ["kitty", "--single-instance"]
-cmd_term_alter = ["kitty"]
 cmd_browser = ["firefox"]
 cmd_lock_screen = ["loginctl", "lock-session"]
 cmd_menu = ["jgmenu_run"]
@@ -36,7 +35,6 @@ cmd_password_manager = ["rofi-rbw"]
 cmd_screenshot = ["flameshot", "screen"]
 cmd_screenshot_select = ["flameshot", "gui"]
 cmd_screenshot_window = ["scrot", "-u"]
-cmd_note = ["kitty", "joplin"]
 cmd_net_sniffer = ["wireshark"]
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
@@ -45,6 +43,13 @@ cmd_volume_decrease = ["pactl", "set-sink-volume", "0", "-2%"]
 cmd_volume_increase = ["pactl", "set-sink-volume", "0", "+2%"]
 cmd_volume_control = ["pavucontrol-qt"]
 cmd_calendar = ["evolution", "-c", "calendar"]
+
+# dropdown 1 ~ 9
+cmd_dropdown = [
+    # name and cmd
+    "term", ["kitty"],
+    "note", ["kitty", "joplin"],
+]
 
 #################
 # Hardware device
