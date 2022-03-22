@@ -64,6 +64,10 @@ other_screen_scale = 1
 # Or run `brightnessctl`
 dev_backlight = "amdgpu_bl0"
 
+# Run `pactl list | grep node.name`
+# Such as name that start with bluez represents bluetooth headphone
+dev_headphone_sinks = ["bluez_output.XX_XX_XX_XX_XX_XX.a2dp-sink"]
+
 # Thermal sensor name.
 # Run `tail /sys/class/hwmon/hwmon*/name`
 # Or run `sensors`

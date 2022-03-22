@@ -118,6 +118,9 @@ class Theme:
         self.volume = dict(
             icon=" ",
             icon_mute="婢 ",
+            icon_headphone=" ",
+            icon_headphone_mute=" ",
+            mute_text="M",
             extra_offsety=self.scale(-1.5),
             **self.color.volume,
         )

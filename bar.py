@@ -67,6 +67,7 @@ class Bar:
             else None,
 
             local_widget.PulseVolume(
+                dev_headphone_sinks=self.env.dev_headphone_sinks,
                 mouse_callbacks={
                     "Button2": lazy.spawn(self.env.cmd_volume_control),
                 },
