@@ -73,10 +73,10 @@ dev_headphone_sinks = ["bluez_output.XX_XX_XX_XX_XX_XX.a2dp-sink"]
 # Or run `sensors`
 dev_thermal = "acpitz"
 
-# Network device names.
+# Network device names. Glob supported.
 # Run `ls /sys/class/net`
 # Or run `nmcli device`
-dev_nic = ["wlp1s0", "enp2s0"]
+dev_nic = ["enp*", "wlp*"]
 
 # If you have connected your phone to kdeconnect,
 # set the device ID to show its battery status.

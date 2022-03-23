@@ -1,3 +1,5 @@
+from fnmatch import fnmatch
+
 from libqtile.widget.net import Net as _Net
 
 from .base import Box
@@ -30,12 +32,18 @@ class Net(Box, _Net):
         super().__init__(*args, **kwargs)
         self.add_defaults(self.defaults)
 
+    def filter(self, interface) -> bool:
+        for pat in self.interface:
+            if fnmatch(interface, pat):
+                return True
+        return False
+
     def poll(self):
         new_int = self.get_stats()
         down = 0
         up = 0
-        for interface in self.interface:
-            if interface not in new_int:
+        for interface in new_int:
+            if not self.filter(interface):
                 continue
             down += new_int[interface]['down'] - \
                 self.stats[interface]['down']
