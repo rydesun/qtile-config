@@ -43,6 +43,7 @@ class Theme:
         self.menu_button = dict(
             margin_x=self.scale(3),
             margin_y=self.scale(3),
+            extra_offsety=self.scale(-1),
             **self.color.menu_button,
         )
         self.groupbox = dict(
@@ -146,5 +147,5 @@ class Theme:
         self.wallpaper = dict(
             fmt="tile",
             font="mono",
-            extra_offsety=self.scale(-2),
+            extra_offsety=self.scale(-1),
         )
