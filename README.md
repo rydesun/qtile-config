@@ -4,7 +4,7 @@ Essential dependency packages to install
 
 ```bash
 sudo pacman -S --needed python-dbus-next python-psutil
-# if have battery
+# Install upower if have a battery
 sudo pacman -S --needed upower
 ```
 

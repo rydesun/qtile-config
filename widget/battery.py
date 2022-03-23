@@ -37,6 +37,16 @@ class Battery(Box):
         self.add_defaults(Battery.defaults)
 
     async def _config_async(self):
+        bus = await MessageBus(bus_type=BusType.SYSTEM).connect()
+        introspect = await bus.introspect(self.dbus_name, self.dbus_path)
+        obj = bus.get_proxy_object(self.dbus_name, self.dbus_path, introspect)
+        self.props = obj.get_interface(self.dbus_props)
+
+        max = await self.props.get_energy_full()
+        if max <= 0:
+            # Not have a battery
+            return
+
         subscribe = await add_signal_receiver(
             callback=self._signal_received,
             signal_name="PropertiesChanged",
@@ -48,11 +58,6 @@ class Battery(Box):
             logger.warning(
                 "Unable to add signal receiver for {}.".format(self.dbus_name)
             )
-        bus = await MessageBus(bus_type=BusType.SYSTEM).connect()
-        introspect = await bus.introspect(self.dbus_name, self.dbus_path)
-        obj = bus.get_proxy_object(self.dbus_name, self.dbus_path, introspect)
-        self.props = obj.get_interface(self.dbus_props)
-
         await self.get_info()
 
     def _signal_received(self, _):
