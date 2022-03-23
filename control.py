@@ -38,6 +38,7 @@ class Control:
             EzKey("M-x", lazy.window.kill()),
             EzKey("M-q", lazy.window.toggle_minimize()),
             EzKey("M-w", lazy.window.toggle_floating()),
+            EzKey("M-e", lazy.window.center()),
 
             EzKey("M-<Tab>", lazy.layout.toggle_split()),
             EzKey("M-j", lazy.layout.down()),
