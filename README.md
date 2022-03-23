@@ -18,8 +18,8 @@ sudo pacman -S --needed ttf-nerd-fonts-symbols
 More resources
 
 ```bash
-# archlinux logo
-sudo pacman -S --needed archlinux-artwork
+# archlinux logo (from AUR)
+pikaur archlinux-artwork
 # archlinux wallpapers
 sudo pacman -S --needed archlinux-wallpaper
 ```
