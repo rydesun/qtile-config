@@ -9,6 +9,7 @@ widgets = {
     "Kdeconnect": "kdeconnect",
     "Net": "net",
     "PulseVolume": "pulse_volume",
+    "RectDecoration": "decoration",
     "TaskList": "tasklist",
     "ThermalSensor": "thermal_sensor",
     "Wallpaper": "wallpaper",

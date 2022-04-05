@@ -1,3 +1,6 @@
+from widget import RectDecoration
+
+
 class Theme:
     def __init__(self, color, scale_factor=1):
         self.color = color
@@ -145,7 +148,11 @@ class Theme:
             **self.color.clock,
         )
         self.wallpaper = dict(
-            fmt="tile",
+            fmt="Qtile",
             font="mono",
             extra_offsety=self.scale(-1),
+            decorations=[RectDecoration(
+                colour=self.color.wallpaper["_decoration"],
+                radius=6, filled=True, padding_y=6)],
+            **self.color.wallpaper,
         )

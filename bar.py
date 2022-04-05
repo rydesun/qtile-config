@@ -91,6 +91,8 @@ class Bar:
                 dir=self.env.wallpaper_main_dir,
                 **theme.wallpaper),
 
+            qtile_widget.Spacer(length=6),
+
         ))), **theme.bar)
 
     def other_bar(self, theme):
@@ -112,5 +114,7 @@ class Bar:
                 default=self.env.wallpaper_other_default,
                 dir=self.env.wallpaper_other_dir,
                 **theme.wallpaper),
+
+            qtile_widget.Spacer(length=6),
 
         ))), **theme.bar)

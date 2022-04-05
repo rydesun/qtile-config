@@ -3,6 +3,7 @@ class Color:
     foreground_soft = "#56b6c2"
     foreground_hard = "#dcdfe4"
     background = "#14272d"
+    background_blob = "#215578"
     shadow = "#000000"
 
     sudden = "#e06c75"
@@ -76,4 +77,8 @@ class Color:
             foreground_alert=self.danger,
         )
         self.clock = dict()
-        self.wallpaper = dict()
+        self.wallpaper = dict(
+            foreground=self.foreground_hard,
+            _decoration=self.background_blob,
+            fontshadow=None,
+        )
