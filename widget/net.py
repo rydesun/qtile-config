@@ -3,6 +3,7 @@ from fnmatch import fnmatch
 from libqtile.widget.net import Net as _Net
 
 from .base import Box
+from .decoration import inject_decorations
 
 
 def humanize_bytes(value):
@@ -16,6 +17,7 @@ def humanize_bytes(value):
     return value, suff[0]
 
 
+@inject_decorations
 class Net(Box, _Net):
     defaults = [
         ("icon_upload", "", ""),

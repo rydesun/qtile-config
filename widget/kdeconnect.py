@@ -2,8 +2,10 @@ from libqtile.log_utils import logger
 from libqtile.utils import add_signal_receiver
 
 from .battery import Battery
+from .decoration import inject_decorations
 
 
+@inject_decorations
 class Kdeconnect(Battery):
     defaults = [
         ("dev_id", "", ""),

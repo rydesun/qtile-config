@@ -1,8 +1,10 @@
 from libqtile.widget.pulse_volume import PulseVolume as _PulseVolume
 
 from .base import Box
+from .decoration import inject_decorations
 
 
+@inject_decorations
 class PulseVolume(Box, _PulseVolume):
     defaults = [
         ("icon", "", ""),

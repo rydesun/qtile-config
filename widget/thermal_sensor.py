@@ -4,8 +4,10 @@ from glob import glob
 from libqtile.widget.base import InLoopPollText
 
 from .base import Box
+from .decoration import inject_decorations
 
 
+@inject_decorations
 class ThermalSensor(Box, InLoopPollText):
     defaults = [
         ("dev_name", "acpitz", ""),
