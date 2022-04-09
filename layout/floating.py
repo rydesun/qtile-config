@@ -11,12 +11,9 @@ from libqtile.layout.floating import Floating as _Floating
 
 class Floating(_Floating):
     def __init__(self,
-                 float_rules: Optional[List[Match]] = None,
                  float_config: Optional[List[Dict]] = None,
                  *args, **kwargs):
-        if float_rules:
-            float_rules.extend(super().default_float_rules)
-        super().__init__(*args, float_rules=float_rules, **kwargs)
+        super().__init__(*args, **kwargs)
         self.client_config = float_config
         self.prime_border_width = self.border_width
 
@@ -29,3 +26,6 @@ class Floating(_Floating):
                     break
         self.border_width = border_width
         super().configure(client, screen_rect)
+
+    def match(self, win):
+        return win.match_floating
