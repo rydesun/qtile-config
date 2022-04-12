@@ -84,6 +84,23 @@ dev_nic = ["enp*", "wlp*"]
 dev_kdeconnect = None
 # dev_kdeconnect = "eeeeeeeeeeeeeeee"
 
+########
+# Groups
+########
+
+groups = [
+    {"key": "a", "bind_window": {
+        "cmd": cmd_term,
+        "match": Match(wm_class="kitty"),
+    }},
+    {"key": "s", "bind_window": {
+        "cmd": cmd_browser,
+        "match": Match(wm_class="firefox", role="browser"),
+    }},
+    {"key": "d", "bind_window": {}},
+    {"key": "f", "bind_window": {}},
+]
+
 #########################
 # Layout and window rules
 #########################
@@ -122,6 +139,13 @@ def __getattr__(attr):
         return ["false"]
     elif attr.startswith("wallpaper_"):
         return ""
+    elif attr == "groups":
+        return [
+            {"key": "a", "bind_window": {}},
+            {"key": "s", "bind_window": {}},
+            {"key": "d", "bind_window": {}},
+            {"key": "f", "bind_window": {}},
+        ]
     elif attr == "float_rules":
         return []
     elif attr == "float_config":

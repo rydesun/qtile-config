@@ -1,21 +1,22 @@
 from libqtile.command import lazy
 from libqtile.config import EzDrag, EzKey, Key
+from libqtile.scratchpad import ScratchPad
 
 
 class Control:
     def __init__(self, env) -> None:
         self.env = env
 
-    def keys(self, group_chars: str, scratchpad_names=None,
+    def keys(self, scratchpad_names=None,
              scratchpad_chars=(str(i) for i in range(1, 10))):
         return [
             *(
-                EzKey("M-"+char, lazy.group[char].toscreen())
-                for char in group_chars
+                EzKey("M-"+g["key"], lazy.group[g["key"]].toscreen())
+                for g in self.env.groups
             ),
             *(
-                EzKey("M-C-"+char, lazy.window.togroup(char))
-                for char in group_chars
+                EzKey("M-C-"+g["key"], lazy.window.togroup(g["key"]))
+                for g in self.env.groups
             ),
 
             *(
@@ -35,6 +36,7 @@ class Control:
             EzKey("M-S-t", lazy.spawn(["bash", "-c", """text=$(zenity --entry)
                                        xdotool type --delay 150 $text"""])),
 
+            EzKey("M-o", bind_window(self.env.groups)),
             EzKey("M-x", lazy.window.kill()),
             EzKey("M-q", lazy.window.toggle_minimize()),
             EzKey("M-w", lazy.window.toggle_floating()),
@@ -82,3 +84,19 @@ class Control:
             EzDrag("M-3", lazy.window.set_size_floating(),
                    start=lazy.window.get_size()),
         ]
+
+
+@lazy.function
+def bind_window(qtile, groups):
+    for g in groups:
+        if g["key"] != qtile.current_group.name:
+            continue
+        rule = g["bind_window"]
+        for w in qtile.windows_map.values():
+            if w.group \
+                    and not isinstance(w.group, ScratchPad) \
+                    and w.match(rule["match"]):
+                w.togroup(qtile.current_group.name)
+                return
+        qtile.cmd_spawn(rule["cmd"])
+        return

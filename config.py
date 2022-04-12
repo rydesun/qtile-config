@@ -48,25 +48,18 @@ layouts = [
     Floating(**main_theme.layout_floating),
 ]
 
-keys = control_agent.keys(
-    group_chars="asdf",
-    scratchpad_names=env.cmd_dropdown[::2]
-)
+keys = control_agent.keys(scratchpad_names=env.cmd_dropdown[::2])
 mouse = control_agent.mouse()
 
-groups = [
-    Group("a", label="⬤", layouts=[layouts[0]]),
-    Group("s", label="⬤", layouts=[layouts[0]], spawn=[env.cmd_browser]),
-    Group("d", label="⬤", layouts=[layouts[0]]),
-    Group("f", label="⬤", layouts=[layouts[1]]),
-    ScratchPad("scratchpad", [
+groups = [Group(g["key"], label="⬤", layouts=[layouts[0]]) for g in env.groups]
+groups.append(ScratchPad("scratchpad", [
         DropDown(
             name=name,
             cmd=cmd,
             **main_theme.dropdown_window)
         for name, cmd in zip(env.cmd_dropdown[::2], env.cmd_dropdown[1::2])
     ]),
-]
+)
 
 widget_defaults = main_theme.widget_defaults
 
