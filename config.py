@@ -1,3 +1,5 @@
+from itertools import chain
+
 import psutil
 from libqtile import hook
 from libqtile.config import DropDown, Group, ScratchPad, Screen
@@ -70,10 +72,19 @@ floating_layout = Floating(
 
 
 # ==== hooks ====
+@hook.subscribe.client_new
+def match_floating(c):
+    for rule in chain(Floating.default_float_rules, env.float_rules):
+        if c.match(rule):
+            c.match_floating = True
+            return
+    c.match_floating = False
 
 # https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
 @hook.subscribe.client_new
 def swallow_window(c, retry=5):
+    if c.match_floating:
+        return
     pid = c.get_pid()
     ppid = psutil.Process(pid).ppid()
 
