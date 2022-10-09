@@ -55,12 +55,12 @@ mouse = control_agent.mouse()
 
 groups = [Group(g["key"], label="⬤", layouts=[layouts[0]]) for g in env.groups]
 groups.append(ScratchPad("scratchpad", [
-        DropDown(
-            name=name,
-            cmd=cmd,
-            **main_theme.dropdown_window)
-        for name, cmd in zip(env.cmd_dropdown[::2], env.cmd_dropdown[1::2])
-    ]),
+    DropDown(
+        name=name,
+        cmd=cmd,
+        **main_theme.dropdown_window)
+    for name, cmd in zip(env.cmd_dropdown[::2], env.cmd_dropdown[1::2])
+]),
 )
 
 widget_defaults = main_theme.widget_defaults
@@ -79,6 +79,7 @@ def match_floating(c):
             c.match_floating = True
             return
     c.match_floating = False
+
 
 # https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
 @hook.subscribe.client_new

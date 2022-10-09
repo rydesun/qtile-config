@@ -150,9 +150,10 @@ class Theme:
         self.wallpaper = dict(
             fmt="Qtile",
             font="mono",
+            fontsize=self.scale(12, rounded=True),
             extra_offsety=self.scale(-1),
             decorations=[RectDecoration(
                 colour=self.color.wallpaper["_decoration"],
-                radius=6, filled=True, padding_y=6)],
+                radius=0, filled=True, padding_y=6)],
             **self.color.wallpaper,
         )
