@@ -118,7 +118,7 @@ float_rules = [
 
 # Set the appearance of floating windows.
 float_config = [
-    {"match": Match(wm_class="kitty"), "border_width": 2},
+    {"match": Match(wm_class="kitty"), "border_width": 0},
 ]
 
 ##############

@@ -81,6 +81,13 @@ def match_floating(c):
     c.match_floating = False
 
 
+# https://github.com/qtile/qtile/discussions/2944
+@hook.subscribe.client_focus
+def set_hint(window):
+    window.window.set_property("IS_FLOATING", str(
+        window.floating), type="STRING", format=8)
+
+
 # https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
 @hook.subscribe.client_new
 def swallow_window(c, retry=5):
