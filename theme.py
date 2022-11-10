@@ -29,6 +29,7 @@ class Theme:
             y=0.1,
             width=0.6,
             height=0.7,
+            opacity=1,
         )
 
     def init_bar(self):
@@ -58,15 +59,16 @@ class Theme:
             **self.color.groupbox,
         )
         self.tasklist = dict(
+            theme_mode='preferred',
             fontsize=self.scale(14, rounded=True),
-            icon_size=self.scale(20),
+            icon_size=self.scale(16),
             title_width_method="uniform",
             max_title_width=self.scale(200),
             spacing=self.scale(12),
             margin_y=self.scale(0),
             padding_x=self.scale(8),
             icon_offset_x=self.scale(0),
-            icon_offset_y=self.scale(0),
+            icon_offset_y=self.scale(2),
             borderwidth=self.scale(2),
             markup_floating="  <span foreground='%s'></span>   {}"
             % self.color.tasklist["_icon_floating"],

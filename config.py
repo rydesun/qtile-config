@@ -21,6 +21,14 @@ except ImportError:
                       "env.py is missing. Use env_example.py instead.")
     import env_example as env
 
+try:
+    from xdg import Config as XdgConfig
+    XdgConfig.setIconTheme('Papirus')
+    XdgConfig.setIconSize(16)
+except ImportError:
+    logger.warning("python-pyxdg is missing")
+    send_notification("Configuration warning", "Please install python-pyxdg")
+
 control_agent = Control(env)
 bar_agent = Bar(env)
 main_theme = Theme(
