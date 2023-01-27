@@ -1,4 +1,4 @@
-from libqtile import bar, qtile
+from libqtile import bar
 from libqtile import widget as qtile_widget
 from libqtile.command import lazy
 
@@ -22,22 +22,20 @@ class Bar:
             and hasattr(self.env, "logo_text")
             else None,
 
-            qtile_widget.GroupBox(
-                visible_groups=["a", "s", "d", "f"],
-                disable_drag=True,
-                **theme.groupbox),
+            qtile_widget.GroupBox(disable_drag=True, **theme.groupbox),
 
             local_widget.TaskList(**theme.tasklist),
 
-            qtile_widget.Systray(**theme.systray)
-            if qtile.core.name == "x11" else None,
+            qtile_widget.Chord(**theme.chord),
+
+            qtile_widget.Systray(**theme.systray),
 
             qtile_widget.Spacer(length=20),
 
             local_widget.Net(
                 interface=self.env.dev_nic,
                 mouse_callbacks={
-                    "Button2": lazy.spawn(self.env.cmd_net_sniffer),
+                    "Button2": lazy.spawn(self.env.cmd_network),
                 },
                 **theme.netspeed)
             if getattr(self.env, "dev_nic", None)
@@ -97,11 +95,11 @@ class Bar:
 
     def other_bar(self, theme):
         return bar.Bar(list(filter(lambda w: w is not None, (
-            qtile_widget.GroupBox(
-                visible_groups=["a", "s", "d", "f", "g"],
-                **theme.groupbox),
+            qtile_widget.GroupBox(disable_drag=True, **theme.groupbox),
 
             local_widget.TaskList(**theme.tasklist),
+
+            qtile_widget.Chord(**theme.chord),
 
             local_widget.Clock(
                 update_interval=0.5,

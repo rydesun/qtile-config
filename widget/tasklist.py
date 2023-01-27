@@ -5,11 +5,20 @@ class TaskList(_TaskList):
     defaults = [
         ("icon_offset_x", 0, ""),
         ("icon_offset_y", 0, ""),
+        ("markup_floating_color", "#707070", ""),
+        ("markup_maximized_color", "#707070", ""),
+        ("markup_minimized_color", "#707070", ""),
     ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.add_defaults(self.defaults)
+        self.markup_floating = self.markup_floating.format(
+            color=self.markup_floating_color)
+        self.markup_maximized = self.markup_maximized.format(
+            color=self.markup_minimized_color)
+        self.markup_minimized = self.markup_minimized.format(
+            color=self.markup_minimized_color)
 
     def draw_icon(self, surface, offset):
         if not surface:
@@ -53,5 +62,18 @@ class TaskList(_TaskList):
             window = self.get_clicked(x, y)
             if window:
                 window.kill()
+        elif button == 3:
+            window = self.get_clicked(x, y)
+            if not window:
+                return
+            for w in window.group.windows:
+                if w == window or w.floating:
+                    continue
+                else:
+                    w.minimized = True
+            window.minimized = False
+
+            if window.floating:
+                window.cmd_bring_to_front()
         else:
             return super().button_press(x, y, button)

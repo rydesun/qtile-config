@@ -1,125 +1,72 @@
 from itertools import chain
 
-import psutil
-from libqtile import hook
+from libqtile import qtile
 from libqtile.config import DropDown, Group, ScratchPad, Screen
 from libqtile.layout.columns import Columns
 from libqtile.log_utils import logger
 from libqtile.utils import send_notification
 
+import hook
 from bar import Bar
-from color import Color
 from control import Control
 from layout import Floating
-from theme import Theme
+from lib.env_loader import EnvLoader
+from lib.theme_loader import ThemeLoader
 
-try:
-    import env
-except ImportError:
-    logger.warning("env.py is missing")
-    send_notification("Configuration warning",
-                      "env.py is missing. Use env_example.py instead.")
-    import env_example as env
-
+# {{{ Init
 try:
     from xdg import Config as XdgConfig
     XdgConfig.setIconTheme('Papirus')
     XdgConfig.setIconSize(16)
 except ImportError:
-    logger.warning("python-pyxdg is missing")
-    send_notification("Configuration warning", "Please install python-pyxdg")
+    logger.warning("python-pyxdg not found")
+    send_notification("Configuration warning", "python-pyxdg not found")
 
+env = EnvLoader()
+theme = ThemeLoader()
 control_agent = Control(env)
 bar_agent = Bar(env)
-main_theme = Theme(
-    Color(),
-    scale_factor=env.main_screen_scale,
-)
+main_theme = theme
+other_theme = theme
+# }}}
 
-# ==== Qtile config begin ====
+# {{{ Qtile config
+keys = control_agent.keys()
+mouse = control_agent.mouse()
 
 screens = [
-    Screen(
-        top=bar_agent.main_bar(theme=main_theme),
-    ),
-    *(
-        Screen(
-            top=bar_agent.other_bar(theme=Theme(
-                Color(), scale_factor=env.other_screen_scale,
-            )),
-        ) for _ in range(1, getattr(env, "total_screens", 1))
-    ),
+    Screen(top=bar_agent.main_bar(main_theme)),
+    *(Screen(top=bar_agent.other_bar(other_theme))
+      for _ in range(env.total_screens-1)),
 ]
 
 layouts = [
-    Columns(
-        insert_position=1,
-        **main_theme.layout_column),
-    Floating(**main_theme.layout_floating),
+    Columns(insert_position=1, **main_theme.layout_column)
 ]
 
-keys = control_agent.keys(scratchpad_names=env.cmd_dropdown[::2])
-mouse = control_agent.mouse()
-
-groups = [Group(g["key"], label="⬤", layouts=[layouts[0]]) for g in env.groups]
-groups.append(ScratchPad("scratchpad", [
-    DropDown(
-        name=name,
-        cmd=cmd,
-        **main_theme.dropdown_window)
-    for name, cmd in zip(env.cmd_dropdown[::2], env.cmd_dropdown[1::2])
-]),
-)
-
-widget_defaults = main_theme.widget_defaults
+groups = [Group(name=i["key"], label="⬤") for i in env.groups]
+groups.append(
+    ScratchPad("default_scratchpad", [
+        DropDown(i["name"], i["cmd"], **main_theme.dropdown_window)
+        for i in env.dropdowns]))
 
 floating_layout = Floating(
     float_rules=env.float_rules,
     float_config=env.float_config,
     **main_theme.layout_floating)
 
+widget_defaults = main_theme.widget_defaults
+# }}}
 
-# ==== hooks ====
-@hook.subscribe.client_new
-def match_floating(c):
-    for rule in chain(Floating.default_float_rules, env.float_rules):
-        if c.match(rule):
-            c.match_floating = True
-            return
-    c.match_floating = False
+# {{{ Hooks
+if qtile.core.name == "x11":
+    rules = chain(Floating.default_float_rules, env.float_rules)
+    hook.float_window.register(rules)
 
+if qtile.core.name == "x11":
+    hook.xprop.register()
 
-# https://github.com/qtile/qtile/discussions/2944
-@hook.subscribe.client_focus
-def set_hint(window):
-    window.window.set_property("IS_FLOATING", str(
-        window.floating), type="STRING", format=8)
+hook.swallow_window.register()
+# }}}
 
-
-# https://github.com/qtile/qtile/issues/1771#issuecomment-642065762
-@hook.subscribe.client_new
-def swallow_window(c, retry=5):
-    if c.match_floating:
-        return
-    pid = c.get_pid()
-    ppid = psutil.Process(pid).ppid()
-
-    cpids = {
-        c.get_pid(): wid
-        for wid, c in c.qtile.windows_map.items()
-    }
-    for _ in range(retry):
-        if not ppid:
-            return
-        if ppid in cpids:
-            parent = c.qtile.windows_map.get(cpids[ppid])
-            parent.minimized = True
-            c.parent = parent
-            return
-        ppid = psutil.Process(ppid).ppid()
-
-
-@hook.subscribe.client_killed
-def unswallow_window(c):
-    if hasattr(c, 'parent'):
-        c.parent.minimized = False
+# vim:fdm=marker

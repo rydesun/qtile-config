@@ -24,10 +24,10 @@ class Net(Box, _Net):
         ("icon_download", "", ""),
         ("format",
          "{icon_download} {txt_download}  {icon_upload} {txt_upload}", ""),
+
+        ("fmt_zero", "··· ·", ""),
+        ("fmt_mini", "··· ●", ""), ("mini_val_threshold", 10_000, ""),
         ("fmt_txt", "{:·>3.0f} {}", ""),
-        ("mini_val_threshold", 100, ""),
-        ("fmt_mini", "··· B", ""),
-        ("fmt_zero", "··· O", ""),
     ]
 
     def __init__(self, *args, **kwargs):
