@@ -10,8 +10,9 @@ def register():
 
 
 def swallow_window(c, retry=5):
-    if c.match_floating:
+    if c.floating or getattr(c, 'match_floating', False):
         return
+
     pid = c.get_pid()
     ppid = psutil.Process(pid).ppid()
 
