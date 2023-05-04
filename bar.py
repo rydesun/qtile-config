@@ -10,7 +10,7 @@ class Bar:
         self.env = env
 
     def main_bar(self, theme):
-        return bar.Bar(list(filter(lambda w: w is not None, (
+        return bar.Bar(list(filter(None, (
             local_widget.Box(
                 image_path=self.env.logo_file,
                 text=self.env.logo_text,
@@ -94,7 +94,7 @@ class Bar:
         ))), **theme.bar)
 
     def other_bar(self, theme):
-        return bar.Bar(list(filter(lambda w: w is not None, (
+        return bar.Bar(list(filter(None, (
             qtile_widget.GroupBox(disable_drag=True, **theme.groupbox),
 
             local_widget.TaskList(**theme.tasklist),
