@@ -82,7 +82,5 @@ thermalSensor = dict(
 clock = dict()
 
 wallpaper = dict(
-    foreground=foreground_hard,
-    _decoration=background_blob,
     fontshadow=None,
 )

@@ -97,21 +97,21 @@ kdeconnect = dict(
 )
 
 backlight = dict(
-    format="{percent: .0f}",
+    format="󰃠{percent: .0f}",
     extra_offsety=-1.5,
 )
 
 volume = dict(
     icon=" ",
-    icon_mute="婢 ",
-    icon_headphone=" ",
-    icon_headphone_mute=" ",
+    icon_mute="󰖁 ",
+    icon_headphone="󰋎 ",
+    icon_headphone_mute="󰋐 ",
     mute_text="M",
     extra_offsety=-1.5,
 )
 
 thermalSensor = dict(
-    icon=" ",
+    icon="󰈐 ",
     extra_offsety=-1.4,
 )
 
@@ -130,10 +130,9 @@ clock = dict(
 )
 
 wallpaper = dict(
-    fmt="Qtile",
-    font="mono",
-    fontsize=12,
-    extra_offsety=1,
+    fmt="󰊠",
+    fontsize=18,
+    extra_offsety=-1.8,
 )
 # }}}
 
