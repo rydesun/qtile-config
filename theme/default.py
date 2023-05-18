@@ -1,7 +1,7 @@
 # {{{ Layout and Window
 layout_column = dict(
     border_width=0,
-    margin_on_single=[60, 200, 80, 200],
+    margin_on_single=[70, 201, 80, 201],
 )
 
 layout_floating = dict(
@@ -9,16 +9,17 @@ layout_floating = dict(
 )
 
 dropdown_window = dict(
-    x=0.2,
-    y=0.1,
-    width=0.6,
-    height=0.7,
+    x=0.25,
+    y=0.2,
+    width=0.5,
+    height=0.6,
+    opacity=1,
 )
 # }}}
 
 # {{{ Bar and Widget
 bar = dict(
-    size=32,
+    size=30,
 )
 
 widget_defaults = dict(
