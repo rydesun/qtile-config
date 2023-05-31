@@ -39,6 +39,8 @@ Although the lack of `env.py` does not cause qtile to crash on startup,
 it's better to create one.
 
 Most of the appearance settings are stored in `theme/`.
+Create `theme/override.py` to override some default values
+if you are satisfied with the default theme.
 
 `control.py` is about keymappings and shortcuts.
 

@@ -1,4 +1,5 @@
 /assets
 /env.py
+/theme/override.py
 
 __pycache__
