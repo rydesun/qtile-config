@@ -10,7 +10,7 @@ def register():
 
 
 def swallow_window(c, retry=5):
-    if c.floating or getattr(c, 'match_floating', False):
+    if getattr(c, 'floating', True) or getattr(c, 'match_floating', False):
         return
 
     pid = c.get_pid()
@@ -19,6 +19,7 @@ def swallow_window(c, retry=5):
     cpids = {
         c.get_pid(): wid
         for wid, c in c.qtile.windows_map.items()
+        if hasattr(c, 'get_pid')
     }
     for _ in range(retry):
         if not ppid:
