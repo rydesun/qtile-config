@@ -1,10 +1,11 @@
 import asyncio
 from enum import Enum, auto
+import subprocess
 
 from dbus_next.aio.message_bus import MessageBus
 from dbus_next.constants import BusType
 from libqtile.log_utils import logger
-from libqtile.utils import add_signal_receiver
+from libqtile.utils import add_signal_receiver, send_notification
 
 from .base import Box
 from .decoration import inject_decorations
@@ -19,6 +20,10 @@ class Battery(Box):
 
     defaults = [
         ("sep", (85, 65, 40, 25, 0), ""),
+        ("alarm_threshold", 20, ""),
+        ("alarm_interval", 600, ""),
+        ("hibernate_threshold", 5, ""),
+        ("hibernate_countdown", 120, ""),
         ("icon_charge", "", ""),
         ("icon_plug", "", ""),
         ("icon_full_energy", "", ""),
@@ -37,6 +42,8 @@ class Battery(Box):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.add_defaults(Battery.defaults)
+        self.alarm = asyncio.create_task(asyncio.sleep(self.alarm_interval))
+        self.hibernate_lock = asyncio.Lock()
 
     async def _config_async(self):
         bus = await MessageBus(bus_type=BusType.SYSTEM).connect()
@@ -66,6 +73,11 @@ class Battery(Box):
         self.qtile.call_soon(asyncio.create_task, self.get_info())
 
     async def get_info(self):
+        percent, state = await self._get_info()
+        self.build_string(percent, state)
+        await self.trigger(percent, state)
+
+    async def _get_info(self):
         percent = await self.props.get_percentage()
         state = await self.props.get_state()
         if state == 1:
@@ -74,7 +86,7 @@ class Battery(Box):
             state = self.BatteryState.Discharging
         else:
             state = self.BatteryState.Plugging
-        self.build_string(percent, state)
+        return percent, state
 
     def build_string(self, percent, state):
         percent = min(max(0, percent), 100)
@@ -116,3 +128,25 @@ class Battery(Box):
             percent=percent,
         )
         self.update(text)
+
+    async def trigger(self, percent, state):
+        if state != self.BatteryState.Discharging:
+            return
+        if percent <= self.alarm_threshold \
+            and (not self.alarm or self.alarm.done()):
+            send_notification("低电量", f"电量还剩{percent:.0f}%")
+            self.alarm = asyncio.create_task(asyncio.sleep(self.alarm_interval))
+        if percent <= self.hibernate_threshold:
+            await self.hibernate()
+
+    async def hibernate(self):
+        if self.hibernate_lock.locked():
+            return
+        await self.hibernate_lock.acquire()
+        send_notification("低电量", "电量过低，即将休眠")
+        await asyncio.sleep(self.hibernate_countdown)
+        percent, state = await self._get_info()
+        if state == self.BatteryState.Discharging \
+            and percent <= self.hibernate_threshold:
+            subprocess.run(["systemctl", "-i", "hibernate"])
+        self.hibernate_lock.release()
