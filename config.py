@@ -69,4 +69,16 @@ if qtile.core.name == "x11":
 hook.swallow_window.register()
 # }}}
 
+
+import subprocess
+import libqtile.hook
+@libqtile.hook.subscribe.startup_once
+def autostart():
+    cmd = ["systemctl", "start", "--user"]
+    if qtile.core.name == "x11":
+        cmd.append("X11.target")
+    else:
+        cmd.append("Wayland.target")
+    subprocess.Popen(cmd).wait()
+
 # vim:fdm=marker
