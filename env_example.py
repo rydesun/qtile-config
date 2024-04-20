@@ -107,7 +107,7 @@ float_rules = [
     Match(wm_class="lxqt-config"),
     Match(wm_class="pinentry-qt"),
     Match(wm_class="scrcpy"),
-    Match(wm_class="Steam"),
+    Match(wm_class="steam"),
 ]
 
 # Set the appearance of floating windows.
