@@ -58,14 +58,12 @@ class TaskList(_TaskList):
             self.draw_icon(icon, offset)
 
     def button_press(self, x, y, button):
+        window = self.get_clicked(x, y)
+        if not window:
+            return super().button_press(x, y, button)
         if button == 2:
-            window = self.get_clicked(x, y)
-            if window:
-                window.kill()
+            window.kill()
         elif button == 3:
-            window = self.get_clicked(x, y)
-            if not window:
-                return
             for w in window.group.windows:
                 if w == window or w.floating:
                     continue
@@ -74,6 +72,10 @@ class TaskList(_TaskList):
             window.minimized = False
 
             if window.floating:
-                window.cmd_bring_to_front()
+                window.bring_to_front()
+        elif button == 4:
+            window.move_up()
+        elif button == 5:
+            window.move_down()
         else:
             return super().button_press(x, y, button)
