@@ -8,8 +8,8 @@ shadow = "#000000"
 sudden = "#e06c75"
 danger = "#b678ad"
 notice = "#a5a07b"
-hint = "#33a3a8"
-safe = "#58b379"
+hint = "#73c5de"
+safe = "#4abfaa"
 major = safe
 minor = "#1d677a"
 

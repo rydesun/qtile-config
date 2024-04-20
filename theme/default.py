@@ -1,7 +1,7 @@
 # {{{ Layout and Window
 layout_column = dict(
     border_width=0,
-    margin_on_single=[70, 201, 80, 201],
+    margin_on_single=[70, 128, 80, 128],
 )
 
 layout_floating = dict(
@@ -58,6 +58,16 @@ tasklist = dict(
     markup_minimized="  <span foreground='{color}'></span>   {{}}",
 )
 
+chord = dict(
+    name_transform=lambda txt: "󰌌 "+({
+        "Window": "窗口",
+        "MoveWindow": "窗口方向",
+        "Execute": "执行",
+        "Player": "播放器",
+        "Capture": "捕捉",
+    }.get(txt) or txt)
+)
+
 systray = dict(
     icon_size=22,
 )
@@ -103,8 +113,8 @@ backlight = dict(
 )
 
 volume = dict(
-    icon=" ",
-    icon_mute="󰖁 ",
+    icon=" ",
+    icon_mute=" ",
     icon_headphone="󰋎 ",
     icon_headphone_mute="󰋐 ",
     mute_text="M",
