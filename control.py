@@ -38,6 +38,8 @@ class Control:
                 EzKey("M-S-b", lazy.window.resize_floating(-20, 20)),
                 EzKey("M-S-n", lazy.window.resize_floating(20, 20)),
             ]),
+            EzKey("M-z", lazy.window.move_up()),
+            EzKey("M-C-z", lazy.window.move_down()),
             # }}}
 
             # {{{ 移动窗口焦点 (保持布局)
@@ -83,6 +85,14 @@ class Control:
             KeyChord(["mod4"], "e", name="Execute", submappings=[
                 Key(["mod4"], i["key"], lazy.spawn(i['cmd']))
                 for i in self.env.cmd_bindings
+            ]),
+
+            KeyChord(["mod4"], "y", name="Player", submappings=[
+                EzKey("M-t", lazy.spawn(self.env.cmd_player_toggle)),
+                EzKey("M-s", lazy.spawn(self.env.cmd_player_stop)),
+                EzKey("M-n", lazy.spawn(self.env.cmd_player_next)),
+                EzKey("M-p", lazy.spawn(self.env.cmd_player_previous)),
+                EzKey("M-l", lazy.spawn(self.env.cmd_player_loop_toggle)),
             ]),
 
             KeyChord(["mod4"], "c", name="Capture", submappings=[
@@ -141,7 +151,7 @@ def bind_window(qtile, groups):
                     and w.match(rule["match"]):
                 w.togroup(qtile.current_group.name)
                 return
-        qtile.cmd_spawn(rule["cmd"])
+        qtile.spawn(rule["cmd"])
         return
 
 # vim:fdm=marker
