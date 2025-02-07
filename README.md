@@ -27,7 +27,7 @@ sudo pacman -S --needed archlinux-wallpaper
 Optional patch
 
 ```bash
-sudo patch /usr/lib/python3.*/site-packages/libqtile/drawer.py top_line.patch
+sudo patch /usr/lib/python3.*/site-packages/libqtile/backend/base/drawer.py top_line.patch
 ```
 
 ## Customization

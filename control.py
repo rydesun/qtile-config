@@ -1,5 +1,5 @@
-from libqtile.command import lazy
 from libqtile.config import EzDrag, EzKey, Key, KeyChord
+from libqtile.lazy import lazy
 from libqtile.scratchpad import ScratchPad
 
 

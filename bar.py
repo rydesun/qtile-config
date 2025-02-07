@@ -1,6 +1,6 @@
 from libqtile import bar
 from libqtile import widget as qtile_widget
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 
 import widget as local_widget
 

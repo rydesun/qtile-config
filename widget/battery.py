@@ -134,7 +134,7 @@ class Battery(Box):
             return
         if percent <= self.alarm_threshold \
             and (not self.alarm or self.alarm.done()):
-            send_notification("低电量", f"电量还剩{percent:.0f}%")
+            send_notification("低电量", f"电量还剩{percent:.0f}%", timeout=60000)
             self.alarm = asyncio.create_task(asyncio.sleep(self.alarm_interval))
         if percent <= self.hibernate_threshold:
             await self.hibernate()
@@ -143,7 +143,7 @@ class Battery(Box):
         if self.hibernate_lock.locked():
             return
         await self.hibernate_lock.acquire()
-        send_notification("低电量", "电量过低，即将休眠")
+        send_notification("低电量", "电量过低，即将休眠", timeout=60000)
         await asyncio.sleep(self.hibernate_countdown)
         percent, state = await self._get_info()
         if state == self.BatteryState.Discharging \

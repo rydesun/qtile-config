@@ -23,7 +23,7 @@ class PulseVolume(Box, _PulseVolume):
     def _update_drawer(self):
         if self.volume is None:
             return
-        if self.volume < 0:
+        if self.is_mute:
             volume = self.mute_text
             if self.is_headphone():
                 icon = self.icon_headphone_mute
@@ -40,5 +40,8 @@ class PulseVolume(Box, _PulseVolume):
     def is_headphone(self) -> bool:
         if not pulse.default_sink_name or not pulse.default_sink:
             return False
-        return pulse.default_sink_name in self.dev_headphone_sinks \
-            or "headphone" in pulse.default_sink.port_active.name.lower()
+        if pulse.default_sink_name in self.dev_headphone_sinks:
+            return True
+        if pulse.default_sink.port_active.name:
+            return "headphone" in pulse.default_sink.port_active.name.lower()
+        return False
