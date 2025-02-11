@@ -8,5 +8,5 @@ def register():
 
 
 def set_hint(window):
-    window.window.set_property("IS_FLOATING", str(
-        window.floating), type="STRING", format=8)
+    window.window.set_property("IS_FLOATING", int(window.floating),
+        type="CARDINAL", format=8)
