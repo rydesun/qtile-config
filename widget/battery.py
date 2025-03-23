@@ -2,8 +2,8 @@ import asyncio
 from enum import Enum, auto
 import subprocess
 
-from dbus_next.aio.message_bus import MessageBus
-from dbus_next.constants import BusType
+from dbus_fast.aio.message_bus import MessageBus
+from dbus_fast.constants import BusType
 from libqtile.log_utils import logger
 from libqtile.utils import add_signal_receiver, send_notification
 

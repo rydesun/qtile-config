@@ -3,7 +3,7 @@
 Essential dependency packages to install
 
 ```bash
-sudo pacman -S --needed python-dbus-next python-psutil python-pyxdg
+sudo pacman -S --needed python-dbus-fast python-psutil python-pyxdg
 # Install upower if have a battery
 sudo pacman -S --needed upower
 ```
