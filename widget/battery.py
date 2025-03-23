@@ -8,10 +8,8 @@ from libqtile.log_utils import logger
 from libqtile.utils import add_signal_receiver, send_notification
 
 from .base import Box
-from .decoration import inject_decorations
 
 
-@inject_decorations
 class Battery(Box):
     class BatteryState(Enum):
         Charging = auto()

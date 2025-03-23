@@ -2,10 +2,8 @@ import os
 import random
 
 from .base import Box
-from .decoration import inject_decorations
 
 
-@inject_decorations
 class Wallpaper(Box):
     defaults = [
         ("default", "", "Default wallpaper"),

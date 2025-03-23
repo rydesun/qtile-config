@@ -2,10 +2,8 @@ from libqtile.widget.pulse_volume import PulseVolume as _PulseVolume
 from libqtile.widget.pulse_volume import pulse
 
 from .base import Box
-from .decoration import inject_decorations
 
 
-@inject_decorations
 class PulseVolume(Box, _PulseVolume):
     defaults = [
         ("icon", "", ""),
@@ -35,7 +33,7 @@ class PulseVolume(Box, _PulseVolume):
                 icon = self.icon_headphone
             else:
                 icon = self.icon
-        self.text = f'{icon}{volume}'
+        self.text = f"{icon}{volume}"
 
     def is_headphone(self) -> bool:
         if not pulse.default_sink_name or not pulse.default_sink:
