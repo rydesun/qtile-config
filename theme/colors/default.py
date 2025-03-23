@@ -33,10 +33,9 @@ menu_button = dict(
 )
 
 groupbox = dict(
-    background=minor,
-    highlight_color=minor,
-    inactive=background,
+    highlight_color=background,
     active=major,
+    inactive=minor,
     this_current_screen_border=major,
     this_screen_border=major,
     other_current_screen_border=background,

@@ -1,7 +1,7 @@
 # {{{ Layout and Window
 layout_column = dict(
     border_width=0,
-    margin_on_single=[70, 128, 80, 128],
+    margin_on_single=[70, 129, 80, 130],
 )
 
 layout_floating = dict(
@@ -28,9 +28,8 @@ widget_defaults = dict(
 )
 
 menu_button = dict(
-    margin_x=3,
-    margin_y=3,
-    extra_offsety=-1,
+    margin_x=10,
+    margin_y=5,
 )
 
 groupbox = dict(
@@ -84,11 +83,11 @@ battery = dict(
     icon_charge="",
     icon_discharge="",
     icon_plug="",
-    icon_full_energy="",
-    icon_high_energy="",
-    icon_half_energy="",
-    icon_low_energy="",
-    icon_empty_energy="",
+    icon_full_energy="󰁹",
+    icon_high_energy="󰂀",
+    icon_half_energy="󰁾",
+    icon_low_energy="󰁼",
+    icon_empty_energy="󰁺",
     extra_offsetx=5,
     extra_offsety=-0.7,
 )
@@ -137,13 +136,13 @@ clock = dict(
         "周六",
         "周日",
     ),
-    extra_offsety=-1,
+    extra_offsety=-0.8,
 )
 
 wallpaper = dict(
-    fmt="󰊠",
-    fontsize=18,
-    extra_offsety=-1.8,
+    fmt="<span foreground='#dcdfe4'>arch</span><span foreground='#3ba4d8'>linux</span>",
+    fontsize=14,
+    extra_offsety=-0.8,
 )
 # }}}
 

@@ -19,7 +19,7 @@ wallpaper_other_dir = "/usr/share/backgrounds/archlinux/"
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
-logo_text = "<span foreground='#dcdfe4'>arch</span><span foreground='#3ba4d8'>linux</span>"
+logo_text = ""
 # }}}
 
 # {{{ External programs
@@ -41,6 +41,16 @@ cmd_volume_toggle = ["pactl", "set-sink-mute", "0", "toggle"]
 cmd_volume_decrease = ["pactl", "set-sink-volume", "0", "-2%"]
 cmd_volume_increase = ["pactl", "set-sink-volume", "0", "+2%"]
 cmd_volume_control = ["pavucontrol-qt"]
+cmd_player_toggle = ["playerctl", "play-pause"]
+cmd_player_stop = ["playerctl", "stop"]
+cmd_player_next = ["playerctl", "next"]
+cmd_player_previous = ["playerctl", "previous"]
+cmd_player_loop_toggle = [
+    "bash", "-c",
+    "[ $(playerctl loop) == None ]"
+    "&& playerctl loop track"
+    "|| playerctl loop None",
+]
 
 dropdowns = [
     {"key": "t", "name": "term", "cmd": ["kitty"]},
