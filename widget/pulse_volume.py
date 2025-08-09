@@ -40,6 +40,6 @@ class PulseVolume(Box, _PulseVolume):
             return False
         if pulse.default_sink_name in self.dev_headphone_sinks:
             return True
-        if pulse.default_sink.port_active.name:
+        if pulse.default_sink.port_active and pulse.default_sink.port_active.name:
             return "headphone" in pulse.default_sink.port_active.name.lower()
         return False
