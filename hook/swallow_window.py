@@ -27,11 +27,13 @@ def swallow_window(c, retry=5):
         if ppid in cpids:
             parent = c.qtile.windows_map.get(cpids[ppid])
             parent.minimized = True
+            parent._swallowed = True
             c.parent = parent
             return
         ppid = psutil.Process(ppid).ppid()
 
 
 def unswallow_window(c):
-    if hasattr(c, 'parent'):
+    if hasattr(c, 'parent') and c.parent._swallowed:
         c.parent.minimized = False
+        c.parent._swallowed = False
