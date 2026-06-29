@@ -38,13 +38,12 @@ class Box(_TextBox):
             self.image.resize(height=new_height)
 
     def calculate_length(self):
-        if self.text or self.image:
-            return min(
-                self.text_offset + self.layout.width,
-                self.bar.width,
-            ) + self.actual_padding * 2
-        else:
+        if not self.text and not self.image:
             return 0
+        if not self.bar.horizontal and not self.rotate:
+            return self.layout.height + self.padding * 2
+        else:
+            return min(self.text_offset + self.layout.width, self.bar.length) + self.padding * 2
 
     def draw(self):
         if not self.can_draw():
@@ -65,7 +64,7 @@ class Box(_TextBox):
 
         if self.text:
             self.layout.draw(
-                self.actual_padding + self.text_offset
+                self.padding + self.text_offset
                 + self.extra_offsetx,
                 int(self.bar.height / 2 - self.layout.height / 2) + 1
                 + self.extra_offsety

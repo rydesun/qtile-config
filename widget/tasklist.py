@@ -20,19 +20,6 @@ class TaskList(_TaskList):
         self.markup_minimized = self.markup_minimized.format(
             color=self.markup_minimized_color)
 
-    def draw_icon(self, surface, offset):
-        if not surface:
-            return
-
-        x = offset + self.borderwidth + self.padding_x + self.icon_offset_x
-        y = self.padding_y + self.borderwidth + self.icon_offset_y
-
-        self.drawer.ctx.save()
-        self.drawer.ctx.translate(x, y)
-        self.drawer.ctx.set_source(surface)
-        self.drawer.ctx.paint()
-        self.drawer.ctx.restore()
-
     def drawbox(self, offset, text, bordercolor, textcolor,
                 width=None, rounded=False, block=False, icon=None):
         self.drawtext(text, textcolor, width)

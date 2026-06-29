@@ -9,7 +9,7 @@ class Bar:
     def __init__(self, env):
         self.env = env
 
-    def main_bar(self, theme):
+    def x11_bar(self, theme):
         return bar.Bar(list(filter(None, (
             local_widget.Box(
                 image_path=self.env.logo_file,
@@ -81,17 +81,38 @@ class Bar:
                 update_interval=0.5,
                 mouse_callbacks={
                     "Button2": lazy.spawn(self.env.cmd_calendar),
+                    "Button3": lazy.spawn(self.env.cmd_clock),
                 },
                 **theme.clock),
 
-            local_widget.Wallpaper(
-                default=self.env.wallpaper_main_default,
-                dir=self.env.wallpaper_main_dir,
-                **theme.wallpaper),
-
-            qtile_widget.Spacer(length=6),
-
         ))), **theme.bar)
+
+    def wayland_bar(self, theme):
+            return bar.Bar(list(filter(None, (
+                qtile_widget.GroupBox(disable_drag=True, **theme.groupbox),
+
+                local_widget.TaskList(**theme.tasklist),
+
+                qtile_widget.Chord(**theme.chord),
+
+                local_widget.Net(
+                    interface=self.env.dev_nic,
+                    mouse_callbacks={
+                        "Button2": lazy.spawn(self.env.cmd_network),
+                    },
+                    **theme.netspeed)
+                if getattr(self.env, "dev_nic", None)
+                else None,
+
+                local_widget.Clock(
+                    update_interval=0.5,
+                    mouse_callbacks={
+                        "Button2": lazy.spawn(self.env.cmd_calendar),
+                        "Button3": lazy.spawn(self.env.cmd_clock),
+                    },
+                    **theme.clock),
+
+            ))), **theme.bar)
 
     def other_bar(self, theme):
         return bar.Bar(list(filter(None, (
@@ -105,14 +126,8 @@ class Bar:
                 update_interval=0.5,
                 mouse_callbacks={
                     "Button2": lazy.spawn(self.env.cmd_calendar),
+                    "Button3": lazy.spawn(self.env.cmd_clock),
                 },
                 **theme.clock),
-
-            local_widget.Wallpaper(
-                default=self.env.wallpaper_other_default,
-                dir=self.env.wallpaper_other_dir,
-                **theme.wallpaper),
-
-            qtile_widget.Spacer(length=6),
 
         ))), **theme.bar)

@@ -1,7 +1,7 @@
 # {{{ Layout and Window
 layout_column = dict(
     border_width=0,
-    margin_on_single=[70, 129, 80, 130],
+    margin_on_single=[70, 130, 100, 130],
 )
 
 layout_floating = dict(
@@ -19,11 +19,11 @@ dropdown_window = dict(
 
 # {{{ Bar and Widget
 bar = dict(
-    size=30,
+    size=28,
 )
 
 widget_defaults = dict(
-    font="sans",
+    font="sans bold",
     fontsize=16,
 )
 
@@ -34,27 +34,24 @@ menu_button = dict(
 
 groupbox = dict(
     font="monospace",
-    margin_x=8,
-    spacing=3,
+    spacing=-3,
     borderwidth=2,
     highlight_method="line",
 )
 
 tasklist = dict(
     theme_mode='preferred',
-    fontsize=14,
-    icon_size=16,
+    fontsize=15,
+    icon_size=20,
     title_width_method="uniform",
     max_title_width=200,
-    spacing=12,
+    spacing=15,
     margin_y=0,
-    padding_x=8,
-    icon_offset_x=0,
-    icon_offset_y=2,
-    borderwidth=2,
-    markup_floating="  <span foreground='{color}'></span>   {{}}",
-    markup_maximized="  <span foreground='{color}'></span>   {{}}",
-    markup_minimized="  <span foreground='{color}'></span>   {{}}",
+    padding_x=5,
+    padding_y=4,
+    markup_floating="<span foreground='{color}'></span>  {{}}",
+    markup_maximized="<span foreground='{color}'></span>  {{}}",
+    markup_minimized="<span foreground='{color}'>󰈉</span>  {{}}",
 )
 
 chord = dict(
@@ -63,7 +60,7 @@ chord = dict(
         "MoveWindow": "窗口方向",
         "Execute": "执行",
         "Player": "播放器",
-        "Capture": "捕捉",
+        "Capture": "捕捉画面",
     }.get(txt) or txt)
 )
 
@@ -72,10 +69,9 @@ systray = dict(
 )
 
 netspeed = dict(
-    font="monospace",
+    font="monospace bold",
     icon_upload="",
     icon_download="",
-    extra_offsety=0.3,
 )
 
 battery = dict(
@@ -136,13 +132,6 @@ clock = dict(
         "周六",
         "周日",
     ),
-    extra_offsety=-0.8,
-)
-
-wallpaper = dict(
-    fmt="<span foreground='#dcdfe4'>arch</span><span foreground='#3ba4d8'>linux</span>",
-    fontsize=14,
-    extra_offsety=-0.8,
 )
 # }}}
 

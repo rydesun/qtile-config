@@ -32,7 +32,5 @@ class EnvLoader:
                 return cmd_term
             case s if s.startswith("cmd_"):
                 return ["false"]
-            case s if s.startswith("wallpaper_"):
-                return ""
             case _:
                 raise AttributeError

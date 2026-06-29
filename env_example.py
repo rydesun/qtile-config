@@ -2,20 +2,13 @@
 
 import os
 
-from libqtile.config import Match
+from libqtile.config import Match, MatchAny
 
 # Feel free to edit, comment or delete these lines,
 # which will disable the relevant widgets.
 
 # {{{ External assets
-# Arch Linux: Run `sudo pacman -S archlinux-wallpaper`
-wallpaper_main_default = "/usr/share/backgrounds/archlinux/small.png"
-# random select one from dir if default is omitted
-wallpaper_main_dir = "/usr/share/backgrounds/archlinux/"
-
-# Other screens
-wallpaper_other_default = "/usr/share/backgrounds/archlinux/simple.png"
-wallpaper_other_dir = "/usr/share/backgrounds/archlinux/"
+icon_theme = "Papirus"
 
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
@@ -27,13 +20,14 @@ cmd_term = ["kitty", "--single-instance",
             "--instance-group", os.getenv("XDG_VTNR", "default")]
 cmd_browser = ["firefox"]
 cmd_menu = ["jgmenu_run"]
-cmd_launcher = ["rofi", "-show", "combi"]
+cmd_launcher = ["rofi", "-show", "drun"]
 
 cmd_screenshot_select = ["spectacle", "--region"]
 cmd_screenshot_window = ["spectacle", "--activewindow"]
-cmd_screenshot_fullscreen = ["spectacle", "--fullscreen"]
+cmd_screenshot_fullscreen = ["spectacle", "--fullscreen", "--background"]
 
 cmd_network = ["wireshark"]
+cmd_clock = ["kclock"]
 
 cmd_backlight_decrease = ["brightnessctl", "s", "1%-"]
 cmd_backlight_increase = ["brightnessctl", "s", "+1%"]
@@ -51,6 +45,8 @@ cmd_player_loop_toggle = [
     "&& playerctl loop track"
     "|| playerctl loop None",
 ]
+
+cmd_waybar_toggle = ["pkill", "-SIGUSR1", "waybar"]
 
 dropdowns = [
     {"key": "t", "name": "term", "cmd": ["kitty"]},
@@ -82,7 +78,7 @@ dev_thermal = "acpitz"
 # Network device names. Glob supported.
 # Run `ls /sys/class/net`
 # Or run `nmcli device`
-dev_nic = ["enp*", "wlp*"]
+dev_nic = ["enp*", "wlp*", "wlan*"]
 
 # If you have connected your phone to kdeconnect,
 # set the device ID to show its battery status.
@@ -99,9 +95,12 @@ groups = [
     }},
     {"key": "s", "bind_window": {
         "cmd": cmd_browser,
-        "match": Match(wm_class="firefox", role="browser"),
+        "match": Match(wm_class="firefox"),
     }},
-    {"key": "d", "bind_window": {}},
+    {"key": "d", "bind_window": {
+        "cmd": ["dolphin"],
+        "match": MatchAny(Match(wm_class="dolphin"), Match(wm_class="org.kde.dolphin")),
+    }},
     {"key": "f", "bind_window": {}},
 ]
 # }}}
@@ -114,10 +113,10 @@ float_rules = [
     Match(wm_class="firefox", role="About"),
     Match(wm_class="firefox", role="toolbox"),
     Match(wm_class="firefox", role="Toplevel"),
-    Match(wm_class="lxqt-config"),
     Match(wm_class="pinentry-qt"),
     Match(wm_class="scrcpy"),
     Match(wm_class="steam"),
+    Match(wm_class="mpv"),
 ]
 
 # Set the appearance of floating windows.

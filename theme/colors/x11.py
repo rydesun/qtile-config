@@ -1,5 +1,5 @@
 foreground = "#0ec2c5"
-foreground_soft = "#56b6c2"
+foreground_soft = "#a8afbc"
 foreground_hard = "#dcdfe4"
 background = "#14272d"
 background_blob = "#215578"
@@ -19,7 +19,6 @@ layout_floating = dict(
 )
 
 bar = dict(
-    opacity=1,
     background=background,
 )
 
@@ -79,7 +78,3 @@ thermalSensor = dict(
 )
 
 clock = dict()
-
-wallpaper = dict(
-    fontshadow=None,
-)

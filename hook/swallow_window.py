@@ -10,7 +10,7 @@ def register():
 
 
 def swallow_window(c, retry=5):
-    if getattr(c, 'floating', True) or getattr(c, 'match_floating', False):
+    if getattr(c, 'floating', True) or getattr(c, 'match_floating', True):
         return
 
     pid = c.get_pid()
@@ -26,6 +26,8 @@ def swallow_window(c, retry=5):
             return
         if ppid in cpids:
             parent = c.qtile.windows_map.get(cpids[ppid])
+            if getattr(parent, 'floating', True):
+                return
             parent.minimized = True
             parent._swallowed = True
             c.parent = parent

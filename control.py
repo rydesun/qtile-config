@@ -20,7 +20,9 @@ class Control:
             ]),
             KeyChord(["mod4"], "m", name="MoveWindow", mode=True, submappings=[
                 EzKey("M-f", lazy.window.toggle_floating()),
+                EzKey("M-S-f", lazy.window.toggle_floating()),
                 EzKey("M-c", lazy.window.center()),
+                EzKey("M-S-c", lazy.window.center()),
                 EzKey("M-h", lazy.window.move_floating(-20, 0)),
                 EzKey("M-l", lazy.window.move_floating(20, 0)),
                 EzKey("M-j", lazy.window.move_floating(0, 20)),
@@ -53,7 +55,7 @@ class Control:
 
             # {{{ 操作Group
             # 显示指定的Group
-            *(Key(["mod4"], i["key"], lazy.group[i["key"]].toscreen())
+            *(Key(["mod4"], i["key"], lazy.group[i["key"]].toscreen(toggle=True))
               for i in self.env.groups),
 
             # 移动窗口到指定的Group
@@ -113,6 +115,7 @@ class Control:
                 EzKey("M-r", lazy.reload_config()),
                 EzKey("M-C-r", lazy.reload_config()),
                 EzKey("M-C-q", lazy.shutdown()),
+                EzKey("M-b", lazy.spawn(self.env.cmd_waybar_toggle)),
             ], name="Qtile"),
             # }}}
 

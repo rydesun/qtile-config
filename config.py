@@ -1,10 +1,11 @@
+import subprocess
 from itertools import chain
 
+import libqtile.hook
 from libqtile import qtile
 from libqtile.config import DropDown, Group, ScratchPad, Screen
 from libqtile.layout.columns import Columns
 from libqtile.log_utils import logger
-from libqtile.utils import send_notification
 
 import hook
 from bar import Bar
@@ -14,48 +15,55 @@ from lib.env_loader import EnvLoader
 from lib.theme_loader import ThemeLoader
 
 # {{{ Init
-try:
-    from xdg import Config as XdgConfig
-    XdgConfig.setIconTheme('Papirus')
-    XdgConfig.setIconSize(16)
-except ImportError:
-    logger.warning("python-pyxdg not found")
-    send_notification("Configuration warning", "python-pyxdg not found")
-
 env = EnvLoader()
-theme = ThemeLoader()
-control_agent = Control(env)
-bar_agent = Bar(env)
-main_theme = theme
-other_theme = theme
+
+_icon_theme = getattr(env, "icon_theme", None)
+if _icon_theme:
+    try:
+        from xdg import Config as XdgConfig
+
+        XdgConfig.setIconTheme(_icon_theme)
+    except ImportError:
+        logger.warning("python-pyxdg not found")
+
+_control = Control(env)
+_bar = Bar(env)
+if qtile.core.name == "x11":
+    _theme = ThemeLoader(default_file="x11", default_colors_file="x11")
+else:
+    _theme = ThemeLoader(default_file="wayland", default_colors_file="wayland")
 # }}}
 
 # {{{ Qtile config
-keys = control_agent.keys()
-mouse = control_agent.mouse()
+keys = _control.keys()
+mouse = _control.mouse()
 
-screens = [
-    Screen(top=bar_agent.main_bar(main_theme)),
-    *(Screen(top=bar_agent.other_bar(other_theme))
-      for _ in range(env.total_screens-1)),
-]
+if qtile.core.name == "x11":
+    main_screen = Screen(bottom=_bar.x11_bar(_theme))
+else:
+    main_screen = Screen(bottom=_bar.wayland_bar(_theme))
+screens = [main_screen]
 
-layouts = [
-    Columns(insert_position=1, **main_theme.layout_column)
-]
+for _ in range(env.total_screens - 1):
+    another_screen = Screen(bottom=_bar.other_bar(_theme))
+    screens.append(another_screen)
 
+layouts = [Columns(insert_position=1, **_theme.layout_column)]
 groups = [Group(name=i["key"], label="⬤") for i in env.groups]
-groups.append(
-    ScratchPad("default_scratchpad", [
-        DropDown(i["name"], i["cmd"], **main_theme.dropdown_window)
-        for i in env.dropdowns]))
+
+_dropdowns = [
+    DropDown(i["name"], i["cmd"], **_theme.dropdown_window) for i in env.dropdowns
+]
+_scratch_pad = ScratchPad("default", _dropdowns)
+groups.append(_scratch_pad)
 
 floating_layout = Floating(
     float_rules=env.float_rules,
     float_config=env.float_config,
-    **main_theme.layout_floating)
+    **_theme.layout_floating,
+)
 
-widget_defaults = main_theme.widget_defaults
+widget_defaults = _theme.widget_defaults
 # }}}
 
 # {{{ Hooks
@@ -70,15 +78,30 @@ hook.swallow_window.register()
 # }}}
 
 
-import subprocess
-import libqtile.hook
 @libqtile.hook.subscribe.startup_once
 def autostart():
-    cmd = ["systemctl", "start", "--user"]
     if qtile.core.name == "x11":
-        cmd.append("X11.target")
+        cmd_sysmted = ["systemctl", "start", "--user", "X11.target"]
+        subprocess.Popen(cmd_sysmted)
     else:
-        cmd.append("Wayland.target")
-    subprocess.Popen(cmd).wait()
+        cmd_sysmted = ["systemctl", "start", "--user", "Wayland.target"]
+        cmd_env_wayland = [
+            "dbus-update-activation-environment",
+            "--systemd",
+            "WAYLAND_DISPLAY",
+        ]
+        subprocess.Popen(cmd_env_wayland)
+        subprocess.Popen(cmd_sysmted)
+
+
+@libqtile.hook.subscribe.shutdown
+def shutdown():
+    if qtile.core.name == "x11":
+        cmd_sysmted = ["systemctl", "stop", "--user", "X11.target"]
+        subprocess.Popen(cmd_sysmted)
+    else:
+        cmd_sysmted = ["systemctl", "stop", "--user", "Wayland.target"]
+        subprocess.Popen(cmd_sysmted)
+
 
 # vim:fdm=marker

@@ -24,12 +24,6 @@ pikaur archlinux-artwork
 sudo pacman -S --needed archlinux-wallpaper
 ```
 
-Optional patch
-
-```bash
-sudo patch /usr/lib/python3.*/site-packages/libqtile/backend/base/drawer.py top_line.patch
-```
-
 ## Customization
 
 First you should refer to `env_example.py` for creating the `env.py`,
