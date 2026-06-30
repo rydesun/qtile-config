@@ -80,28 +80,25 @@ hook.swallow_window.register()
 
 @libqtile.hook.subscribe.startup_once
 def autostart():
+    cmd_env = ["dbus-update-activation-environment", "--systemd", "--all"]
+    subprocess.Popen(cmd_env)
     if qtile.core.name == "x11":
         cmd_sysmted = ["systemctl", "start", "--user", "X11.target"]
         subprocess.Popen(cmd_sysmted)
     else:
         cmd_sysmted = ["systemctl", "start", "--user", "Wayland.target"]
-        cmd_env_wayland = [
-            "dbus-update-activation-environment",
-            "--systemd",
-            "WAYLAND_DISPLAY",
-        ]
-        subprocess.Popen(cmd_env_wayland)
         subprocess.Popen(cmd_sysmted)
+
+        from pathlib import Path
+
+        cmd_xwayland = ["xrdb", "-merge", Path.home() / ".xresources"]
+        subprocess.Popen(cmd_xwayland)
 
 
 @libqtile.hook.subscribe.shutdown
 def shutdown():
-    if qtile.core.name == "x11":
-        cmd_sysmted = ["systemctl", "stop", "--user", "X11.target"]
-        subprocess.Popen(cmd_sysmted)
-    else:
-        cmd_sysmted = ["systemctl", "stop", "--user", "Wayland.target"]
-        subprocess.Popen(cmd_sysmted)
+    cmd_sysmted = ["systemctl", "stop", "--user", "graphical-session.target"]
+    subprocess.Popen(cmd_sysmted)
 
 
 # vim:fdm=marker
