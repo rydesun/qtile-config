@@ -148,6 +148,8 @@ def bind_window(qtile, groups):
         if g["key"] != qtile.current_group.name:
             continue
         rule = g["bind_window"]
+        if not rule:
+            return
         for w in qtile.windows_map.values():
             if hasattr(w, 'group') and w.group \
                     and not isinstance(w.group, ScratchPad) \

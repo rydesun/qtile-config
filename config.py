@@ -2,6 +2,7 @@ import subprocess
 from itertools import chain
 
 import libqtile.hook
+from gi.repository import Gio
 from libqtile import qtile
 from libqtile.config import DropDown, Group, ScratchPad, Screen
 from libqtile.layout.columns import Columns
@@ -15,17 +16,16 @@ from lib.env_loader import EnvLoader
 from lib.theme_loader import ThemeLoader
 
 # {{{ Init
-env = EnvLoader()
-
-_icon_theme = getattr(env, "icon_theme", None)
-if _icon_theme:
+theme = Gio.Settings.new("org.gnome.desktop.interface").get_string("icon-theme")
+if theme:
     try:
         from xdg import Config as XdgConfig
 
-        XdgConfig.setIconTheme(_icon_theme)
+        XdgConfig.setIconTheme(theme)
     except ImportError:
         logger.warning("python-pyxdg not found")
 
+env = EnvLoader()
 _control = Control(env)
 _bar = Bar(env)
 if qtile.core.name == "x11":

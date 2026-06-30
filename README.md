@@ -39,15 +39,3 @@ if you are satisfied with the default theme.
 `control.py` is about keymappings and shortcuts.
 
 `bar.py` focus on widgets on the bar.
-
-## Companion
-
-Highly recommended companion applications
-
-- picom — X compositor
-- dunst — Notification daemon
-- rofi — Application launcher
-
-Systray icon
-
-- papirus-icon-theme

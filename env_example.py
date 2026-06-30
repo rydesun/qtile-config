@@ -8,8 +8,6 @@ from libqtile.config import Match, MatchAny
 # which will disable the relevant widgets.
 
 # {{{ External assets
-icon_theme = "Papirus"
-
 # Arch Linux: Run `sudo pacman -S archlinux-artwork`
 logo_file = "/usr/share/archlinux/icons/archlinux-icon-crystal-256.svg"
 logo_text = ""
