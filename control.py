@@ -104,7 +104,7 @@ class Control:
             ]),
 
             KeyChord(["mod4"], "t", name="ScratchPad", submappings=[
-                Key(["mod4"], i["key"], lazy.group['default_scratchpad'].
+                Key(["mod4"], i["key"], lazy.group['scratch'].
                     dropdown_toggle(i["name"]))
                 for i in self.env.dropdowns
             ]),

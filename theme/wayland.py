@@ -1,7 +1,7 @@
 # {{{ Layout and Window
 layout_column = dict(
     border_width=1,
-    margin_on_single=[75, 130, 100, 130],
+    margin_on_single=[76, 130, 100, 130],
 )
 
 layout_floating = dict(

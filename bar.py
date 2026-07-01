@@ -95,6 +95,8 @@ class Bar:
 
                 qtile_widget.Chord(**theme.chord),
 
+                qtile_widget.Spacer(length=20),
+
                 local_widget.Net(
                     interface=self.env.dev_nic,
                     mouse_callbacks={
@@ -103,6 +105,8 @@ class Bar:
                     **theme.netspeed)
                 if getattr(self.env, "dev_nic", None)
                 else None,
+
+                qtile_widget.Spacer(length=20),
 
                 local_widget.Clock(
                     update_interval=0.5,

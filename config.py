@@ -54,7 +54,7 @@ groups = [Group(name=i["key"], label="⬤") for i in env.groups]
 _dropdowns = [
     DropDown(i["name"], i["cmd"], **_theme.dropdown_window) for i in env.dropdowns
 ]
-_scratch_pad = ScratchPad("default", _dropdowns)
+_scratch_pad = ScratchPad("scratch", _dropdowns)
 groups.append(_scratch_pad)
 
 floating_layout = Floating(
