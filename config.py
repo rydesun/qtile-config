@@ -78,10 +78,10 @@ hook.swallow_window.register()
 # }}}
 
 
-@libqtile.hook.subscribe.startup_once
+@libqtile.hook.subscribe.startup
 def autostart():
     cmd_env = ["dbus-update-activation-environment", "--systemd", "--all"]
-    subprocess.Popen(cmd_env)
+    subprocess.run(cmd_env)
     if qtile.core.name == "x11":
         cmd_sysmted = ["systemctl", "start", "--user", "X11.target"]
         subprocess.Popen(cmd_sysmted)
@@ -91,8 +91,8 @@ def autostart():
 
         from pathlib import Path
 
-        cmd_xwayland = ["xrdb", "-merge", Path.home() / ".xresources"]
-        subprocess.Popen(cmd_xwayland)
+        cmd_config_xwayland = ["xrdb", "-merge", Path.home() / ".xresources"]
+        subprocess.Popen(cmd_config_xwayland)
 
 
 @libqtile.hook.subscribe.shutdown

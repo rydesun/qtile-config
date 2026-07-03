@@ -84,8 +84,6 @@ battery = dict(
     icon_half_energy="󰁾",
     icon_low_energy="󰁼",
     icon_empty_energy="󰁺",
-    extra_offsetx=5,
-    extra_offsety=-0.7,
 )
 
 kdeconnect = dict(
@@ -98,13 +96,10 @@ kdeconnect = dict(
     icon_half_energy="",
     icon_low_energy="",
     icon_empty_energy="",
-    extra_offsetx=3,
-    extra_offsety=-1.5,
 )
 
 backlight = dict(
     format="󰃠{percent: .0f}",
-    extra_offsety=-1.5,
 )
 
 volume = dict(
@@ -113,12 +108,10 @@ volume = dict(
     icon_headphone="󰋎 ",
     icon_headphone_mute="󰋐 ",
     mute_text="M",
-    extra_offsety=-1.5,
 )
 
 thermalSensor = dict(
     icon="󰈐 ",
-    extra_offsety=-1.4,
 )
 
 clock = dict(
